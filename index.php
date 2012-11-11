@@ -1,2 +1,8 @@
-test
-encore test
+<?php
+
+
+echo 'test';
+
+echo 'encore test';
+
+?>
