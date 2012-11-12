@@ -10,4 +10,6 @@ echo 'comment ça marche';
 
 echo 'test';
 
+echo 'Test de jojo';
+
 ?>
