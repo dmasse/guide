@@ -6,6 +6,6 @@ echo 'test';
 echo 'encore test';
 echo 'bis';
 
-echo 'comment Ã§a marche';
+echo 'comment ça marche';
 
 ?>
