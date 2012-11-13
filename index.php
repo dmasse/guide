@@ -18,9 +18,6 @@ echo 'Test de jojo';
 
 echo 'Test Caroline wop wop';
 echo 'blabla';
-<<<<<<< HEAD
 echo 'test';
-=======
->>>>>>> branch 'master' of http://github.com/dmasse/guide.git
 echo 'Test Caroline wop wop2';
 ?>
