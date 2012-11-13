@@ -18,6 +18,7 @@ echo 'Test de jojo';
 
 echo 'Test Caroline wop wop';
 echo 'blabla';
+echo 'test';
 echo 'Test Caroline wop wop2';
 echo '!!'
 ?>
