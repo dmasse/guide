@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
    <head>
@@ -37,3 +38,29 @@
  
    </body>
 </html>
+=======
+<?php
+
+
+echo 'test';
+
+echo 'encore test';
+echo 'bis';
+
+echo 'comment ça marche';
+
+echo 'test';
+
+echo 'test';
+echo 'testMarie';
+
+
+echo 'Test de jojo'; 
+
+echo 'Test Caroline wop wop';
+echo 'blabla';
+echo 'test \\n' ;
+echo 'Test Caroline wop wop2';
+echo '!!'
+?>
+>>>>>>> branch 'master' of http://github.com/dmasse/guide.git
