@@ -18,7 +18,7 @@ class PDO2 extends PDO {
   	} 
   	catch (PDOException $e) 
   	{       
-  		die ('Erreur : '.e->getMessage());  
+  		die ('Erreur : '.$e->getMessage());  
   	 }  
   }  
    return self::$connection;  } // End of PDO2::getInstance() */ }
