@@ -8,8 +8,9 @@ class PDO2 extends PDO {
  
  /* Constructeur : héritage public obligatoire par héritage de PDO */
   public function __construct( ) { 
+  	
  } // End of PDO2::__construct() */
- /* Singleton */ 
+ 
  public static function getInstance() { 
   if (!isset(self::$connection)) {     
   	try 
@@ -18,7 +19,11 @@ class PDO2 extends PDO {
   	} 
   	catch (PDOException $e) 
   	{       
+<<<<<<< HEAD
   		die ('Erreur : '.$e->getMessage());  
+=======
+  		die ('Erreur : ' .$e->getMessage());
+>>>>>>> branch 'master' of http://github.com/dmasse/guide.git
   	 }  
   }  
    return self::$connection;  } // End of PDO2::getInstance() */ }
