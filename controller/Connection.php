@@ -1,5 +1,5 @@
 <?php
-require (\View\Connection.php);
+require ('\View\Connection.php');
 // Création d'un tableau des erreurs 
 $erreurs_inscription = array();
 
