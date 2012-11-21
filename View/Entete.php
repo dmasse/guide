@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Guide-touriste, nous vous mettons en contact</title>
 <meta http-equiv="Content-Language" content="fr" />
 <link rel="stylesheet" href="style/global.css" type="text/css" media="screen" />
