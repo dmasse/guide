@@ -1,7 +1,8 @@
 <?php 
 $this->set('title_for_layout',"Se connecter");
 ?>
-<?php echo $this->Form->create('User');?>
+<?php echo $this->Session->flash('auth');?>
+<?php echo $this->Form->create('User',array('action'=>'login'));?>
 
 <?php echo $this->Form->input('Identifiant',array('label'=>"Saississez votre identifiant"));?>
 <?php echo $this->Form->input('Mdp',array('type'=>'password','label'=>"Saississez votre mot de passe"));?>

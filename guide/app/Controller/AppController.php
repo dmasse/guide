@@ -34,24 +34,8 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 	
 	
-
 	
-	
-	public $components = array('Session','Cookie',
-		    'Auth' => array(
-		        'loginAction' => array(
-		            'controller' => 'Users',
-		            'action' => 'login'
-		        ),
-		        'authError' => 'Vous devez être inscrit pour accéder à cette page !',
-		        'authenticate' => array(
-		            'Form' => array(
-		            	'userModel' => 'Users',
-		                'fields' => array('username' => 'Identifiant','password'=>'Mdp')
-		            )
-		        )
-	    )
-	);
+	public $components = array('Session','Cookie','Auth') ;
 			
 			
 			
@@ -68,11 +52,12 @@ class AppController extends Controller {
 	//	$this->Auth->loginAction = array('controller'=>'users','action'=>'login','membre'=>false,'admin'=>false);
 	//	if(!isset($this->request->params['prefix'])){ //acces qu aux membres avec le prefixes
 	
-		$this->Auth->fields = array(
-				'username' => 'identifiant',
-				'password' => 'Mdp'
-		);
-		$this->Auth->allow();
+		$this->Auth->authenticate = array(
+            'Form' => array(
+                'fields' => array('username' => 'Identifiant', 'password' => 'Mdp'),
+                'userModel' => 'User',
+                ));
+	//	$this->Auth->deny();
 	//}
 	}
 		

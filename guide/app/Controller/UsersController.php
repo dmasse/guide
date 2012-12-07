@@ -124,7 +124,7 @@ function login(){
 			$this->User->id=$this->Auth->user("id");//permet d'inserer la date de derniere connection
 			$this->Session->setFlash("Identifiants incorrects","message_error");
 		
-			debug(Security::hash('123456',null,true));
+			debug($this->request->data);
 			debug($this->User->Mdp);
 		
 			
