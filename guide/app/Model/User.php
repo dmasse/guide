@@ -11,6 +11,7 @@ public $validate = array(
 						'rule'=>'alphanumeric',
 						'required'=>true,
 						'message'=> "la saisie de votre nom est incorrecte"
+						
 				      )
 						),
 		'PrenomUser'=> array(
