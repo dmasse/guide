@@ -463,3 +463,22 @@
 #9 C:\wamp\www\cake\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
 #10 C:\wamp\www\cake\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #11 {main}
+2012-12-07 15:37:08 Error: [CakeException] Authentication adapter "scope" was not found.
+#0 C:\wamp\www\guide\guide\lib\Cake\Controller\Component\AuthComponent.php(633): AuthComponent->constructAuthenticate()
+#1 C:\wamp\www\guide\guide\lib\Cake\Controller\Component\AuthComponent.php(510): AuthComponent->identify(Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\guide\guide\app\Controller\UsersController.php(115): AuthComponent->login()
+#3 [internal function]: UsersController->login()
+#4 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#5 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#6 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2012-12-07 15:38:20 Error: [CakeException] Authentication adapter "scope" was not found.
+#0 C:\wamp\www\guide\guide\lib\Cake\Controller\Component\AuthComponent.php(533): AuthComponent->constructAuthenticate()
+#1 C:\wamp\www\guide\guide\app\Controller\UsersController.php(138): AuthComponent->logout()
+#2 [internal function]: UsersController->logout()
+#3 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#4 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#5 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#6 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}

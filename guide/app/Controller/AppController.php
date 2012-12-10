@@ -56,8 +56,11 @@ class AppController extends Controller {
             'Form' => array(
                 'fields' => array('username' => 'Identifiant', 'password' => 'Mdp'),
                 'userModel' => 'User',
-                ));
-	//	$this->Auth->deny();
+            		'scope'=> array('User.active'=> 1)
+                )
+			
+				);
+		$this->Auth->allow('registration','login','logout','password','home','display','activate');
 	//}
 	}
 		

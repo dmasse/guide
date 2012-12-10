@@ -38,10 +38,8 @@ if ($d['User']['TypePersonne']==3){
 	//verification du bon format du mot de passe
 	$formatMdp=false;
 	if (!empty($d['User']['Mdp'])){
-		debug($formatMdp);
 		if(strlen($d['User']['Mdp'])>=6){
 			$formatMdp=True;
-			debug($formatMdp);
 		}else{
 			$formatMdp=false;
 		}
@@ -114,7 +112,6 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)){
 
 function login(){
 	if($this->request->is('post')){//verifier que des données ont bien été envoyées
-		debug($this->Auth->login());
 		if($this->Auth->login()){//connection
 			$this->User->id=$this->Auth->user("id");//permet d'inserer la date de derniere connection
 			$this->User->saveField('DerniereCoUser',date('Y-m-d H:i:s'));
@@ -124,8 +121,7 @@ function login(){
 			$this->User->id=$this->Auth->user("id");//permet d'inserer la date de derniere connection
 			$this->Session->setFlash("Identifiants incorrects","message_error");
 		
-			debug($this->request->data);
-			debug($this->User->Mdp);
+		
 		
 			
 			
@@ -140,8 +136,9 @@ function membre_index(){//on limite l'acces grace aux prefixe là acces qu'au vu
 		
 function logout(){//permet de se déconnecter
 	$this->Auth->logout();
-	$this->redirect($this->referer());//revoir pour faire la redirection
-	$this->Session->setFlash("vous êtes déconnecté","notif");
+	$this->Session->setFlash("vous �tes d�connect�","notif");// ne marche pas
+	$this->redirect('/');//revoir pour faire la redirection
+	
 }
 		
 function activate($token){//variable correspondant à l'url permet d'activer le compte de l'utilisateur
@@ -178,7 +175,9 @@ function password () {//fonction pour recupérer le mot de passe
 			$this->User->id=$user['User']['id'];
 			$password=substr(md5(uniqid(rand(),true)),0,8);//generation nouveau mot de passe
 		$this->User->saveField('Mdp',Security::hash($password,null,true));
+
 		$this->Session->setFlash("votre mot de passe a bien été réinitialisé,voici votre nouveau mot de passe :$password","notif");
+		$this->redirect('/users/login');
 		}else{
 			$this->Session->setFlash("Le lien n'est pas valide","message_error");
 			
@@ -197,7 +196,6 @@ function password () {//fonction pour recupérer le mot de passe
 	//génération d'un nouveau mot de passe	
     App::uses('CakeEmail','Network/Email');
     $link=array('controller'=>'users','actions'=>'password','token'=>$user['User']['id'].'-'.md5($user['User']['Mdp']));
-    debug($link);
     $mail= new CakeEmail();
    	$mail = new CakeEmail('smtp');
 		   	$mail->from('touristeProjet@gmail.com')
@@ -205,7 +203,7 @@ function password () {//fonction pour recupérer le mot de passe
 		   	   ->subject('Test::Mot de passe oublié')
 		   	   ->emailFormat('html')
 		   	   ->template('mdp')
-		   	   ->viewVars(array('NomUser'=>$user['User']['NomUser'],'PrenomUser'=>$user['User']['PrenomUser'],'link'=>$link))
+		   	   ->viewVars(array('Identifiant'=>$user['User']['Identifiant'],'link'=>$link))
 		   	   ->send();
 		   	
 		   	$this->Session->setFlash("Un email vous a été avec un nouveau mot de passe","notif");
