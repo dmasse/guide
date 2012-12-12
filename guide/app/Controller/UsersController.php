@@ -17,15 +17,15 @@ $d['User']['id'] = null;//permet d'etre sur d'avoir une insertion et non une mod
 $SelectionRadioButton=false;
 //gestion du radio button
 
-if($d['User']['TYPE_PERSONNE']==2) {
-		$d['User']['TYPE_PERSONNE']=1;//guide
+if($d['User']['type_personne']==2) {
+		$d['User']['type_personne']=1;//guide
 	$SelectionRadioButton=true;
 
 	} 
 
 
-if ($d['User']['TYPE_PERSONNE']==3){
-	$d['User']['TYPE_PERSONNE']=0;//touriste
+if ($d['User']['type_personne']==3){
+	$d['User']['type_personne']=0;//touriste
 	$SelectionRadioButton=true;
 
 	}
@@ -34,8 +34,8 @@ if ($d['User']['TYPE_PERSONNE']==3){
 	
 	//verification du bon format du mot de passe
 	$formatMdp=false;
-	if (!empty($d['User']['MDP'])){
-		if(strlen($d['User']['MDP'])>=6){
+	if (!empty($d['User']['mdp'])){
+		if(strlen($d['User']['mdp'])>=6){
 			$formatMdp=True;
 		}else{
 			$formatMdp=false;
@@ -46,9 +46,9 @@ if ($d['User']['TYPE_PERSONNE']==3){
 	
  // verification que les deux mots de passe sont les mêmes plus mot de passe en format securisé
 	$comparaisonmdp=false;    	    		    
-if (!empty($d['User']['MDP'])){
-		if ($d['User']['MDP']==$d['User']['confmdp']){
-			$d['User']['MDP']=Security::hash($d['User']['MDP'],null,true);//cryptage du mot de passe
+if (!empty($d['User']['mdp'])){
+		if ($d['User']['mdp']==$d['User']['confmdp']){
+			$d['User']['mdp']=Security::hash($d['User']['mdp'],null,true);//cryptage du mot de passe
 			$comparaisonmdp=True;
 		}else{
 			$comparaisonmdp=false;
@@ -58,26 +58,26 @@ if (!empty($d['User']['MDP'])){
 
 if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)){
    
-		   if ($this->User->save($d,true,array('TYPE_PERSONNE','NOM_USER','PRENOM_USER','MAIL_USER','IDENTIFIANT','MDP'))){//sauvegarder les données dans la base de données
+		   if ($this->User->save($d,true,array('type_personne','nom_user','prenom_user','mail_user','identifiant','mdp'))){//sauvegarder les données dans la base de données
 //generation du lien d'activation
-		   debug($this->User->id);
-	     	$link=array('controller'=>'users','action'=>'activate',($this->User->id).'-'.md5($d['User']['MDP']));
+	
+	     	$link=array('controller'=>'users','action'=>'activate',($this->User->id).'-'.md5($d['User']['mdp']));
 		   	//permet de gerer l'envoie pour confirmer l'inscription
 		
 		
             App::uses('CakeEmail','Network/Email');
 		   	$mail = new CakeEmail('smtp');
 		   	$mail->from('touristeProjet@gmail.com')
-		   	   ->to($d['User']['MAIL_USER'])
+		   	   ->to($d['User']['mail_user'])
 		   	   ->subject('Test::Inscription')
 		   	   ->emailFormat('html')
 		   	   ->template('registration')
-		   	   ->viewVars(array('NOM_USER'=>$d['User']['NOM_USER'],'PRENOM_USER'=>$d['User']['PRENOM_USER'],'link'=>$link))
+		   	   ->viewVars(array('nom_user'=>$d['User']['nom_user'],'prenom_user'=>$d['User']['prenom_user'],'link'=>$link))
 		   	   ->send();
             $this->request->data= array();//permet de vider tous les champs on peut aussi faire une redirection
            
             $this->Session->setFlash("Votre compte a bien été créé, valider votre inscription grace au mail de confirmation","notif");
-			//$this->redirect('/');//redirection vers home
+			$this->redirect('/');//redirection vers home
 			}else{
 				$this->Session->setFlash("Merci de corriger vos erreurs","message_error");		
 				
@@ -94,7 +94,7 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)){
 	//si le mot de passe est au bon format
 	
 	if($formatMdp==false){
-		$this->User->validationErrors['MDP']= array('le mot de passe doit faire six caractéres minimum');
+		$this->User->validationErrors['mdp']= array('le mot de passe doit faire six caractéres minimum');
 	}
 	
 	
@@ -112,7 +112,7 @@ function login(){
 	if($this->request->is('post')){//verifier que des données ont bien été envoyées
 		if($this->Auth->login()){//connection
 			$this->User->id=$this->Auth->user("id");//permet d'inserer la date de derniere connection
-			$this->User->saveField('DERNIERE_CO_USER',date('Y-m-d H:i:s'));
+			$this->User->saveField('derniere_co_user',date('Y-m-d H:i:s'));
 			$this->Session->setFlash("Vous êtes maintenant connecté","notif");
 			$this->redirect('/');//redirection vers home
 		}else{
@@ -141,16 +141,16 @@ function logout(){//permet de se déconnecter
 		
 function activate($token){//variable correspondant à l'url permet d'activer le compte de l'utilisateur
 	$token=explode('-',$token);//decoder l'url
-	debug($token);
+
 	$user=$this->User->find('first',array(
-			'conditions'=>array('User.Id'=>$token[0],'MD5(User.MDP)'=>$token[1],//changement 10/12/2012
+			'conditions'=>array('User.id'=>$token[0],'MD5(User.mdp)'=>$token[1],//changement 10/12/2012
 					'Active'=>0)//les utilisateurs non activés seulement
 			));
 
 if (!empty($user)){
-	$this->User->id = $user['User']['Id'];
-	$this->User->saveField('DATE_INSCRIPTION_USER',date('Y-m-d H:i:s'));
-	$this->User->saveField('ACTIVE',1);//changement du boolean dans la base de donnée
+	$this->User->id = $user['User']['id'];
+	$this->User->saveField('date_inscription_user',date('Y-m-d H:i:s'));
+	$this->User->saveField('active',1);//changement du boolean dans la base de donnée
 	$this->Auth->login($user['User']);//permet de logger automatiquement l'utilisateur
 	$this->Session->setFlash("votre compte a bien été activé","notif");
 	
@@ -169,7 +169,7 @@ function password () {//fonction pour recupérer le mot de passe
 	if(!empty($this->request->params['named']['token'])){
 		$token=$this->request->params['named']['token'];
 		$token= explode('-',$token);
-		$user=$this->User->find('first',array('conditions'=>array('ID'=>$token[0],'Md5(User.MDP)'=>$token[1]),'ACTIVE'=>1));
+		$user=$this->User->find('first',array('conditions'=>array('id'=>$token[0],'Md5(User.mdp)'=>$token[1]),'active'=>1));
 		if($user){
 			$this->User->id=$user['User']['id'];
 			$password=substr(md5(uniqid(rand(),true)),0,8);//generation nouveau mot de passe
@@ -187,22 +187,22 @@ function password () {//fonction pour recupérer le mot de passe
 	
 	if($this->request->is('post')){
 		$v= current ($this->request->data);
-		$user=$this->User->find('first',array('conditions'=>array('MAIL_USER'=>$v['MAIL_USER'],'ACTIVE'=>1)));
+		$user=$this->User->find('first',array('conditions'=>array('mail_user'=>$v['mail_user'],'active'=>1)));
 	
 		if(empty($user)){
 		$this->Session->setFlash("Aucun utilisateur ne correspond à ce mail","message_error");
 			}else{
 	//génération d'un nouveau mot de passe	
     App::uses('CakeEmail','Network/Email');
-    $link=array('controller'=>'users','actions'=>'password','token'=>$user['User']['ID'].'-'.md5($user['User']['MDP']));
+    $link=array('controller'=>'users','actions'=>'password','token'=>$user['User']['id'].'-'.md5($user['User']['mdp']));
     $mail= new CakeEmail();
    	$mail = new CakeEmail('smtp');
 		   	$mail->from('touristeProjet@gmail.com')
-		   	   ->to($user['User']['MAIL_USER'])
+		   	   ->to($user['User']['mail_user'])
 		   	   ->subject('Test::Mot de passe oublié')
 		   	   ->emailFormat('html')
 		   	   ->template('mdp')
-		   	   ->viewVars(array('Identifiant'=>$user['User']['IDENTIFIANT'],'link'=>$link))
+		   	   ->viewVars(array('Identifiant'=>$user['User']['identifiant'],'link'=>$link))
 		   	   ->send();
 		   	
 		   	$this->Session->setFlash("Un email vous a été avec un nouveau mot de passe","notif");
@@ -213,16 +213,16 @@ function password () {//fonction pour recupérer le mot de passe
 }
 		
 function edit(){
-	$user_id=$this->Auth->user('ID');
+	$user_id=$this->Auth->user('id');
 	if(!$user_id){
 		$this->redirect('/');
 		die();
 		
 	}
-	$this->User->ID = $user_id;
+	$this->User->id = $user_id;
 	if($this->request->is('put')||$this->request->is('post')){
 		$d=$this->request->data;
-		$d['User']['ID']=$user_id;
+		$d['User']['id']=$user_id;
 	
 		
 //verification du bon format du mot de passe
@@ -252,7 +252,7 @@ function edit(){
 		
 if (($passError)and($formatMdp2)){		
 		//pour sauver les nouvelles informations
-	if($this->User->save($d,true,array('DATE_NAISSANCE_USER','TELEPHONE_USER','MDP'))) {
+	if($this->User->save($d,true,array('date_naissance_user','telephone_user','mdp'))) {
 			$this->Session->setFlash("Votre profil a bien été modifié","notif");
 			$this->request->data=$this->User->read();
 		}else {

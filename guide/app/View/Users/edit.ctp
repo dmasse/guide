@@ -23,11 +23,19 @@
  echo $this->Form->input('Vide',array('type'=>'label','label'=>""));
  
  echo $this->Form->file('Guide.photo_guide');
- echo $this->Form->input('Societes.nom_societe',array('label'=>"Nom de la société"));
- echo $this->Form->input('Societes.telephone_societe',array('label'=>"Telephone de la société"));
- echo $this->Form->input('Societes.mail_societe',array('label'=>"telephone de la société"));
- echo $this->Form->input('Societes.siret',array('label'=>"Numero de Siret de la société"));
- 
+  echo $this->Form->input('societe',array('type'=>'label','label'=>"Si vous faites parti d'une sociÃ©tÃ© remplisser les champs suivants"));
+ echo $this->Form->input('Societes.nom_societe',array('label'=>"Nom de la sociï¿½tï¿½"));
+ echo $this->Form->input('Societes.telephone_societe',array('label'=>"Telephone de la sociï¿½tï¿½"));
+ echo $this->Form->input('Societes.mail_societe',array('label'=>"telephone de la sociï¿½tï¿½"));
+ echo $this->Form->input('Societes.siret',array('label'=>"Numero de Siret de la sociï¿½tï¿½"));
+ echo $this->Form->input('Rib',array('type'=>'label','label'=>"Remplissez vous informations bancaires"));
+ echo $this->Form->input('rib_guides.banque',array('label'=>"Banque"));
+ echo $this->Form->input('rib_guides.guichet',array('label'=>"Guichet"));
+ echo $this->Form->input('rib_guides.num_compte',array('label'=>"NumÃ©ro de compte"));
+ echo $this->Form->input('rib_guides.nom_titulaire',array('label'=>"Nom du titulaire"));
+ echo $this->Form->input('rib_guides.domiciliation',array('label'=>"Adresse de la banque")); 
+ echo $this->Form->input('rib_guides.num_iban',array('label'=>"Numero Iban"));
+   echo $this->Form->input('rib_guides.bic',array('label'=>"Numero Bic"));
   
  }
  

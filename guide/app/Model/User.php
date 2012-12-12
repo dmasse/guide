@@ -12,29 +12,25 @@ class User extends AppModel {
 			'Langue' => array(
 					'className'    => 'langue',
 					'foreignKey'    => 'langue_id'
-			)
+			),
+			
 	);
 	
 
 		
-	var $hasMany = array(
-			'Diplome' => array(
-					'className'    => 'Diplome',
-					'dependent'    => true
-			)
-	);
+	
 	
 public $validate = array(
 		
 	
-		'NOM_USER'=> array(
+		'nom_user'=> array(
 				array(
 						'rule'=>'alphanumeric',
 						'required'=>true,
 						'message'=> "la saisie de votre nom est incorrecte"
 				      )
 						),
-		'PRENOM_USER'=> array(
+		'prenom_user'=> array(
 						array(
 								'rule'=>'alphanumeric',
 								'required'=>true,
@@ -42,7 +38,7 @@ public $validate = array(
 								'message'=> "la saisie de votre prenom est incorrecte"
 			                    )
 				),
-		'MAIL_USER'=> array(
+		'mail_user'=> array(
 						array(
 								'rule'=>'email',
 								'required'=>true,
@@ -55,7 +51,7 @@ public $validate = array(
 				         )
 				),
 				
-		'IDENTIFIANT'=> array(
+		'identifiant'=> array(
 				array(
 						'rule'=>'alphanumeric',
 						'required'=>true,
@@ -70,7 +66,7 @@ public $validate = array(
 		
 	
 			
-		'TELEPHONE_USER'=>array(
+		'telephone_user'=>array(
 				
 				array(
 						'rule'=>'alphanumeric',

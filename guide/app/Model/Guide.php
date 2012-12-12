@@ -9,7 +9,12 @@ class Guide extends AppModel {
 			)
 	);
 	
-
+	var $hasMany = array(
+			'Diplome' => array(
+					'className'    => 'Diplome',
+					'dependent'    => true
+			)
+	);
 	
 	
 	
