@@ -17,15 +17,15 @@ $d['User']['id'] = null;//permet d'etre sur d'avoir une insertion et non une mod
 $SelectionRadioButton=false;
 //gestion du radio button
 
-if($d['User']['TypePersonne']==2) {
-		$d['User']['TypePersonne']=1;//guide
+if($d['User']['Type_Personne']==2) {
+		$d['User']['Type_Personne']=1;//guide
 	$SelectionRadioButton=true;
 
 	} 
 
 
-if ($d['User']['TypePersonne']==3){
-	$d['User']['TypePersonne']=0;//touriste
+if ($d['User']['Type_Personne']==3){
+	$d['User']['Type_Personne']=0;//touriste
 	$SelectionRadioButton=true;
 
 	}
@@ -58,7 +58,7 @@ if (!empty($d['User']['Mdp'])){
 
 if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)){
    
-		   if ($this->User->save($d,true,array('TypePersonne','NomUser','PrenomUser','MailUser','Identifiant','Mdp'))){//sauvegarder les données dans la base de données
+		   if ($this->User->save($d,true,array('Type_Personne','Nom_User','Prenom_User','Mail_User','Identifiant','Mdp'))){//sauvegarder les données dans la base de données
 //generation du lien d'activation
 		   
 	     	$link=array('controller'=>'users','action'=>'activate',($this->User->id).'-'.md5($d['User']['Mdp']));
@@ -72,7 +72,7 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)){
 		   	   ->subject('Test::Inscription')
 		   	   ->emailFormat('html')
 		   	   ->template('registration')
-		   	   ->viewVars(array('NomUser'=>$d['User']['NomUser'],'PrenomUser'=>$d['User']['PrenomUser'],'link'=>$link))
+		   	   ->viewVars(array('Nom_User'=>$d['User']['Nom_User'],'Prenom_User'=>$d['User']['Prenom_User'],'link'=>$link))
 		   	   ->send();
             $this->request->data= array();//permet de vider tous les champs on peut aussi faire une redirection
 			$this->Session->setFlash("Votre compte a bien été créé, valider votre inscription grace au mail de confirmation","notif");
@@ -148,7 +148,7 @@ function activate($token){//variable correspondant à l'url permet d'activer le 
 
 if (!empty($user)){
 	$this->User->id = $user['User']['id'];
-	$this->User->saveField('DateInscriptionUser',date('Y-m-d H:i:s'));
+	$this->User->saveField('Date_Inscription_User',date('Y-m-d H:i:s'));
 	$this->User->saveField('Active',1);//changement du boolean dans la base de donnée
 	$this->Auth->login($user['User']);//permet de logger automatiquement l'utilisateur
 	$this->Session->setFlash("votre compte a bien été activé","notif");
@@ -251,7 +251,7 @@ function edit(){
 		
 if (($passError)and($formatMdp2)){		
 		//pour sauver les nouvelles informations
-		if($this->User->save($d,true,array('DateNaissanceUser','TelephoneUser','Mdp'))) {
+		if($this->User->save($d,true,array('Date_Naissance_User','Telephone_User','Mdp'))) {
 			$this->Session->setFlash("Votre profil a bien été modifié","notif");
 			$this->request->data=$this->User->read();
 		}else {

@@ -1,21 +1,30 @@
-<?php $this->set('title_for_layout',"Editer mon profil");?>
+<?php $this->set('title_for_layout',"Editer mon profil");
 
-<?php echo $this->Form->create('User');?>
-<?php echo $this->Form->input('Identifiant',array('label'=>"Votre Identifiant"));?>
-<?php echo $this->Form->input('NomUser',array('label'=>"Nom"));?>
-<?php echo $this->Form->input('PrenomUser',array('label'=>"Prenom"));?>
-<?php echo $this->Form->input('MailUser',array('label'=>"Votre email"));?>
-<?php echo $this->Form->input('TelephoneUser',array('label'=>"Telephone"));?>
-<?php echo $this->Form->input('DateNaissanceUser',array('label'=>"Date de naissance"));?>
-<?php echo $this->Form->input('pass1',array('type'=>'password','label'=>"Votre nouveau mot de passe"));?>
-<?php echo $this->Form->input('pass2',array('type'=>'password','label'=>"Confirmer le mot de passe"));?>
-<?php debug ($User.typePersonne);?>
-<?php if ('User.TypePersonne'==1){
-echo $this->Form->input('Guide.SexeGuide',array('label'=>("indiquer votre sexe")));} 
+ echo $this->Form->create('User',array('type'=>'file'));
+ echo $this->Form->input('Identifiant',array('label'=>"Votre Identifiant"));
+ echo $this->Form->input('Nom_User',array('label'=>"Nom"));
+ echo $this->Form->input('Prenom_User',array('label'=>"Prenom"));
+ echo $this->Form->input('Mail_User',array('label'=>"Votre email"));
+ echo $this->Form->input('Telephone_User',array('label'=>"Telephone"));
+ echo $this->Form->input('Date_Naissance_User',array('label'=>"Date de naissance"));
+ echo $this->Form->input('pass1',array('type'=>'password','label'=>"Votre nouveau mot de passe"));
+ echo $this->Form->input('pass2',array('type'=>'password','label'=>"Confirmer le mot de passe"));
 
+ if ($SessionTypePers==1){
 
-
-
-
-?>
-<?php echo $this->Form->end('Modifier');?>
+ echo $this->Form->input('Guide.Sexe_Guide', array(
+          'div' => false,
+          'label' =>true,
+          'type' => 'radio',
+          'legend'=>'Indiquez votre sexe :',//permet de choisir la legende
+          'options' => array(2 => 'Femme', 3 => 'Homme')));
+          
+ echo $this->Form->error('Guide.Sexe_Guide');
+ echo $this->Form->input('Vide',array('type'=>'label','label'=>""));
+ 
+ 
+ 
+ echo $this->Form->file('Guide.photo_guide');
+ }
+ 
+ echo $this->Form->end('Modifier');?>
