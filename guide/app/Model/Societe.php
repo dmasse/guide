@@ -1,19 +1,11 @@
-<?php
-
-class Guide extends AppModel {
+<?php 
+class Societe extends AppModel {
 	var $hasOne = array(
 			'User' => array(
 					'className'    => 'User',
-				    'conditions'   =>array('user.TYPE_PERSONNE'=>'1'),
 					'dependent'    => true
 			)
 	);
 	
-
-	
-	
-	
 	}
-
-
-?>
+	?>

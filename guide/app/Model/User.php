@@ -2,28 +2,39 @@
 
 class User extends AppModel {
 	
-
+//gestion des relations
 	var $belongsTo = array(
 			'guide' => array(
 					'className'    => 'guide',
 					'foreignKey'    => 'guide_id'
+			),
+			
+			'Langue' => array(
+					'className'    => 'langue',
+					'foreignKey'    => 'langue_id'
 			)
 	);
 	
-	
 
+		
+	var $hasMany = array(
+			'Diplome' => array(
+					'className'    => 'Diplome',
+					'dependent'    => true
+			)
+	);
 	
 public $validate = array(
 		
 	
-		'NomUser'=> array(
+		'NOM_USER'=> array(
 				array(
 						'rule'=>'alphanumeric',
 						'required'=>true,
 						'message'=> "la saisie de votre nom est incorrecte"
 				      )
 						),
-		'PrenomUser'=> array(
+		'PRENOM_USER'=> array(
 						array(
 								'rule'=>'alphanumeric',
 								'required'=>true,
@@ -31,7 +42,7 @@ public $validate = array(
 								'message'=> "la saisie de votre prenom est incorrecte"
 			                    )
 				),
-		'MailUser'=> array(
+		'MAIL_USER'=> array(
 						array(
 								'rule'=>'email',
 								'required'=>true,
@@ -44,7 +55,7 @@ public $validate = array(
 				         )
 				),
 				
-		'Identifiant'=> array(
+		'IDENTIFIANT'=> array(
 				array(
 						'rule'=>'alphanumeric',
 						'required'=>true,
@@ -59,13 +70,13 @@ public $validate = array(
 		
 	
 			
-		'TelephoneUser'=>array(
+		'TELEPHONE_USER'=>array(
 				
 				array(
 						'rule'=>'alphanumeric',
 						'required'=>true,
 						'allowEmpty' =>false,
-						'message'=> "la saisie de votre numéro de téléphone n'est pas correcte"
+						'message'=> "la saisie de votre numï¿½ro de tï¿½lï¿½phone n'est pas correcte"
 				),
 				array (
 						'rule'=>'isUnique',

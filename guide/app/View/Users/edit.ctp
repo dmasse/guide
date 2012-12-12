@@ -22,9 +22,13 @@
  echo $this->Form->error('Guide.Sexe_Guide');
  echo $this->Form->input('Vide',array('type'=>'label','label'=>""));
  
- 
- 
  echo $this->Form->file('Guide.photo_guide');
+ echo $this->Form->input('Societes.nom_societe',array('label'=>"Nom de la société"));
+ echo $this->Form->input('Societes.telephone_societe',array('label'=>"Telephone de la société"));
+ echo $this->Form->input('Societes.mail_societe',array('label'=>"telephone de la société"));
+ echo $this->Form->input('Societes.siret',array('label'=>"Numero de Siret de la société"));
+ 
+  
  }
  
  echo $this->Form->end('Modifier');?>
