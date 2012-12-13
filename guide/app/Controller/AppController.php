@@ -64,7 +64,12 @@ class AppController extends Controller {
 	//}
 	}
 		
+	function beforeRender()
+	{
 		
+		//permet de passer des champs de la session dans des vues
+		$this->set('SessionTypePers', $this->Auth->user('Type_Personne'));
+	}	
 		
 		
 		
