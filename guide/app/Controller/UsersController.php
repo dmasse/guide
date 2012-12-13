@@ -22,15 +22,15 @@ $d['User']['id'] = null;//permet d'etre sur d'avoir une insertion et non une mod
 $SelectionRadioButton=false;
 //gestion du radio button
 
-if($d['User']['TypePersonne']==2) {
-		$d['User']['TypePersonne']=1;//guide
+if($d['User']['type_personne']==2) {
+		$d['User']['type_personne']=1;//guide
 	$SelectionRadioButton=true;
 
 	} 
 
 
-if ($d['User']['TypePersonne']==3){
-	$d['User']['TypePersonne']=0;//touriste
+if ($d['User']['type_personne']==3){
+	$d['User']['type_personne']=0;//touriste
 	$SelectionRadioButton=true;
 
 	}
@@ -63,7 +63,7 @@ if (!empty($d['User']['Mdp'])){
 
 if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)){
    
-		   if ($this->User->save($d,true,array('TypePersonne','NomUser','PrenomUser','MailUser','Identifiant','Mdp'))){//sauvegarder les données dans la base de données
+		   if ($this->User->save($d,true,array('type_personne','nom_user','prenom_user','mail_user','identifiant','mdp'))){//sauvegarder les données dans la base de données
 //generation du lien d'activation
 		   
 	     	$link=array('controller'=>'users','action'=>'activate',($this->User->id).'-'.md5($d['User']['Mdp']));
