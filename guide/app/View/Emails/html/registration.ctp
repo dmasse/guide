@@ -1,6 +1,6 @@
 <p>
 
-<strong>Bonjour <?php echo $nom_user,$prenom_user; ?></strong>
+<strong>Bonjour <?php echo $NomUser,$PrenomUser; ?></strong>
 
 </p>
 <p>Pour activer ce compte suivez le lien : </p>

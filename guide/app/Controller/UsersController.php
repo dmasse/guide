@@ -13,9 +13,6 @@ if ($this->request->is('post')){
 $d= $this->request->data;//empeche le piratage stocker les données dans un tableau
 $d['User']['id'] = null;//permet d'etre sur d'avoir une insertion et non une modification attention à changer en fonction de la base de données
 			
-
-
-
 //verification de la selection du radioButton
 $SelectionRadioButton=false;
 //gestion du radio button
@@ -112,7 +109,6 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)){
 
 function login(){
 	if($this->request->is('post')){//verifier que des données ont bien été envoyées
-		debug($this->request->data['user']['mdp']);
 		if($this->Auth->login()){//connection
 			$this->User->id=$this->Auth->user("id");//permet d'inserer la date de derniere connection
 			$this->User->saveField('DerniereCoUser',date('Y-m-d H:i:s'));
@@ -146,12 +142,13 @@ function activate($token){//variable correspondant à l'url permet d'activer le 
 	$token=explode('-',$token);//decoder l'url
 	debug($token);
 	$user=$this->User->find('first',array(
-			'conditions'=>array('id'=>$token[0],'MD5(User.Mdp)'=>$token[1],
+			'conditions'=>array('User.id'=>$token[0],'MD5(User.Mdp)'=>$token[1],//changement 10/12/2012
 					'Active'=>0)//les utilisateurs non activés seulement
 			));
 
 if (!empty($user)){
 	$this->User->id = $user['User']['id'];
+	$this->User->saveField('DateInscriptionUser',date('Y-m-d H:i:s'));
 	$this->User->saveField('Active',1);//changement du boolean dans la base de donnée
 	$this->Auth->login($user['User']);//permet de logger automatiquement l'utilisateur
 	$this->Session->setFlash("votre compte a bien été activé","notif");
@@ -222,49 +219,63 @@ function edit(){
 		
 	}
 	$this->User->id = $user_id;
-	//préremplir les champs
-	$this->request->data['User']['identifiant'] = $this->Auth->user('identifiant');
-	$this->request->data['User']['nom_user'] = $this->Auth->user('nom_user');
-	$this->request->data['User']['prenom_user'] = $this->Auth->user('prenom_user');
-	$this->request->data['User']['mail_user'] = $this->Auth->user('mail_user');
-	$this->request->data['User']['date_naissance_user'] = $this->Auth->user('date_naissance_user');
-	$this->request->data['User']['telephone_user'] = $this->Auth->user('telephone_user');
-
-	
 	if($this->request->is('put')||$this->request->is('post')){
 		$d=$this->request->data;
 		$d['User']['id']=$user_id;
-		$passError=false;
-		//verification mot de passe et confirmation mot de passe !!!!!
+	
 		
+//verification du bon format du mot de passe
+		$formatMdp2=false;
+		if (!empty($d['User']['pass1'])){
+			if(strlen($d['User']['pass1'])>=6){
+				$formatMdp2=True;
+			}else{
+				$formatMdp2=false;
+			}
+		}
+		
+	
+		
+		$passError=false;
+		
+//verification mot de passe et confirmation mot de passe !!!!!
 		if(!empty($d['User']['pass1'])){
 			if ($d['User']['pass1']==$d['User']['pass2']){
 				$d['User']['Mdp']=Security::hash($d['User']['pass1'],null,true);				
-				
+				$passError=true;
 			}else{
-				$passError=true;				
+				$passError=false;				
 			}
 			
 		}
 		
-		
+if (($passError)and($formatMdp2)){		
 		//pour sauver les nouvelles informations
 		if($this->User->save($d,true,array('DateNaissanceUser','TelephoneUser','Mdp'))) {
 			$this->Session->setFlash("Votre profil a bien été modifié","notif");
+			$this->request->data=$this->User->read();
 		}else {
 			$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
 				
 		}
-		if($passError)$this->User->validationErrors['pass2']= array('les mots de passe ne correspondent pas');
-	}else{
-		$this->request->data=$this->User->read();
-	}
+}else {
+$this->Session->setFlash("Impossible de sauvegarder modifier vos erreurs","message_error");
+
+if($passError==false)
+{$this->User->validationErrors['pass2']= array('les mots de passe ne correspondent pas');
+}
+if($formatMdp2==false)
+{$this->User->validationErrors['pass1']= array('le mot de passe doit faire au moins 6 caract�res');
+}
+$this->request->data['User']['pass1']=$this->request->data['User']['pass2']='';//laisse les champs vides
+
+}
 	
-	$this->request->data['User']['pass1']=$this->request->data['User']['pass2']='';//laisse les champs vides
+$this->request->data['User']['pass1']=$this->request->data['User']['pass2']='';//laisse les champs vides
 	
 }
 		
-	
+}	
 		
 
 			
