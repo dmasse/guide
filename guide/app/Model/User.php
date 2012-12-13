@@ -6,14 +6,14 @@ class User extends AppModel {
 public $validate = array(
 		
 	
-		'NomUser'=> array(
+		'nom_user'=> array(
 				array(
 						'rule'=>'alphanumeric',
 						'required'=>true,
 						'message'=> "la saisie de votre nom est incorrecte"
 				      )
 						),
-		'PrenomUser'=> array(
+		'prenom_user'=> array(
 						array(
 								'rule'=>'alphanumeric',
 								'required'=>true,
@@ -21,7 +21,7 @@ public $validate = array(
 								'message'=> "la saisie de votre prenom est incorrecte"
 			                    )
 				),
-		'MailUser'=> array(
+		'mail_user'=> array(
 						array(
 								'rule'=>'email',
 								'required'=>true,
@@ -34,7 +34,7 @@ public $validate = array(
 				         )
 				),
 				
-		'Identifiant'=> array(
+		'identifiant'=> array(
 				array(
 						'rule'=>'alphanumeric',
 						'required'=>true,
@@ -49,7 +49,7 @@ public $validate = array(
 		
 	
 		
-		'Mpd'=> array(							
+		'mpd'=> array(							
 				'regle1' => array(
 						'rule' => 'notEmpty',
 						'message' => 'ce champs est obligatoire'
