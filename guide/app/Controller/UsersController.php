@@ -137,7 +137,7 @@ function membre_index(){//on limite l'acces grace aux prefixe lÃ  acces qu'au vu
 		
 function logout(){//permet de se dÃ©connecter
 	$this->Auth->logout();
-	$this->Session->setFlash("vous étes déconnecté","notif");// ne marche pas
+	$this->Session->setFlash("vous ï¿½tes dï¿½connectï¿½","notif");// ne marche pas
 	$this->redirect('/');//revoir pour faire la redirection
 	
 }
@@ -229,7 +229,23 @@ function edit(){
 	$this->request->data['User']['mail_user'] = $this->Auth->user('mail_user');
 	$this->request->data['User']['date_naissance_user'] = $this->Auth->user('date_naissance_user');
 	$this->request->data['User']['telephone_user'] = $this->Auth->user('telephone_user');
-
+	//si le guide a au moins une fois changer son profil
+	
+if ($Sessionguide==1){
+	$this->request->data['Guide']['sexe_guide'] = $this->Auth->user('sexe_guide');
+	$this->request->data['Guide']['photo_guide'] = $this->Auth->user('photo_guide');
+	$this->request->data['societes']['nom_societe'] = $this->Auth->user('nom_societe');
+	$this->request->data['societes']['telephone_societe'] = $this->Auth->user('telephone_societe');
+	$this->request->data['societes']['mail_societe'] = $this->Auth->user('mail_societe');
+	$this->request->data['societes']['siret'] = $this->Auth->user('siret');
+	$this->request->data['rib_guides']['banque'] = $this->Auth->user('banque');
+	$this->request->data['rib_guides']['guichet'] = $this->Auth->user('guichet');
+	$this->request->data['rib_guides']['num_comptes'] = $this->Auth->user('num_comptes');
+	$this->request->data['rib_guides']['nom_titulaires'] = $this->Auth->user('nom_titulaires');
+	$this->request->data['rib_guides']['domiciliation'] = $this->Auth->user('domiciliation');
+	$this->request->data['rib_guides']['num_iban'] = $this->Auth->user('num_iban');
+	$this->request->data['rib_guides']['bic'] = $this->Auth->user('bic');
+}
 	
 	if($this->request->is('put')||$this->request->is('post')){
 		$d=$this->request->data;

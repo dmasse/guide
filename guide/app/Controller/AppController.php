@@ -62,6 +62,7 @@ class AppController extends Controller {
 		
 		//permet de passer des champs de la session dans des vues
 		$this->set('SessionTypePers', $this->Auth->user('type_personne'));
+		$this->set('Sessionguide', $this->Auth->user('guide_id'));
 	}	
 		
 		
