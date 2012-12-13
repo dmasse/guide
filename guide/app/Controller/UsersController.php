@@ -1,5 +1,5 @@
 <?php 
-//test commit Joffrey
+
 
 class UsersController extends AppController{
 	
@@ -231,6 +231,13 @@ function edit(){
 	$this->request->data['User']['mail_user'] = $this->Auth->user('mail_user');
 	$this->request->data['User']['date_naissance_user'] = $this->Auth->user('date_naissance_user');
 	$this->request->data['User']['telephone_user'] = $this->Auth->user('telephone_user');
+    //permet d'afficher la liste des langues existante
+
+	$this->set('langues',$this->Langues->find('list',array('fields'=>'langues.nom_langues')));
+
+	
+	
+
 	//si le guide a au moins une fois changer son profil
 	
 if ($Sessionguide==1){

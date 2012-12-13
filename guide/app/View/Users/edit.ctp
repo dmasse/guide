@@ -7,6 +7,8 @@
  echo $this->Form->input('mail_user',array('label'=>"Votre email"));
  echo $this->Form->input('telephone_User',array('label'=>"Telephone"));
  echo $this->Form->input('date_naissance_user',array('label'=>"Date de naissance"));
+ echo $this->Form->input('societe',array('type'=>'label','label'=>"choississez votre langue préférée"));
+ echo $form->select('user.langue_id',$langues,null,null,false);
  echo $this->Form->input('pass1',array('type'=>'password','label'=>"Votre nouveau mot de passe"));
  echo $this->Form->input('pass2',array('type'=>'password','label'=>"Confirmer le mot de passe"));
 
