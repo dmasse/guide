@@ -40,21 +40,14 @@ class AppController extends Controller {
 			
 			
 		
-	//=> array(
-	//		'authenticate'=> array(
-	//				'Form'=> array(
-	//					'scope'=> array('User.active'=> 1)	
-	//						)			
-					
-	//				)));
-	
+
 	function beforeFilter(){
 	//	$this->Auth->loginAction = array('controller'=>'users','action'=>'login','membre'=>false,'admin'=>false);
 	//	if(!isset($this->request->params['prefix'])){ //acces qu aux membres avec le prefixes
 	
 		$this->Auth->authenticate = array(
             'Form' => array(
-                'fields' => array('username' => 'Identifiant', 'password' => 'Mdp'),
+                'fields' => array('username' => 'identifiant', 'password' => 'mdp'),
                 'userModel' => 'User',
             		'scope'=> array('User.active'=> 1)
                 )
@@ -68,7 +61,7 @@ class AppController extends Controller {
 	{
 		
 		//permet de passer des champs de la session dans des vues
-		$this->set('SessionTypePers', $this->Auth->user('Type_Personne'));
+		$this->set('SessionTypePers', $this->Auth->user('type_personne'));
 	}	
 		
 		

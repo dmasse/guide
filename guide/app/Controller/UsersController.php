@@ -110,6 +110,7 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)){
 
 function login(){
 	if($this->request->is('post')){//verifier que des données ont bien été envoyées
+		debug($this->request->data['user']['mdp']);
 		if($this->Auth->login()){//connection
 			$this->User->id=$this->Auth->user("id");//permet d'inserer la date de derniere connection
 			$this->User->saveField('derniere_co_user',date('Y-m-d H:i:s'));
@@ -220,6 +221,15 @@ function edit(){
 		
 	}
 	$this->User->id = $user_id;
+	//préremplir les champs
+	$this->request->data['User']['identifiant'] = $this->Auth->user('identifiant');
+	$this->request->data['User']['nom_user'] = $this->Auth->user('nom_user');
+	$this->request->data['User']['prenom_user'] = $this->Auth->user('prenom_user');
+	$this->request->data['User']['mail_user'] = $this->Auth->user('mail_user');
+	$this->request->data['User']['date_naissance_user'] = $this->Auth->user('date_naissance_user');
+	$this->request->data['User']['telephone_user'] = $this->Auth->user('telephone_user');
+
+	
 	if($this->request->is('put')||$this->request->is('post')){
 		$d=$this->request->data;
 		$d['User']['id']=$user_id;
