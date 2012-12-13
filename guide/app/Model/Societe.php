@@ -1,8 +1,8 @@
 <?php 
 class Societe extends AppModel {
 	var $hasOne = array(
-			'User' => array(
-					'className'    => 'User',
+			'Guide' => array(
+					'className'    => 'Guide',
 					'dependent'    => true
 			)
 	);

@@ -1,7 +1,16 @@
 <?php 
 
 class User extends AppModel {
-	
+	public $belongsTo = array(
+			'Langue' => array(
+					'className'    => 'Langue',
+					'foreignKey'   => 'langue_id'
+			),
+			'Guide' => array(
+					'className'    => 'Guide',
+					'foreignKey'   => 'guide_id'
+			)
+	);
 	
 public $validate = array(
 		
