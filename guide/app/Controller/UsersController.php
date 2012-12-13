@@ -1,4 +1,6 @@
 <?php 
+//test commit Joffrey
+
 class UsersController extends AppController{
 	
 	//var $name="User";
