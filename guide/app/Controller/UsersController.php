@@ -35,6 +35,7 @@ class UsersController extends AppController{
 
 			}
 
+<<<<<<< HEAD
 
 
 			//verification du bon format du mot de passe
@@ -50,7 +51,30 @@ class UsersController extends AppController{
 
 
 			// verification que les deux mots de passe sont les mêmes plus mot de passe en format securisé
+=======
+	
+	
+	//verification du bon format du mot de passe
+	$comparaisoncgu=false;
+	if (!empty($d['User']['cgu'])){
+			$comparaisoncgu=True;	
+		}else{
+			$comparaisoncgu=false;
+		}
+
+	
+	
+	
+ // verification que les deux mots de passe sont les mêmes plus mot de passe en format securisé
+	$comparaisonmdp=false;    	    		    
+if (!empty($d['User']['mdp'])){
+		if ($d['User']['mdp']==$d['User']['confmdp']){
+			$d['User']['mdp']=Security::hash($d['User']['mdp'],null,true);//cryptage du mot de passe
+			$comparaisonmdp=True;
+		}else{
+>>>>>>> branch 'master' of http://github.com/dmasse/guide.git
 			$comparaisonmdp=false;
+<<<<<<< HEAD
 			if (!empty($d['User']['Mdp'])){
 				if ($d['User']['Mdp']==$d['User']['confmdp']){
 					$d['User']['Mdp']=Security::hash($d['User']['Mdp'],null,true);//cryptage du mot de passe
@@ -58,6 +82,51 @@ class UsersController extends AppController{
 				}else{
 					$comparaisonmdp=false;
 				}
+=======
+				}	
+				
+	//verification du bon format du mot de passe
+	$formatMdp=false;
+	if (!empty($d['User']['mdp'])){
+		if(strlen($d['User']['mdp'])>=6){
+			$formatMdp=True;
+		}else{
+			$formatMdp=false;
+					}
+				}
+								 }	
+
+debug($comparaisonmdp);
+debug($SelectionRadioButton);
+debug($formatMdp);
+debug($comparaisoncgu);
+
+if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)and($comparaisoncgu)){
+   
+		   if ($this->User->save($d,true,array('type_personne','nom_user','prenom_user','mail_user','identifiant','mdp', 'cgu'))){//sauvegarder les données dans la base de données
+//generation du lien d'activation
+		   
+	     	$link=array('controller'=>'users','action'=>'activate',($this->User->id).'-'.md5($d['User']['mdp']));
+		   	//permet de gerer l'envoie pour confirmer l'inscription
+		
+		
+            App::uses('CakeEmail','Network/Email');
+		   	$mail = new CakeEmail('smtp');
+		   	$mail->from('touristeProjet@gmail.com')
+		   	   ->to($d['User']['mail_user'])
+		   	   ->subject('Test::Inscription')
+		   	   ->emailFormat('html')
+		   	   ->template('registration')
+		   	   ->viewVars(array('nom_user'=>$d['User']['nom_user'],'prenom_user'=>$d['User']['prenom_user'],'link'=>$link))
+		   	   ->send();
+            $this->request->data= array();//permet de vider tous les champs on peut aussi faire une redirection
+			$this->Session->setFlash("Votre compte a bien été créé, valider votre inscription grace au mail de confirmation","notif");
+			$this->redirect('/');//redirection vers home
+			}else{
+				$this->Session->setFlash("Merci de corriger vos erreurs","message_error");		
+				
+				
+>>>>>>> branch 'master' of http://github.com/dmasse/guide.git
 			}
 
 
