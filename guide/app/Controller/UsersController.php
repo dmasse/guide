@@ -233,13 +233,13 @@ function edit(){
 	$this->request->data['User']['telephone_user'] = $this->Auth->user('telephone_user');
     //permet d'afficher la liste des langues existante
 
-	$this->set('langues',$this->Langue->find('list',array('fields'=>'Langues.nom_langues')));
+	$this->set('langues',$this->User->Langue->find('list',array('field'=>'Langues.nom_langue')));
 
 	
 	
 
 	//si le guide a au moins une fois changer son profil
-	
+	$Sessionguide=$this->Auth->user('guide_id');	
 if ($Sessionguide==1){
 	$this->request->data['Guide']['sexe_guide'] = $this->Auth->user('sexe_guide');
 	$this->request->data['Guide']['photo_guide'] = $this->Auth->user('photo_guide');
@@ -259,9 +259,10 @@ if ($Sessionguide==1){
 	if($this->request->is('put')||$this->request->is('post')){
 		$d=$this->request->data;
 		$d['User']['id']=$user_id;
-		$passError=false;
+		
 		//verification mot de passe et confirmation mot de passe !!!!!
 		
+		$passError=false;
 		if(!empty($d['User']['pass1'])){
 			if ($d['User']['pass1']==$d['User']['pass2']){
 				$d['User']['Mdp']=Security::hash($d['User']['pass1'],null,true);				
@@ -274,7 +275,7 @@ if ($Sessionguide==1){
 		
 		
 		//pour sauver les nouvelles informations
-		if($this->User->save($d,true,array('DateNaissanceUser','TelephoneUser','Mdp'))) {
+		if($this->User->save($d,true,array('date_naissance_user','telephone_user','mdp','langue_id'))) {
 			$this->Session->setFlash("Votre profil a bien été modifié","notif");
 		}else {
 			$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));

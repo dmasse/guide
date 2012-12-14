@@ -6,6 +6,6 @@ class Langue extends AppModel {
 					'dependent'    => true
 			)
 	);
-	
+	var $displayField = 'nom_langue';
 	}
 	?>
