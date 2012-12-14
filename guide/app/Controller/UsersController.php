@@ -246,7 +246,7 @@ function edit(){
 	$this->request->data['User']['telephone_user'] = $this->Auth->user('telephone_user');
     //permet d'afficher la liste des langues existante
 
-	$this->set('langues',$this->Langues->find('list',array('fields'=>'langues.nom_langues')));
+	$this->set('langues',$this->Langue->find('list',array('fields'=>'Langues.nom_langues')));
 
 	
 	
