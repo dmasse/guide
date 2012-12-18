@@ -35,7 +35,7 @@ class UsersController extends AppController{
 
 			}
 
-<<<<<<< HEAD
+
 
 
 			//verification du bon format du mot de passe
@@ -50,8 +50,8 @@ class UsersController extends AppController{
 
 
 
-			// verification que les deux mots de passe sont les mêmes plus mot de passe en format securisé
-=======
+// verification que les deux mots de passe sont les mêmes plus mot de passe en format securisé
+
 	
 	
 	//verification du bon format du mot de passe
@@ -72,18 +72,10 @@ if (!empty($d['User']['mdp'])){
 			$d['User']['mdp']=Security::hash($d['User']['mdp'],null,true);//cryptage du mot de passe
 			$comparaisonmdp=True;
 		}else{
->>>>>>> branch 'master' of http://github.com/dmasse/guide.git
+
 			$comparaisonmdp=false;
-<<<<<<< HEAD
-			if (!empty($d['User']['Mdp'])){
-				if ($d['User']['Mdp']==$d['User']['confmdp']){
-					$d['User']['Mdp']=Security::hash($d['User']['Mdp'],null,true);//cryptage du mot de passe
-					$comparaisonmdp=True;
-				}else{
-					$comparaisonmdp=false;
-				}
-=======
-				}	
+
+		}	
 				
 	//verification du bon format du mot de passe
 	$formatMdp=false;
@@ -96,10 +88,7 @@ if (!empty($d['User']['mdp'])){
 				}
 								 }	
 
-debug($comparaisonmdp);
-debug($SelectionRadioButton);
-debug($formatMdp);
-debug($comparaisoncgu);
+
 
 if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)and($comparaisoncgu)){
    
@@ -126,7 +115,7 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)and($comparaisoncg
 				$this->Session->setFlash("Merci de corriger vos erreurs","message_error");		
 				
 				
->>>>>>> branch 'master' of http://github.com/dmasse/guide.git
+
 			}
 
 
@@ -179,6 +168,7 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)and($comparaisoncg
 			}
 
 		}
+	 }
 	}
 
 	function login(){
@@ -286,7 +276,9 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)and($comparaisoncg
 	}
 
 	function edit(){
+		
 		$user_id=$this->Auth->user('id');
+		$Sessionguide=$this->Auth->user('type_personne');
 		if(!$user_id){
 			$this->redirect('/');
 			die();
@@ -300,7 +292,7 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)and($comparaisoncg
 		$this->request->data['User']['mail_user'] = $this->Auth->user('mail_user');
 		$this->request->data['User']['date_naissance_user'] = $this->Auth->user('date_naissance_user');
 		$this->request->data['User']['telephone_user'] = $this->Auth->user('telephone_user');
-		//permet d'afficher la liste des langues existante
+		//permet d'afficher la liste des langues existantes
 
 		$this->set('langues',$this->User->Langue->find('list',array('field'=>'Langues.nom_langue')));
 
@@ -308,29 +300,28 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)and($comparaisoncg
 
 
 		//si le guide a au moins une fois changer son profil
-		$Sessionguide=$this->Auth->user('guide_id');
+
 		if ($Sessionguide==1){
 			$this->request->data['Guide']['sexe_guide'] = $this->Auth->user('sexe_guide');
 			$this->request->data['Guide']['photo_guide'] = $this->Auth->user('photo_guide');
-			$this->request->data['societes']['nom_societe'] = $this->Auth->user('nom_societe');
-			$this->request->data['societes']['telephone_societe'] = $this->Auth->user('telephone_societe');
-			$this->request->data['societes']['mail_societe'] = $this->Auth->user('mail_societe');
-			$this->request->data['societes']['siret'] = $this->Auth->user('siret');
-			$this->request->data['rib_guides']['banque'] = $this->Auth->user('banque');
-			$this->request->data['rib_guides']['guichet'] = $this->Auth->user('guichet');
-			$this->request->data['rib_guides']['num_comptes'] = $this->Auth->user('num_comptes');
-			$this->request->data['rib_guides']['nom_titulaires'] = $this->Auth->user('nom_titulaires');
-			$this->request->data['rib_guides']['domiciliation'] = $this->Auth->user('domiciliation');
-			$this->request->data['rib_guides']['num_iban'] = $this->Auth->user('num_iban');
-			$this->request->data['rib_guides']['bic'] = $this->Auth->user('bic');
+			$this->request->data['Societe']['nom_societe'] = $this->Auth->user('nom_societe');
+			$this->request->data['Societe']['telephone_societe'] = $this->Auth->user('telephone_societe');
+			$this->request->data['Societe']['mail_societe'] = $this->Auth->user('mail_societe');
+			$this->request->data['Societe']['siret'] = $this->Auth->user('siret');
+			$this->request->data['Rib_guide']['banque'] = $this->Auth->user('banque');
+			$this->request->data['Rib_guide']['guichet'] = $this->Auth->user('guichet');
+			$this->request->data['Rib_guide']['num_comptes'] = $this->Auth->user('num_comptes');
+			$this->request->data['Rib_guide']['nom_titulaires'] = $this->Auth->user('nom_titulaires');
+			$this->request->data['Rib_guide']['domiciliation'] = $this->Auth->user('domiciliation');
+			$this->request->data['Rib_guide']['num_iban'] = $this->Auth->user('num_iban');
+			$this->request->data['Rib_guide']['bic'] = $this->Auth->user('bic');
 		}
 
 
 
 
 
-
-		if($this->request->is('put')||$this->request->is('post')){
+	if($this->request->is('put')||$this->request->is('post')){
 			$d=$this->request->data;
 			$d['User']['id']=$user_id;
 
@@ -339,7 +330,7 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)and($comparaisoncg
 			$passError=false;
 			if(!empty($d['User']['pass1'])){
 				if ($d['User']['pass1']==$d['User']['pass2']){
-					$d['User']['Mdp']=Security::hash($d['User']['pass1'],null,true);
+					$d['User']['mdp']=Security::hash($d['User']['pass1'],null,true);
 
 				}else{
 					$passError=true;
@@ -347,15 +338,33 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)and($comparaisoncg
 					
 			}
 
+	
+//enregistre les infos de façon differentes si il s'agit d'un guide ou d'un touriste			
+if ($Sessionguide==1){
+	debug($d);
+	//pour sauver les nouvelles informations
+	//'Rib_guide.banque','Rib_guide.Societe.guichet','Rib_guide.Societe.num_compte','Rib_guide.nom_titulaire','Rib_guide.domiciliation','Rib_guide.num_iban','Rib_guide.bic','Guide.photo_diplome','Societe.nom_societe','Societe.telephone_societe','Societe.mail_societe','Societe.siret'
+	if(($this->User->save($d,true,array('User.identifiant','User.nom_user','User.prenom_user','User.mail_user','User.date_naissance_user','User.telephone_user','User.mdp','User.langue_id')))and($this->User->Guide->save($d,true,array('Guide.sexe_guide','Guide.photo_guide')))){
+		$this->Session->setFlash("Votre profil a bien été modifié","notif");
+	}else {
+		$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
+	
+	}
+			
+			
+			
+}else{
 
-			//pour sauver les nouvelles informations
-			if($this->User->save($d,true,array('date_naissance_user','telephone_user','mdp','langue_id'))) {
-				$this->Session->setFlash("Votre profil a bien été modifié","notif");
-			}else {
-				$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
-
-			}
-			if($passError)$this->User->validationErrors['pass2']= array('les mots de passe ne correspondent pas');
+	//pour sauver les nouvelles informations
+	if($this->User->save($d,true,array('identifiant','nom_user','prenom_user','mail_user','date_naissance_user','telephone_user','mdp','langue_id'))) {
+		$this->Session->setFlash("Votre profil a bien été modifié","notif");
+	}else {
+		$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
+	
+	}		
+}			
+			
+	if($passError)$this->User->validationErrors['pass2']= array('les mots de passe ne correspondent pas');
 		}else{
 			$this->request->data=$this->User->read();
 		}
