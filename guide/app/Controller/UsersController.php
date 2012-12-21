@@ -8,36 +8,46 @@ class UsersController extends AppController{
 	var $components = array('Auth');
 	//var $primaryKey = 'IdUser';//changement du nom de la clé primaire
 
-
 	function Registration(){//renvoie à la vue registration
 		//verifier si les données ont été postées
 		if ($this->request->is('post')){
 			$d= $this->request->data;//empeche le piratage stocker les données dans un tableau
 			$d['User']['id'] = null;//permet d'etre sur d'avoir une insertion et non une modification attention à changer en fonction de la base de données
+	
+			//verification de la selection du radioButton TYPE DE PERSONNE (Guide/Touriste)
+			$SelectionRadioButtonTypePersonne=false;
 				
-
-
-
-			//verification de la selection du radioButton
-			$SelectionRadioButton=false;
 			//gestion du radio button
-
 			if($d['User']['type_personne']==2) {
 				$d['User']['type_personne']=1;//guide
-				$SelectionRadioButton=true;
-
+				$SelectionRadioButtonTypePersonne=true;
 			}
-
-
+	
+	
 			if ($d['User']['type_personne']==3){
 				$d['User']['type_personne']=0;//touriste
-				$SelectionRadioButton=true;
-
+				$SelectionRadioButtonTypePersonne=true;
 			}
-
-
-
-
+	
+			//verification de la selection du radioButton CIVILITE (Melle, Mme, Mr)
+			$SelectionRadioButtonCivilite=false;
+				
+			//gestion du radio button
+			if($d['User']['civilite']==2){
+				$d['User']['civilite']="Melle";//Mademoiselle
+				$SelectionRadioButtonCivilite=true;
+			}
+	
+			if($d['User']['civilite']==3){
+				$d['User']['civilite']='Mme';//Madame
+				$SelectionRadioButtonCivilite=true;
+			}
+	
+			if($d['User']['civilite']==4){
+				$d['User']['civilite']='Mr';//Monsieur
+				$SelectionRadioButtonCivilite=true;
+			}
+	
 			//verification du bon format du mot de passe
 			$formatMdp=false;
 			if (!empty($d['User']['Mdp'])){
@@ -47,133 +57,89 @@ class UsersController extends AppController{
 					$formatMdp=false;
 				}
 			}
-
-
-
-// verification que les deux mots de passe sont les mêmes plus mot de passe en format securisé
-
 	
-	
-	//verification du bon format du mot de passe
-	$comparaisoncgu=false;
-	if (!empty($d['User']['cgu'])){
-			$comparaisoncgu=True;	
-		}else{
+			//verification de l'accord aux conditions générales d'utilisation
 			$comparaisoncgu=false;
-		}
-
+			if (!empty($d['User']['cgu'])){
+				$comparaisoncgu=True;
+			}else{
+				$comparaisoncgu=false;
+			}
 	
-	
-	
- // verification que les deux mots de passe sont les mêmes plus mot de passe en format securisé
-	$comparaisonmdp=false;    	    		    
-if (!empty($d['User']['mdp'])){
-		if ($d['User']['mdp']==$d['User']['confmdp']){
-			$d['User']['mdp']=Security::hash($d['User']['mdp'],null,true);//cryptage du mot de passe
-			$comparaisonmdp=True;
-		}else{
-
+			// verification que les deux mots de passe sont les mêmes plus mot de passe en format securisé
 			$comparaisonmdp=false;
-
-		}	
-				
-	//verification du bon format du mot de passe
-	$formatMdp=false;
-	if (!empty($d['User']['mdp'])){
-		if(strlen($d['User']['mdp'])>=6){
-			$formatMdp=True;
-		}else{
-			$formatMdp=false;
+			if (!empty($d['User']['mdp'])){
+				if ($d['User']['mdp']==$d['User']['confmdp']){
+					$d['User']['mdp']=Security::hash($d['User']['mdp'],null,true);//cryptage du mot de passe
+					$comparaisonmdp=True;
+				}else{
+					$comparaisonmdp=false;
+				}
+	
+				//verification du bon format du mot de passe
+				$formatMdp=false;
+				if (!empty($d['User']['mdp'])){
+					if(strlen($d['User']['mdp'])>=6){
+						$formatMdp=True;
+					}else{
+						$formatMdp=false;
 					}
 				}
-								 }	
-
-
-
-if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)and($comparaisoncgu)){
-   
-		   if ($this->User->save($d,true,array('type_personne','nom_user','prenom_user','mail_user','identifiant','mdp', 'cgu'))){//sauvegarder les données dans la base de données
-//generation du lien d'activation
-		   
-	     	$link=array('controller'=>'users','action'=>'activate',($this->User->id).'-'.md5($d['User']['mdp']));
-		   	//permet de gerer l'envoie pour confirmer l'inscription
-		
-		
-            App::uses('CakeEmail','Network/Email');
-		   	$mail = new CakeEmail('smtp');
-		   	$mail->from('touristeProjet@gmail.com')
-		   	   ->to($d['User']['mail_user'])
-		   	   ->subject('Test::Inscription')
-		   	   ->emailFormat('html')
-		   	   ->template('registration')
-		   	   ->viewVars(array('nom_user'=>$d['User']['nom_user'],'prenom_user'=>$d['User']['prenom_user'],'link'=>$link))
-		   	   ->send();
-            $this->request->data= array();//permet de vider tous les champs on peut aussi faire une redirection
-			$this->Session->setFlash("Votre compte a bien été créé, valider votre inscription grace au mail de confirmation","notif");
-			$this->redirect('/');//redirection vers home
-			}else{
-				$this->Session->setFlash("Merci de corriger vos erreurs","message_error");		
-				
-				
-
-			}
-
-
-			if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)){
-				 
-				if ($this->User->save($d,true,array('type_personne','nom_user','prenom_user','mail_user','identifiant','mdp'))){//sauvegarder les données dans la base de données
-					//generation du lien d'activation
-					 
-					$link=array('controller'=>'users','action'=>'activate',($this->User->id).'-'.md5($d['User']['Mdp']));
-					//permet de gerer l'envoie pour confirmer l'inscription
-
-
-					App::uses('CakeEmail','Network/Email');
-					$mail = new CakeEmail('smtp');
-					$mail->from('touristeProjet@gmail.com')
-					->to($d['User']['MailUser'])
-					->subject('Test::Inscription')
-					->emailFormat('html')
-					->template('registration')
-					->viewVars(array('NomUser'=>$d['User']['NomUser'],'PrenomUser'=>$d['User']['PrenomUser'],'link'=>$link))
-					->send();
-					$this->request->data= array();//permet de vider tous les champs on peut aussi faire une redirection
-					$this->Session->setFlash("Votre compte a bien été créé, valider votre inscription grace au mail de confirmation","notif");
-					$this->redirect('/');//redirection vers home
+					
+				//verification de la civilité
+				$comparaisoncivilite=false;
+				if (!empty($d['User']['civilite'])){
+					$comparaisoncivilite=True;
 				}else{
-					$this->Session->setFlash("Merci de corriger vos erreurs","message_error");
-
-
+					$comparaisoncivilite=false;
 				}
-					
-					
-			}else{
-				$this->Session->setFlash("Merci de corriger vos erreurs","message_error");
-				//Si les mots de passe ne sont pas les memes
-				if ($comparaisonmdp==false){
-					$this->User->validationErrors['confmdp']= array('les mots de passe ne correspondent pas');
+	
+	
+	
+				if (($comparaisonmdp)and($SelectionRadioButtonTypePersonne)and($formatMdp)and($comparaisoncgu)and($comparaisoncivilite)and($SelectionRadioButtonCivilite)){
+					if ($this->User->save($d,true,array('type_personne','nom_user','prenom_user','mail_user','identifiant','mdp', 'cgu','optin_b','optin_n','civilite'))){//sauvegarder les données dans la base de données
+						//generation du lien d'activation
+							
+						$link=array('controller'=>'users','action'=>'activate',($this->User->id).'-'.md5($d['User']['mdp']));
+						//permet de gerer l'envoie pour confirmer l'inscription
+	
+	
+						App::uses('CakeEmail','Network/Email');
+						$mail = new CakeEmail('smtp');
+						$mail->from('touristeProjet@gmail.com')
+						->to($d['User']['mail_user'])
+						->subject('Test::Inscription')
+						->emailFormat('html')
+						->template('registration')
+						->viewVars(array('nom_user'=>$d['User']['nom_user'],'prenom_user'=>$d['User']['prenom_user'],'link'=>$link))
+						->send();
+						$this->request->data= array();//permet de vider tous les champs on peut aussi faire une redirection
+						$this->Session->setFlash("Votre compte a bien été créé, valider votre inscription grace au mail de confirmation","notif");
+						$this->redirect('/');//redirection vers home
+							
+					}else{
+						$this->Session->setFlash("Merci de corriger vos erreurs","message_error");
+						//Si les mots de passe ne sont pas les memes
+						if ($comparaisonmdp==false){
+							$this->User->validationErrors['confmdp']= array('les mots de passe ne correspondent pas');
+						}
+						//si le mot de passe est au bon format
+						if($formatMdp==false){
+							$this->User->validationErrors['Mdp']= array('le mot de passe doit faire six caractéres minimum');
+						}
+	
+						//si le radio button n'est pas rempli
+						if($SelectionRadioButton==false){
+							$this->User->validationErrors['Vide']= array('Veuillez selectionner votre type de profil (guide/touriste)');
+						}
+					}
 				}
-				//si le mot de passe est au bon format
-
-				if($formatMdp==false){
-					$this->User->validationErrors['Mdp']= array('le mot de passe doit faire six caractéres minimum');
-				}
-
-
-				//si le radio button n'est pas rempli
-				if($SelectionRadioButton==false){
-					$this->User->validationErrors['Vide']= array('Veuillez selectionner votre type de profil (guide/touriste)');
-				}
-
 			}
-
 		}
-	 }
 	}
 
 	function login(){
 		if($this->request->is('post')){//verifier que des données ont bien été envoyées
-			debug($this->request->data['user']['mdp']);
 			if($this->Auth->login()){//connection
 				$this->User->id=$this->Auth->user("id");//permet d'inserer la date de derniere connection
 				$this->User->saveField('DerniereCoUser',date('Y-m-d H:i:s'));
@@ -207,7 +173,7 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)and($comparaisoncg
 		$token=explode('-',$token);//decoder l'url
 		debug($token);
 		$user=$this->User->find('first',array(
-				'conditions'=>array('id'=>$token[0],'MD5(User.Mdp)'=>$token[1],
+				'conditions'=>array('User.id'=>$token[0],'MD5(User.Mdp)'=>$token[1],
 						'Active'=>0)//les utilisateurs non activés seulement
 		));
 
@@ -276,55 +242,29 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)and($comparaisoncg
 	}
 
 	function edit(){
-		
+
 		$user_id=$this->Auth->user('id');
 		$Sessionguide=$this->Auth->user('type_personne');
+		$Editguide=$this->Auth->user('guide_id');
 		if(!$user_id){
 			$this->redirect('/');
 			die();
-
 		}
-		$this->User->id = $user_id;
-		//préremplir les champs
-		$this->request->data['User']['identifiant'] = $this->Auth->user('identifiant');
-		$this->request->data['User']['nom_user'] = $this->Auth->user('nom_user');
-		$this->request->data['User']['prenom_user'] = $this->Auth->user('prenom_user');
-		$this->request->data['User']['mail_user'] = $this->Auth->user('mail_user');
-		$this->request->data['User']['date_naissance_user'] = $this->Auth->user('date_naissance_user');
-		$this->request->data['User']['telephone_user'] = $this->Auth->user('telephone_user');
-		//permet d'afficher la liste des langues existantes
-
-		$this->set('langues',$this->User->Langue->find('list',array('field'=>'Langues.nom_langue')));
+		$this->User->id = $user_id;//on fixe l'id du modéle
+		//pour les données non submit
+		//	if(!$this->request->is('put')||!$this->request->is('post')){
 
 
 
 
-		//si le guide a au moins une fois changer son profil
-
-		if ($Sessionguide==1){
-			$this->request->data['Guide']['sexe_guide'] = $this->Auth->user('sexe_guide');
-			$this->request->data['Guide']['photo_guide'] = $this->Auth->user('photo_guide');
-			$this->request->data['Societe']['nom_societe'] = $this->Auth->user('nom_societe');
-			$this->request->data['Societe']['telephone_societe'] = $this->Auth->user('telephone_societe');
-			$this->request->data['Societe']['mail_societe'] = $this->Auth->user('mail_societe');
-			$this->request->data['Societe']['siret'] = $this->Auth->user('siret');
-			$this->request->data['Rib_guide']['banque'] = $this->Auth->user('banque');
-			$this->request->data['Rib_guide']['guichet'] = $this->Auth->user('guichet');
-			$this->request->data['Rib_guide']['num_comptes'] = $this->Auth->user('num_comptes');
-			$this->request->data['Rib_guide']['nom_titulaires'] = $this->Auth->user('nom_titulaires');
-			$this->request->data['Rib_guide']['domiciliation'] = $this->Auth->user('domiciliation');
-			$this->request->data['Rib_guide']['num_iban'] = $this->Auth->user('num_iban');
-			$this->request->data['Rib_guide']['bic'] = $this->Auth->user('bic');
-		}
-
-
-
-
-
-	if($this->request->is('put')||$this->request->is('post')){
+		if($this->request->is('put')||$this->request->is('post')){
 			$d=$this->request->data;
 			$d['User']['id']=$user_id;
-
+			$d['Guide']['id']=$this->User->field('guide_id');
+			$d['Societe']['id']=$this->User->Guide->field('societe_id');
+			$d['Rib_guide']['id']=$this->User->Guide->field('rib_guide_id');
+			debug($d);
+			debug($d['Guide']['id']);
 			//verification mot de passe et confirmation mot de passe !!!!!
 
 			$passError=false;
@@ -335,48 +275,88 @@ if (($comparaisonmdp)and($SelectionRadioButton)and($formatMdp)and($comparaisoncg
 				}else{
 					$passError=true;
 				}
-					
+
 			}
 
-	
-//enregistre les infos de façon differentes si il s'agit d'un guide ou d'un touriste			
-if ($Sessionguide==1){
-	debug($d);
-	//pour sauver les nouvelles informations
-	//'Rib_guide.banque','Rib_guide.Societe.guichet','Rib_guide.Societe.num_compte','Rib_guide.nom_titulaire','Rib_guide.domiciliation','Rib_guide.num_iban','Rib_guide.bic','Guide.photo_diplome','Societe.nom_societe','Societe.telephone_societe','Societe.mail_societe','Societe.siret'
-	if(($this->User->save($d,true,array('User.identifiant','User.nom_user','User.prenom_user','User.mail_user','User.date_naissance_user','User.telephone_user','User.mdp','User.langue_id')))and($this->User->Guide->save($d,true,array('Guide.sexe_guide','Guide.photo_guide')))){
-		$this->Session->setFlash("Votre profil a bien été modifié","notif");
-	}else {
-		$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
-	
-	}
-			
-			
-			
-}else{
 
-	//pour sauver les nouvelles informations
-	if($this->User->save($d,true,array('identifiant','nom_user','prenom_user','mail_user','date_naissance_user','telephone_user','mdp','langue_id'))) {
-		$this->Session->setFlash("Votre profil a bien été modifié","notif");
-	}else {
-		$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
-	
-	}		
-}			
+			//enregistre les infos de façon differentes si il s'agit d'un guide ou d'un touriste
+			if ($Sessionguide==1){
+           
+				//pour sauver les nouvelles informations
 			
-	if($passError)$this->User->validationErrors['pass2']= array('les mots de passe ne correspondent pas');
+	           
+				if(($this->User->saveAssociated($d,true,array('User'=>array('identifiant','nom_user','prenom_user','mail_user','date_naissance_user','telephone_user','mdp','langue_id'),'Guide'=>array('id','sexe_guide','photo_guide'))))and ($this->User->Guide->saveAssociated($d,true,array('Societe'=>array('id','Societe.nom_societe','Societe.telephone_societe','mail_societe','siret'),'Rib_guide'=>array('id','Rib_guide.banque','Rib_guide.Societe.guichet','Rib_guide.Societe.num_compte','Rib_guide.nom_titulaire','Rib_guide.domiciliation','Rib_guide.num_iban','Rib_guide.bic'))))){
+					$this->Session->setFlash("Votre profil a bien été modifié","notif");
+				}else {
+					$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
+
+				}
+
+
+
+			}else{
+				debug($this->User->Guide->Societe->field('siret'));
+				//pour sauver les nouvelles informations
+				if($this->User->save($d,true,array('User.identifiant','User.nom_user','User.prenom_user','User.mail_user','User.date_naissance_user','User.telephone_user','User.mdp','User.langue_id'))) {
+					$this->Session->setFlash("Votre profil a bien été modifié","notif");
+				}else {
+					$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
+
+				}
+			}
+
+			if($passError){
+				$this->User->validationErrors['pass2']= array('les mots de passe ne correspondent pas');
+			}else{
+				$this->request->data=$this->User->read();
+			}
+
+				
+				
+				
+			$this->request->data['User']['pass1']=$this->request->data['User']['pass2']='';//laisse les champs vides
+
 		}else{
-			$this->request->data=$this->User->read();
+
+
+
+			//préremplir les champs
+			$this->request->data['User']['identifiant'] = $this->Auth->user('identifiant');
+			$this->request->data['User']['nom_user'] = $this->Auth->user('nom_user');
+			$this->request->data['User']['prenom_user'] = $this->Auth->user('prenom_user');
+			$this->request->data['User']['mail_user'] = $this->Auth->user('mail_user');
+			$this->request->data['User']['date_naissance_user'] = $this->Auth->user('date_naissance_user');
+			$this->request->data['User']['telephone_user'] = $this->Auth->user('telephone_user');
+			//permet d'afficher la liste des langues existantes
+			$this->set('langues',$this->User->Langue->find('list',array('field'=>'Langues.nom_langue')));
+
+			//si le guide a au moins une fois changer son profil
+			if (!empty($Editguide)){
+				$this->request->data['Guide']['sexe_guide'] = $this->User->Guide->field('sexe_guide');
+				$this->request->data['Guide']['photo_guide'] = $this->User->Guide->field('photo_guide');
+				$this->request->data['Societe']['nom_societe'] =$this->User->Guide->Societe->field('nom_societe');
+				$this->request->data['Societe']['telephone_societe'] = $this->User->Guide->Societe->field('telephone_societe');
+				$this->request->data['Societe']['mail_societe'] =  $this->User->Guide->Societe->field('mail_societe');
+				$this->request->data['Societe']['siret'] =  $this->User->Guide->Societe->field('siret');
+				$this->request->data['Rib_guide']['banque'] =  $this->User->Guide->Rib_guide->field('banque');
+				$this->request->data['Rib_guide']['guichet'] =  $this->User->Guide->Rib_guide->field('guichet');
+				$this->request->data['Rib_guide']['num_compte'] =  $this->User->Guide->Rib_guide->field('num_compte');
+				$this->request->data['Rib_guide']['nom_titulaire'] =  $this->User->Guide->Rib_guide->field('nom_titulaire');
+				$this->request->data['Rib_guide']['domiciliation'] =  $this->User->Guide->Rib_guide->field('domiciliation');
+				$this->request->data['Rib_guide']['num_iban'] =  $this->User->Guide->Rib_guide->field('num_iban');
+				$this->request->data['Rib_guide']['bic'] =  $this->User->Guide->Rib_guide->field('bic');
+			}
+
+
 		}
 
-		$this->request->data['User']['pass1']=$this->request->data['User']['pass2']='';//laisse les champs vides
+
 
 	}
 
 
 
 
-		
 
 
 }

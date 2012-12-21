@@ -24,7 +24,7 @@
  echo $this->Form->input('Vide',array('type'=>'label','label'=>""));
  
  //echo $this->Form->file('Guide.photo_guide');
- echo $this->Form->input('Societe',array('type'=>'label','label'=>"Si vous faites parti d'une société remplisser les champs suivants"));
+ echo $this->Form->input('Societe',array('type'=>'label','label'=>"Si vous faites parti d'une société remplissez les champs suivants"));
  echo $this->Form->input('Societe.nom_societe',array('label'=>"Nom de la société"));
  echo $this->Form->input('Societe.telephone_societe',array('label'=>"Telephone de la société"));
  echo $this->Form->input('Societe.mail_societe',array('label'=>"Adresse mail de la société"));

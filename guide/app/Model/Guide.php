@@ -12,9 +12,9 @@ class Guide extends AppModel {
 	public $belongsTo = array(
 			'Societe' => array(
 					'className'    => 'Societe',
-					'foreignKey'   => 'Societe_id'
+					'foreignKey'   => 'societe_id'
 			),
-			'rib_guide' => array(
+			'Rib_guide' => array(
 					'className'    => 'rib_guide',
 					'foreignKey'   => 'rib_guide_id'
 			)
