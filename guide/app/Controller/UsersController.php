@@ -5,7 +5,7 @@ class UsersController extends AppController{
 
 	//var $name="User";
 	var $uses = array("User");//precise le modél à utiliser
-	var $components = array('Auth');
+	var $components = array('Auth','RequestHandler');//permet de récupérer l'adresse IP
 	//var $primaryKey = 'IdUser';//changement du nom de la clé primaire
 
 	function Registration(){//renvoie à la vue registration
@@ -179,6 +179,8 @@ class UsersController extends AppController{
 
 		if (!empty($user)){
 			$this->User->id = $user['User']['id'];
+			$Ip = $this->RequestHandler->getClientIp();
+			$this->User->saveField('adresse_ip',$Ip);
 			$this->User->saveField('Active',1);//changement du boolean dans la base de donnée
 			$this->Auth->login($user['User']);//permet de logger automatiquement l'utilisateur
 			$this->Session->setFlash("votre compte a bien été activé","notif");
@@ -242,122 +244,182 @@ class UsersController extends AppController{
 	}
 
 	function edit(){
-
+		
 		$user_id=$this->Auth->user('id');
+		$this->User->id = $user_id;//on fixe l'id du modéle
+		
 		$Sessionguide=$this->Auth->user('type_personne');
 		$Editguide=$this->Auth->user('guide_id');
+		$d['User']['id']=$user_id;
+		$d['Guide']['id']=$this->User->field('guide_id');
+		$d['Guide']['photo_guide']='null';
+		$d['Societe']['siret']='null';
+		$d['Rib_guide']['num_compte']='0';
+		$d['Societe']['id']=$this->User->Guide->field('societe_id');
+		$d['Rib_guide']['id']=$this->User->Guide->field('rib_guide_id');
+		//$this->set('photoguide', $this->User->field('guide_id'));
+		debug($d);
+		debug($user_id);
+		debug($this->User->field('guide_id'));
 		if(!$user_id){
 			$this->redirect('/');
 			die();
 		}
-		$this->User->id = $user_id;//on fixe l'id du modéle
-		//pour les données non submit
-		//	if(!$this->request->is('put')||!$this->request->is('post')){
+		
 
 
-
-
-		if($this->request->is('put')||$this->request->is('post')){
-			$d=$this->request->data;
-			$d['User']['id']=$user_id;
-			$d['Guide']['id']=$this->User->field('guide_id');
-			$d['Societe']['id']=$this->User->Guide->field('societe_id');
-			$d['Rib_guide']['id']=$this->User->Guide->field('rib_guide_id');
-			debug($d);
-			debug($d['Guide']['id']);
-			//verification mot de passe et confirmation mot de passe !!!!!
-
-			$passError=false;
-			if(!empty($d['User']['pass1'])){
-				if ($d['User']['pass1']==$d['User']['pass2']){
-					$d['User']['mdp']=Security::hash($d['User']['pass1'],null,true);
-
-				}else{
-					$passError=true;
-				}
-
-			}
-
-
-			//enregistre les infos de façon differentes si il s'agit d'un guide ou d'un touriste
+		
+//gestion des boutons
+		if($this->request->data['type'] == 'profil'){
 			if ($Sessionguide==1){
-           
-				//pour sauver les nouvelles informations
+			$this->User->saveAssociated($d,true,array('Guide'=>array('id','photo_guide')));
+			}
+			$this->redirect( array('controller' => 'Users','action' => 'edit_profil'));
+		}
 			
-	           
+		
+		 if($this->request->data['type'] == 'banque')
+			{
+				$this->User->Guide->saveAssociated($d,true,array('Rib_guide'=>array('id','num_compte')));
+				$this->redirect( array('controller' => 'Users','action' => 'edit_banque'));
+			}
+		
+			if($this->request->data['type'] == 'cursus')
+			{
+				$this->User->Guide->saveAssociated($d,true,array('Societe'=>array('id','siret')));
+				$this->redirect( array('controller' => 'Users','action' => 'edit_cursus'));
+			}
+			
+		
+
+
+
+         /*  
+			
 				if(($this->User->saveAssociated($d,true,array('User'=>array('identifiant','nom_user','prenom_user','mail_user','date_naissance_user','telephone_user','mdp','langue_id'),'Guide'=>array('id','sexe_guide','photo_guide'))))and ($this->User->Guide->saveAssociated($d,true,array('Societe'=>array('id','Societe.nom_societe','Societe.telephone_societe','mail_societe','siret'),'Rib_guide'=>array('id','Rib_guide.banque','Rib_guide.Societe.guichet','Rib_guide.Societe.num_compte','Rib_guide.nom_titulaire','Rib_guide.domiciliation','Rib_guide.num_iban','Rib_guide.bic'))))){
-					$this->Session->setFlash("Votre profil a bien été modifié","notif");
+				$this->Session->setFlash("Votre profil a bien été modifié","notif"); 
+				$this->set('photoguide', $this->User->field('guide_id'));
 				}else {
 					$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
 
 				}
-
-
-
 			}else{
-				debug($this->User->Guide->Societe->field('siret'));
+			
 				//pour sauver les nouvelles informations
 				if($this->User->save($d,true,array('User.identifiant','User.nom_user','User.prenom_user','User.mail_user','User.date_naissance_user','User.telephone_user','User.mdp','User.langue_id'))) {
 					$this->Session->setFlash("Votre profil a bien été modifié","notif");
 				}else {
 					$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
 
-				}
-			}
 
-			if($passError){
-				$this->User->validationErrors['pass2']= array('les mots de passe ne correspondent pas');
-			}else{
-				$this->request->data=$this->User->read();
-			}
-
-				
-				
-				
-			$this->request->data['User']['pass1']=$this->request->data['User']['pass2']='';//laisse les champs vides
-
-		}else{
-
-
-
-			//préremplir les champs
-			$this->request->data['User']['identifiant'] = $this->Auth->user('identifiant');
-			$this->request->data['User']['nom_user'] = $this->Auth->user('nom_user');
-			$this->request->data['User']['prenom_user'] = $this->Auth->user('prenom_user');
-			$this->request->data['User']['mail_user'] = $this->Auth->user('mail_user');
-			$this->request->data['User']['date_naissance_user'] = $this->Auth->user('date_naissance_user');
-			$this->request->data['User']['telephone_user'] = $this->Auth->user('telephone_user');
-			//permet d'afficher la liste des langues existantes
-			$this->set('langues',$this->User->Langue->find('list',array('field'=>'Langues.nom_langue')));
-
-			//si le guide a au moins une fois changer son profil
-			if (!empty($Editguide)){
-				$this->request->data['Guide']['sexe_guide'] = $this->User->Guide->field('sexe_guide');
-				$this->request->data['Guide']['photo_guide'] = $this->User->Guide->field('photo_guide');
-				$this->request->data['Societe']['nom_societe'] =$this->User->Guide->Societe->field('nom_societe');
-				$this->request->data['Societe']['telephone_societe'] = $this->User->Guide->Societe->field('telephone_societe');
-				$this->request->data['Societe']['mail_societe'] =  $this->User->Guide->Societe->field('mail_societe');
-				$this->request->data['Societe']['siret'] =  $this->User->Guide->Societe->field('siret');
-				$this->request->data['Rib_guide']['banque'] =  $this->User->Guide->Rib_guide->field('banque');
-				$this->request->data['Rib_guide']['guichet'] =  $this->User->Guide->Rib_guide->field('guichet');
-				$this->request->data['Rib_guide']['num_compte'] =  $this->User->Guide->Rib_guide->field('num_compte');
-				$this->request->data['Rib_guide']['nom_titulaire'] =  $this->User->Guide->Rib_guide->field('nom_titulaire');
-				$this->request->data['Rib_guide']['domiciliation'] =  $this->User->Guide->Rib_guide->field('domiciliation');
-				$this->request->data['Rib_guide']['num_iban'] =  $this->User->Guide->Rib_guide->field('num_iban');
-				$this->request->data['Rib_guide']['bic'] =  $this->User->Guide->Rib_guide->field('bic');
-			}
-
-
-		}
-
+		
+*/
 
 
 	}
 
+ function edit_profil(){
+ 	
+ $Sessionguide=$this->Auth->user('type_personne');
+ $Editguide=$this->Auth->user('guide_id');
+ $this->helpers[]='Media.Uploader';
+ $this->User->id = $user_id;//on fixe l'id du modéle
+ $d['Guide']['id']=$this->User->field('guide_id');
+ 
+ //préremplir les champs
+ $this->request->data['User']['identifiant'] = $this->Auth->user('identifiant');
+ $this->request->data['User']['nom_user'] = $this->Auth->user('nom_user');
+ $this->request->data['User']['prenom_user'] = $this->Auth->user('prenom_user');
+ $this->request->data['User']['mail_user'] = $this->Auth->user('mail_user');
+ $this->request->data['User']['date_naissance_user'] = $this->Auth->user('date_naissance_user');
+ $this->request->data['User']['telephone_user'] = $this->Auth->user('telephone_user');
+ 
+ 
+ //permet d'afficher la liste des langues existantes
+ $this->set('langues',$this->User->Langue->find('list',array('field'=>'Langues.nom_langue')));
+ 
+ if($this->request->is('put')||$this->request->is('post')){
+ 	$d=$this->request->data;
+ 
+ 	//verification mot de passe et confirmation mot de passe !!!!!
+    $passError=false;
+ 	if(!empty($d['User']['pass1'])){
+ 		if ($d['User']['pass1']==$d['User']['pass2']){
+ 			$d['User']['mdp']=Security::hash($d['User']['pass1'],null,true);
+ 
+ 		}else{
+ 			$passError=true;}}
+ 	
+ 	if($passError){
+ 		$this->User->validationErrors['pass2']= array('les mots de passe ne correspondent pas');
+ 	}else{
+ 		$this->request->data=$this->User->read();
+ 	}
+ 	
+ if(($this->User->saveAssociated($d,true,array('User'=>array('identifiant','nom_user','prenom_user','mail_user','date_naissance_user','telephone_user','mdp','langue_id'))))){
+$this->Session->setFlash("Votre profil a bien été modifié","notif"); 
+}else {
+$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
+}
+ $this->request->data['User']['pass1']=$this->request->data['User']['pass2']='';//laisse les champs vides
+  }
+ 
+ 
+}
+
+function edit_banque(){
+$Editguide=$this->Auth->user('guide_id');	
+//si le guide a au moins une fois changer son profil
+
+if (!empty($Editguide)){
+	//on préremplit les champs
+$this->request->data['Rib_guide']['banque'] =  $this->User->Guide->Rib_guide->field('banque');
+$this->request->data['Rib_guide']['guichet'] =  $this->User->Guide->Rib_guide->field('guichet');
+$this->request->data['Rib_guide']['num_compte'] =  $this->User->Guide->Rib_guide->field('num_compte');
+$this->request->data['Rib_guide']['nom_titulaire'] =  $this->User->Guide->Rib_guide->field('nom_titulaire');
+$this->request->data['Rib_guide']['domiciliation'] =  $this->User->Guide->Rib_guide->field('domiciliation');
+$this->request->data['Rib_guide']['num_iban'] =  $this->User->Guide->Rib_guide->field('num_iban');
+$this->request->data['Rib_guide']['bic'] =  $this->User->Guide->Rib_guide->field('bic');
+		}	
+		
+		if($this->request->is('put')||$this->request->is('post')){
+			$d=$this->request->data;
+if(($this->User->Guide->saveAssociated($d,true,array('Rib_guide'=>array('id','Rib_guide.banque','Rib_guide.guichet','Rib_guide.num_compte','Rib_guide.nom_titulaire','Rib_guide.domiciliation','Rib_guide.num_iban','Rib_guide.bic'))))){
+				$this->Session->setFlash("Votre profil a bien été modifié","notif");
+			}else {
+				$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
+			}
+			
+		}
+				
+		
+		
+}
+function edit_cursus(){
+$Editguide=$this->Auth->user('guide_id');
+//si le guide a au moins une fois changer son profil
+if (!empty($Editguide)){
+
+	$this->request->data['Societe']['nom_societe'] =$this->User->Guide->Societe->field('nom_societe');
+	$this->request->data['Societe']['telephone_societe'] = $this->User->Guide->Societe->field('telephone_societe');
+	$this->request->data['Societe']['mail_societe'] =  $this->User->Guide->Societe->field('mail_societe');
+	$this->request->data['Societe']['siret'] =  $this->User->Guide->Societe->field('siret');	
+	
+	
+}
+$this->helpers[]='Media.Uploader';
+if($this->request->is('put')||$this->request->is('post')){
+	$d=$this->request->data;
+	if(($this->User->Guide->saveAssociated($d,true,array('Societe'=>array('id','Societe.nom_societe','Societe.telephone_societe','mail_societe','siret'))))){
+		$this->Session->setFlash("Votre profil a bien été modifié","notif");
+	}else {
+		$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
+	}
+		
+}
 
 
-
-
+}
 
 }
 

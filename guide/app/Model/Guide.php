@@ -1,6 +1,8 @@
 <?php
 
 class Guide extends AppModel {
+	
+	public $actsAs = array('containable','Media.Media');
 	var $hasOne = array(
 			'User' => array(
 					'className'    => 'User',
