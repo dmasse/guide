@@ -10,7 +10,6 @@
  echo $this->Form->input('Societe.siret',array('label'=>"Numero de Siret de la société"));
  
  
- echo $this->Uploader->iframe('Diplome',$diplome);
  
  ?>
  
