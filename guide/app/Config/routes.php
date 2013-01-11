@@ -30,7 +30,12 @@
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-
+    //permet de définir la taille de l'affichage des photos
+  Router::connect('/img/:file_:format.jpg',array('controller'=>'medias','action'=>'crop','plugin'=>'media'),
+  		array (
+  				'file'=>'guides\/([0-9]+)\/[^\/]+',
+  				'format'=>'200X200'
+  				));
 /**
  * Load all plugin routes.  See the CakePlugin documentation on 
  * how to customize the loading of plugin routes.

@@ -1,14 +1,18 @@
 <?php
 
 class Guide extends AppModel {
-	
-	public $actsAs = array('containable','Media.Media');
+
+
 	var $hasOne = array(
 			'User' => array(
 					'className'    => 'User',
 					'conditions'   => array('User.TypePersonne' => '1'),
 					'dependent'    => true
-			)
+			),
+			'Diplome' => array(
+					'className'    => 'Diplome',
+					'dependent'    => true)
+		
 	);
 	
 	public $belongsTo = array(
@@ -17,7 +21,7 @@ class Guide extends AppModel {
 					'foreignKey'   => 'societe_id'
 			),
 			'Rib_guide' => array(
-					'className'    => 'rib_guide',
+					'className'    => 'Rib_guide',
 					'foreignKey'   => 'rib_guide_id'
 			)
 	);

@@ -2,7 +2,7 @@
 class Diplome extends AppModel {
 	var $belongsTo = array(
 			'Guide' => array(
-					'className'    => 'guide',
+					'className'    => 'Guide',
 					'foreignKey'    => 'guide_id'
 			)
 	);

@@ -8,3 +8,9 @@
  echo $this->Form->input('Societe.telephone_societe',array('label'=>"Telephone de la société"));
  echo $this->Form->input('Societe.mail_societe',array('label'=>"Adresse mail de la société"));
  echo $this->Form->input('Societe.siret',array('label'=>"Numero de Siret de la société"));
+ 
+ 
+ echo $this->Uploader->iframe('Diplome',$diplome);
+ 
+ ?>
+ 

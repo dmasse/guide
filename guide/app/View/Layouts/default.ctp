@@ -44,7 +44,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		 <ul class="account">
 		 <?php if(AuthComponent::user('id')): ?>
 		 <li><?php echo $this->Html->link("Se deconnecter",array('action'=>'logout','controller'=>'users')); ?></li>
-		  <li><?php echo $this->Html->link("Editer mon compte",array('action'=>'edit','controller'=>'users')); ?></li>
+		  <li><?php echo $this->Html->link("Gerer mon profil",array('action'=>'viewmember','controller'=>'users')); ?></li>
 		   <li><?php echo $this->Html->link("Ajouter une nouvelle visite",array('action'=>'addvisit','controller'=>'visites')); ?></li>
 		 <?php else :?>
 		 <li><?php echo $this->Html->link("Se connecter",array('action'=>'login','controller'=>'users')); ?></li>
