@@ -42,7 +42,9 @@ class VisitesController extends AppController{
 	
 	
 	//créer une nouvelle visite à chaque fois!!!!!
-	if(($this->Visite->Visite_physique->saveAssociated($d,true,array('Visite_physique'=>array('id','Visite_physique.nb_personne','duree_physique','prix_physique','acces_handicap'),'trad_titre_desc_visite'=>array('id','titre_visite_trad','desc_visite_trad','langue_id'),'langue'=>array('id','nom_langue'))))){
+	if(($this->Visite->saveAssociated($d,true,array('Visite_physique'=>array('id','Visite_physique.nb_personne','Visite_physique.duree_physique','Visite_physique.prix_physique','Visite_physique.acces_handicap'))))){
+	$this->Visite->id = $this->Visite->field('id');;//on fixe l'id du modéle
+	($this->Visite->Visite_physique->saveAssociated($d,true,array('Trad_titre_desc_visite'=>array('id','titre_visite_trad','desc_visite_trad','langue_id'),'Langue'=>array('id','nom_langue'))));
 	$this->Session->setFlash("Une nouvelle visite physique a été créée","notif");
 	$this->redirect('/visites/addvisit');
 	}else {
