@@ -39,14 +39,16 @@ class VisitesController extends AppController{
 	$d['Visite']['date_ajout']=date('Y-m-d H:i:s');
 	debug($d);
 	$d['Visite']['guide_id']= $this->Auth->User('guide_id');
-	
+	$d['Visite_physique']['id']= $this->Visite->Visite_physique->field('id');
 	
 	//créer une nouvelle visite à chaque fois!!!!!
-	if(($this->Visite->saveAssociated($d,true,array('Visite_physique'=>array('id','Visite_physique.nb_personne','Visite_physique.duree_physique','Visite_physique.prix_physique','Visite_physique.acces_handicap'))))){
-	$this->Visite->id = $this->Visite->field('id');;//on fixe l'id du modéle
+	if($this->Visite->saveAssociated($d,true,array('deep' => true),array('Visite_physique'=>array('id','Visite_physique.nb_personne','Visite_physique.duree_physique','Visite_physique.prix_physique','Visite_physique.acces_handicap')))){
+		$d['Visite']['id']= $this->Visite->field('id');
+		$d['Visite_physique']['id']= $this->Visite->Visite_physique->field('id');
+	//$this->Visite->Visite_physique->id = $this->Visite->Visite_physique->field('id');//on fixe l'id du modéle
 	($this->Visite->Visite_physique->saveAssociated($d,true,array('Trad_titre_desc_visite'=>array('id','titre_visite_trad','desc_visite_trad','langue_id'),'Langue'=>array('id','nom_langue'))));
 	$this->Session->setFlash("Une nouvelle visite physique a été créée","notif");
-	$this->redirect('/visites/addvisit');
+	//$this->redirect('/visites/addvisit');
 	}else {
 	$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
 	}
