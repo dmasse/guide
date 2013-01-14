@@ -37,10 +37,10 @@ class VisitesController extends AppController{
 	$d['Visite']['date_ajout']=date('Y-m-d H:i:s');
 	debug($d);
 	$d['Visite']['guide_id']= $this->Auth->User('guide_id');
-	debug($this->Visite->Visite_physique->field('nb_personne'));
+	debug($this->Visite->Visite_physique->Trad_titre_desc_visite->field('desc_visite_trad'));
 	//créer une nouvelle visite à chaque fois!!!!!
-	if(	$this->Visite->saveAssociated($d,true,array('Visite_physique'=>array('id','Visite_physique.nb_personne','duree_physique','prix_physique','acces_handicap'),'titre_de'=>array('')))and $this->Visite_physiques->saveAssociated($d,true,array('trad_titre_desc_visite'= )){
-	$this->Session->setFlash("Votre profil a bien été modifié","notif");
+	if(($this->Visite->saveAssociated($d,true,array('Visite_physique'=>array('id','Visite_physique.nb_personne','duree_physique','prix_physique','acces_handicap'),'trad_titre_desc_visite'=>array('titre_visite_trad','desc_visite_trad'))))){
+	$this->Session->setFlash("Une nouvelle visite physique a été créée","notif");
 	}else {
 	$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
 	}
