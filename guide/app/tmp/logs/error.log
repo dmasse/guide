@@ -1059,3 +1059,8 @@
 #10 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(VisitesController), Object(CakeRequest), Object(CakeResponse))
 #11 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #12 {main}
+2013-01-14 09:44:22 Error: [MissingActionException] Action VisitesController::index() could not be found.
+#0 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(VisitesController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}

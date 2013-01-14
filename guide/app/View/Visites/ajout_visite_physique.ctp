@@ -1,7 +1,7 @@
  <?php $this->set('title_for_layout',"Ajouter Visite Physique");
   
  echo $this->Form->create('Visite',array('type'=>'file'));
- 
+ echo $this->Form->input('Trad_titre_desc_visites.langue_id',array('label'=>'Choississez la langue de la visite :'));
  echo $this->Form->input('Visite_physique',array('type'=>'label','label'=>"Remplissez les informations correspondants à la visite physique que vous souhaitez proposer : "));
  echo $this->Form->input('Trad_titre_desc_visite.0.titre_visite_trad',array('label'=>"Titre de la visite"));
  echo $this->Form->input('Trad_titre_desc_visite.0.desc_visite_trad',array('label'=>"Description de la visite"));

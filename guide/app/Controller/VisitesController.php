@@ -30,17 +30,21 @@ class VisitesController extends AppController{
 	
 	function ajout_visite_physique(){	
     $Sessionguide=$this->Auth->user('type_personne');
-
+    
+    //permet d'afficher la liste des langues existantes
+   $this->set('langues',$this->Visite->Visite_physique->Trad_titre_desc_visite->Langue->find('list',array('field'=>'Langues.nom_langue')));
    if($this->request->is('put')||$this->request->is('post')){
 	$d=array();
 	$d=$this->request->data;
 	$d['Visite']['date_ajout']=date('Y-m-d H:i:s');
 	debug($d);
 	$d['Visite']['guide_id']= $this->Auth->User('guide_id');
-	debug($this->Visite->Visite_physique->Trad_titre_desc_visite->field('desc_visite_trad'));
+	
+	
 	//créer une nouvelle visite à chaque fois!!!!!
-	if(($this->Visite->Visite_physique->saveAssociated($d,true,array('Visite_physique'=>array('id','Visite_physique.nb_personne','duree_physique','prix_physique','acces_handicap'),'trad_titre_desc_visite'=>array('id','titre_visite_trad','desc_visite_trad'))))){
+	if(($this->Visite->Visite_physique->saveAssociated($d,true,array('Visite_physique'=>array('id','Visite_physique.nb_personne','duree_physique','prix_physique','acces_handicap'),'trad_titre_desc_visite'=>array('id','titre_visite_trad','desc_visite_trad','langue_id'),'langue'=>array('id','nom_langue'))))){
 	$this->Session->setFlash("Une nouvelle visite physique a été créée","notif");
+	$this->redirect('/visites/addvisit');
 	}else {
 	$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
 	}
