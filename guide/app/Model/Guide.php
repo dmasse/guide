@@ -6,7 +6,7 @@ class Guide extends AppModel {
 	var $hasOne = array(
 			'User' => array(
 					'className'    => 'User',
-					'conditions'   => array('User.TypePersonne' => '1'),
+					'conditions'   => array('User.typePersonne' => '1'),
 					'dependent'    => true
 			),
 			'Diplome' => array(

@@ -15,16 +15,16 @@ class Visite extends AppModel {
 			'Visite_physique' => array(
 					'className'    => 'Visite_physique',
 					'dependent'    => true)
-			),
+			,
 		
 			'Type_de_visites' => array(
 					'className'    => 'Type_de_visites',
 					'dependent'    => true)
-			),
+			,
 			'Porter_surs' => array(
 					'className'    => 'Porter_surs',
 					'dependent'    => true)
-					),
+					)
 					
 	;
 

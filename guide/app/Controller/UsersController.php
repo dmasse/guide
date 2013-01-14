@@ -142,7 +142,7 @@ class UsersController extends AppController{
 		if($this->request->is('post')){//verifier que des données ont bien été envoyées
 			if($this->Auth->login()){//connection
 				$this->User->id=$this->Auth->user("id");//permet d'inserer la date de derniere connection
-				$this->User->saveField('DerniereCoUser',date('Y-m-d H:i:s'));
+				$this->User->saveField('derniereCoUser',date('Y-m-d H:i:s'));
 				$this->Session->setFlash("Vous êtes maintenant connecté","notif");
 				$this->redirect('/');//redirection vers home
 			}else{
@@ -181,6 +181,7 @@ class UsersController extends AppController{
 			$this->User->id = $user['User']['id'];
 			$Ip = $this->RequestHandler->getClientIp();
 			$this->User->saveField('adresse_ip',$Ip);
+			$this->User->saveField('date_inscription_user',date('Y-m-d H:i:s'));
 			$this->User->saveField('active',1);//changement du boolean dans la base de donnée
 			$this->Auth->login($user['User']);//permet de logger automatiquement l'utilisateur
 			$this->Session->setFlash("votre compte a bien été activé","notif");

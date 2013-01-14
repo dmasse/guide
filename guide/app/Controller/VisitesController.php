@@ -29,6 +29,29 @@ class VisitesController extends AppController{
 	}
 	
 	function ajout_visite_physique(){	
+    $Sessionguide=$this->Auth->user('type_personne');
+
+   if($this->request->is('put')||$this->request->is('post')){
+	$d=array();
+	$d=$this->request->data;
+	$d['Visite']['date_ajout']=date('Y-m-d H:i:s');
+	debug($d);
+	$d['Visite']['guide_id']= $this->Auth->User('guide_id');
+	debug($this->Visite->Visite_physique->field('nb_personne'));
+	//créer une nouvelle visite à chaque fois!!!!!
+	if(	$this->Visite->saveAssociated($d,true,array('Visite_physique'=>array('id','Visite_physique.nb_personne','duree_physique','prix_physique','acces_handicap'),'titre_de'=>array('')))and $this->Visite_physiques->saveAssociated($d,true,array('trad_titre_desc_visite'= )){
+	$this->Session->setFlash("Votre profil a bien été modifié","notif");
+	}else {
+	$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
+	}
+	
+		}
+		
+		
+		}		
+		
+		
+		
 		
 	}
 		
@@ -53,5 +76,5 @@ class VisitesController extends AppController{
 	
 }
 
-}
+
 ?>

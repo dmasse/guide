@@ -1,2 +1,2 @@
-1357900345
-a:1:{s:4:"name";a:3:{i:-372579228;s:6:"`test`";i:873339669;s:9:"`visites`";i:2084797095;s:18:"`visite_physiques`";}}
+1358152099
+a:2:{s:4:"name";a:12:{i:-372579228;s:6:"`test`";i:873339669;s:9:"`visites`";i:2084797095;s:18:"`visite_physiques`";i:-691614019;s:31:"`Visite_physique`.`nb_personne`";i:58612267;s:17:"`Visite_physique`";i:1254270620;s:12:"`date_ajout`";i:-1441954952;s:10:"`guide_id`";i:1428155899;s:11:"`visite_id`";i:-918521171;s:13:"`nb_personne`";i:-676611183;s:16:"`acces_handicap`";i:1533481196;s:15:"`prix_physique`";i:939072154;s:16:"`duree_physique`";}s:6:"fields";a:1:{s:32:"bb0230b4f79f8fea78a7299e51628420";a:1:{i:0;s:31:"`Visite_physique`.`nb_personne`";}}}
