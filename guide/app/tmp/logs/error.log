@@ -1045,3 +1045,17 @@
 #10 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(VisitesController), Object(CakeRequest), Object(CakeResponse))
 #11 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #12 {main}
+2013-01-14 09:38:49 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`test`.`trad_titre_desc_visites`, CONSTRAINT `FK_languedescription` FOREIGN KEY (`langue_id`) REFERENCES `langues` (`id`))
+#0 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('INSERT INTO `te...', Array)
+#2 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(985): DboSource->execute('INSERT INTO `te...')
+#3 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(1703): DboSource->create(Object(Trad_titre_desc_visite), Array, Array)
+#4 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(2060): Model->save(Array, NULL)
+#5 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(2253): Model->saveMany(Array, NULL)
+#6 C:\wamp\www\guide\guide\app\Controller\VisitesController.php(42): Model->saveAssociated(Array, true, Array)
+#7 [internal function]: VisitesController->ajout_visite_physique()
+#8 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(VisitesController), Array)
+#9 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#10 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(VisitesController), Object(CakeRequest), Object(CakeResponse))
+#11 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
