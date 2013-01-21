@@ -17,12 +17,12 @@ class Visite extends AppModel {
 					'dependent'    => true)
 			,
 		
-			'Type_de_visites' => array(
-					'className'    => 'Type_de_visites',
+			'Type_de_visite' => array(
+					'className'    => 'Type_de_visite',
 					'dependent'    => true)
 			,
-			'Porter_surs' => array(
-					'className'    => 'Porter_surs',
+			'Porter_sur' => array(
+					'className'    => 'Porter_sur',
 					'dependent'    => true)
 					)
 					

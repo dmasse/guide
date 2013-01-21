@@ -33,6 +33,8 @@ class VisitesController extends AppController{
     
     //permet d'afficher la liste des langues existantes
    $this->set('langues',$this->Visite->Visite_physique->Trad_titre_desc_visite->Langue->find('list',array('field'=>'Langues.nom_langue')));
+   //permet d'afficher la liste des types de visites existants
+  $this->set('typesVisites',$this->Visite->Type_de_visite->Type_visite_francai->find('list',array('field'=>'Type_visite_francais.type_visite_francai')));
    if($this->request->is('put')||$this->request->is('post')){
 	$d=array();
 	$d=$this->request->data;
@@ -45,10 +47,10 @@ class VisitesController extends AppController{
 	if($this->Visite->saveAssociated($d,true,array('deep' => true),array('Visite_physique'=>array('id','Visite_physique.nb_personne','Visite_physique.duree_physique','Visite_physique.prix_physique','Visite_physique.acces_handicap')))){
 		$d['Visite']['id']= $this->Visite->field('id');
 		$d['Visite_physique']['id']= $this->Visite->Visite_physique->field('id');
-	//$this->Visite->Visite_physique->id = $this->Visite->Visite_physique->field('id');//on fixe l'id du modéle
-	($this->Visite->Visite_physique->saveAssociated($d,true,array('Trad_titre_desc_visite'=>array('id','titre_visite_trad','desc_visite_trad','langue_id'),'Langue'=>array('id','nom_langue'))));
+	
+	($this->Visite->Visite_physique->saveAssociated($d,true,array('Trad_titre_desc_visite'=>array('id','titre_visite_trad','desc_visite_trad','langue_id'),'Langue'=>array('id','nom_langue'),'Date_visite_physique'=>array('id','date_visite_physique'))));
 	$this->Session->setFlash("Une nouvelle visite physique a été créée","notif");
-	//$this->redirect('/visites/addvisit');
+	$this->redirect('/visites/addvisit');
 	}else {
 	$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
 	}

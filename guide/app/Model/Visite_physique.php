@@ -10,8 +10,8 @@ class Visite_physique extends AppModel {
 	);
 	
 	var $hasMany = array(
-			'date_visite_physique' => array(
-					'className'    => 'date_visite_physique',
+			'Date_visite_physique' => array(
+					'className'    => 'Date_visite_physique',
 					'dependent'    => true
 			),
 			
