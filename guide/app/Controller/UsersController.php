@@ -555,7 +555,66 @@ function viewmember(){
 
 	$this->set($data);
 }
+function Resume_profil (){
 
+	//liste déroulante avec tous les guides
+$this->set('ListGuide',$this->User->find('list',array('field'=>'Users.nom_user','conditions'=>array('User.type_personne'=>'1'))));
+
+	//selection du guide
+	if($this->request->is('put')||$this->request->is('post')){
+	$this->User->Guide->id=$this->request->data['User']['GuideSelectionne'];
+
+	}
+	//affichage de toutes les visites proposées par le guide
+
+
+	//affichage des photos des visites
+
+
+	//affichage des informations du guide
+
+	
+	//Si l'user n'est pas connecté redirection
+       $d['User']['id']                  =$user_id;
+		    $d['User']['identifiant']         =$this->User->field('identifiant');
+		    $d['User']['nom_user']            =$this->User->field('nom_user');
+		    $d['User']['prenom_user']         =$this->User->field('prenom_user');
+		    $d['User']['mail_user']           =$this->User->field('mail_user');
+		    $d['User']['date_naissance_user'] =$this->User->field('date_naissance_user');
+		    $d['User']['telephone_user']      =$this->User->field('telephone_user');
+		   //$d['User']['langue_id']         =$this->User->field('langue_id');
+		    $d['Langue']['nom_langue']        =$this->User->Langue->field('nom_langue');
+		    $d['User']['prenom_user']         =$this->User->field('prenom_user');
+		    $d['User']['type_personne']       =$this->Auth->user('type_personne');
+		    $d['User']['civilite']            =$this->User->field('civilite');
+			$d['Guide']['id']                  =$this->User->Guide->field('id');
+			$d['Guide']['photo_guide']         =$this->User->Guide->field('photo_guide');
+			$d['Rib_guide']['id']              =$this->User->Guide->Rib_guide->field('id');
+			$d['Rib_guide']['banque']          =$this->User->Guide->Rib_guide->field('banque');
+			$d['Rib_guide']['guichet']         =$this->User->Guide->Rib_guide->field('guichet');
+			$d['Rib_guide']['num_compte']      =$this->User->Guide->Rib_guide->field('num_compte');
+			$d['Rib_guide']['nom_titulaire']   =$this->User->Guide->Rib_guide->field('nom_titulaire');
+			$d['Rib_guide']['domiciliation']   =$this->User->Guide->Rib_guide->field('domiciliation');
+			$d['Rib_guide']['num_iban']        =$this->User->Guide->Rib_guide->field('num_iban');
+			$d['Rib_guide']['bic']             =$this->User->Guide->Rib_guide->field('bic');
+				
+			$d['Societe']['id']                =$this->User->Guide->Societe->field('id');
+			$d['Societe']['siret']             =$this->User->Guide->Societe->field('siret');
+			$d['Societe']['nom_societe']       =$this->User->Guide->Societe->field('nom_societe');
+			$d['Societe']['telephone_societe'] =$this->User->Guide->Societe->field('telephone_societe');
+			$d['Societe']['mail_societe']      =$this->User->Guide->Societe->field('mail_societe');
+				
+			$d['Diplome']['id']                =$this->User->Guide->Diplome->field('id');
+			$d['Diplome']['id']                =$this->User->Guide->Diplome->field('photo_diplome');
+	
+	
+	
+		
+	
+	
+	
+
+}
 
 }
 

@@ -74,7 +74,11 @@ public $validate = array(
 		
 			     );
 		
-	
+
+
+var $displayField = 'nom_user';
+
 }
+
 
 ?>

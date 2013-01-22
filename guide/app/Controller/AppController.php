@@ -53,7 +53,7 @@ class AppController extends Controller {
                 )
 			
 				);
-		$this->Auth->allow('registration','login','logout','password','home','display','activate');
+		$this->Auth->allow('registration','login','logout','password','home','display','activate','resume_profil');
 	//}
 	}
 		

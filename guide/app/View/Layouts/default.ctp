@@ -46,6 +46,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		 <li><?php echo $this->Html->link("Se deconnecter",array('action'=>'logout','controller'=>'users')); ?></li>
 		  <li><?php echo $this->Html->link("Gerer mon profil",array('action'=>'viewmember','controller'=>'users')); ?></li>
 		   <li><?php echo $this->Html->link("Ajouter une nouvelle visite",array('action'=>'addvisit','controller'=>'visites')); ?></li>
+		   	 <li><?php echo $this->Html->link("Afficher les visites d'un guide",array('action'=>'Resume_profil','controller'=>'users')); ?></li>
 		 <?php else :?>
 		 <li><?php echo $this->Html->link("Se connecter",array('action'=>'login','controller'=>'users')); ?></li>
 		  <li><?php echo $this->Html->link("S'inscrire",array('action'=>'registration','controller'=>'users')); ?></li>
