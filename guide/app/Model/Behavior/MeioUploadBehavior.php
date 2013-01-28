@@ -757,5 +757,29 @@ class MeioUploadBehavior extends ModelBehavior {
 	   imagedestroy($dst_img);
 	   imagedestroy($src_img);
    }
+   /**
+ * Création d'un aperçu d'image
+ *
+ * @param $name String Nom du fichier sur le serveur
+ * @param $filename String Nom final du fichier
+ * @param $new_w Int Largeur en px
+ * @param $new_h Int Hauteur en px
+ * @param $zc Bool "Zoom crop" (si vrai, découpe le plus grand carré possible au centre de l'image)
+*/
+/* 
+	function createthumb2($name, $filename, $new_w, $new_h, $zc)
+	{
+		App::import('Vendor', 'phpThumb', array('file' => 'phpThumb'.DS.'phpthumb.class.php'));
+
+		$phpThumb = new phpThumb();
+		$phpThumb->setSourceFilename($name);
+		$phpThumb->setParameter('w', $new_w);
+		$phpThumb->setParameter('h', $new_h);
+		$phpThumb->setParameter('zc', $zc);
+
+		$phpThumb->generateThumbnail();
+		$phpThumb->RenderToFile($filename));
+	}
+	*/
 }
 ?>

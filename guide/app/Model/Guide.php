@@ -6,7 +6,7 @@ class Guide extends AppModel {
 	var $hasOne = array(
 			'User' => array(
 					'className'    => 'User',
-					'conditions'   => array('User.typePersonne' => '1'),
+					'conditions'   => array('User.type_personne' => '1'),
 					'dependent'    => true
 			),
 			'Diplome' => array(
@@ -14,6 +14,11 @@ class Guide extends AppModel {
 					'dependent'    => true)
 		
 	);
+	var $hasMany = array(
+			'Visite' => array(
+					'className'    => 'Visite',
+					'dependent'    => true
+			));
 	
 	public $belongsTo = array(
 			'Societe' => array(

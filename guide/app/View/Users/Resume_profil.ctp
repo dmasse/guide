@@ -18,6 +18,7 @@
  )); 
 
  echo $this->Form->end('Valider'); 
+ if ($valider){
  echo $this->Html->image('ptibiscuit.jpg', array('alt'=>'voilou', true));
  affiche($this,'Civilité',$User['civilite'],$champsManquant);
  affiche($this,'Nom',$User['nom_user'],$champsManquant);
@@ -41,7 +42,32 @@
  affiche($this,'Domiciliation',$Rib_guide['domiciliation'],$champsManquant);
  affiche($this,'IBAN',$Rib_guide['num_iban'],$champsManquant);
  affiche($this,'BIC',$Rib_guide['bic'],$champsManquant);
+debug($visites); 
+
+
+foreach ($visites as $visite):
+
+$visite1=$visite['Visite_physique'];
+$visite1titre=$visite['Visite_physique']['Trad_titre_desc_visite'];
+ echo "<br><br>les visites physiques proposées :<br><br>";
  
+ foreach ($visite1 as $v):
+ foreach ($visite1titre as $titre):
+ echo "<br><br>Titre de la physique:<br>";
+ echo $titre['titre_visite_trad'];
+ 
+ echo "<br><br>Prix de la visite:<br>";
+ echo $v['prix_physique'] ;
+ echo "<br><br>nombre de personne:<br>";
+ echo $v['nb_personne'] ;
+ echo "<br><br>durée de la visite physique:<br>";
+ echo $v['duree_physique'] ;
+ echo "<br><br>accessible au handicapé:<br>";
+ echo $v['acces_handicap'] ;
+ endforeach;
+ endforeach ;
+      endforeach; 
+ }
  
 ?>
 
