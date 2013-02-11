@@ -9,7 +9,8 @@ class UsersController extends AppController{
 	//var $primaryKey = 'IdUser';//changement du nom de la clé primaire
 
 	function Registration()
-	{	//renvoie à la vue registration
+	{	
+		//renvoie à la vue registration
 		//verifier si les données ont été postées
 		if ($this->request->is('post'))
 		{
@@ -184,16 +185,16 @@ class UsersController extends AppController{
 
 
 	function membre_index()
-	{//on limite l'acces grace aux prefixe là acces qu'au vues membres
-
+	{
+		//on limite l'acces grace aux prefixe là acces qu'au vues membres
 	}
 
 	function logout()
-	{//permet de se déconnecter
+	{
+		//permet de se déconnecter
 		$this->Auth->logout();
 		$this->Session->setFlash("vous �tes d�connect�","notif");// ne marche pas
 		$this->redirect('/');//revoir pour faire la redirection
-
 	}
 
 	function activate($token)
@@ -273,93 +274,8 @@ class UsersController extends AppController{
 		}
 	}
 
-/*	function edit(){
-		
-		$user_id=$this->Auth->user('id');
-		$this->User->id = $user_id;//on fixe l'id du modéle
-		
-		$Sessionguide=$this->Auth->user('type_personne');
-		$Editguide=$this->Auth->user('guide_id');
-		$d['User']['id']=$user_id;
-		$d['Guide']['id']=$this->User->field('guide_id');
-		$d['Guide']['photo_guide']='0';
-		$d['Societe']['siret']='0';
-		$d['Rib_guide']['num_compte']='0';
-		$d['Societe']['id']=$this->User->Guide->field('societe_id');
-		$d['Rib_guide']['id']=$this->User->Guide->field('rib_guide_id');
-		$d['Diplome']['id']=$this->User->Guide->Diplome->field('id');
-		//$this->set('photoguide', $this->User->field('guide_id'));
-	
-		if(!$user_id){
-			$this->redirect('/');
-			die();
-		}
-		
-
-
-		
-//gestion des boutons
-		if($this->request->data['type'] == 'profil'){
-			if ($Sessionguide==1){
-			$this->User->saveAssociated($d,true,array('Guide'=>array('id','photo_guide')));
-			}
-			$this->redirect( array('controller' => 'Users','action' => 'edit_profil'));
-			//pour remettre le champs à null regarder si on ne peut pas trouver une autre solution
-			$d['Guide']['photo_guide']=null;
-			$this->User->saveAssociated($d,true,array('Guide'=>array('id','photo_guide')));
-		}
-		
-			
-		
-		 if($this->request->data['type'] == 'banque')
-			{
-				$this->User->Guide->saveAssociated($d,true,array('Rib_guide'=>array('id','num_compte')));
-				$this->redirect( array('controller' => 'Users','action' => 'edit_banque'));
-				$d['Rib_guide']['num_compte']=null;
-				$this->User->Guide->saveAssociated($d,true,array('Rib_guide'=>array('id','num_compte')));
-			}
-		
-			if($this->request->data['type'] == 'cursus')
-			{
-				$this->User->Guide->saveAssociated($d,true,array('Societe'=>array('id','siret')));//sauvegarde aussi diplome
-				$this->User->Guide->saveAssociated($d,true);//sauvegarde aussi diplome
-	
-				$this->redirect( array('controller' => 'Users','action' => 'edit_cursus'));
-				$d['Societe']['siret']=null;
-				$this->User->Guide->saveAssociated($d,true,array('Societe'=>array('id','siret')));
-				//$this->User->Guide->saveAssociated($d,true,array('Diplome'=>array('id','photo_diplome')));
-			}
-			
-		
-
-
-
-          
-			
-				if(($this->User->saveAssociated($d,true,array('User'=>array('identifiant','nom_user','prenom_user','mail_user','date_naissance_user','telephone_user','mdp','langue_id'),'Guide'=>array('id','sexe_guide','photo_guide'))))and ($this->User->Guide->saveAssociated($d,true,array('Societe'=>array('id','Societe.nom_societe','Societe.telephone_societe','mail_societe','siret'),'Rib_guide'=>array('id','Rib_guide.banque','Rib_guide.Societe.guichet','Rib_guide.Societe.num_compte','Rib_guide.nom_titulaire','Rib_guide.domiciliation','Rib_guide.num_iban','Rib_guide.bic'))))){
-				$this->Session->setFlash("Votre profil a bien été modifié","notif"); 
-				$this->set('photoguide', $this->User->field('guide_id'));
-				}else {
-					$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
-
-				}
-			}else{
-			
-				//pour sauver les nouvelles informations
-				if($this->User->save($d,true,array('User.identifiant','User.nom_user','User.prenom_user','User.mail_user','User.date_naissance_user','User.telephone_user','User.mdp','User.langue_id'))) {
-					$this->Session->setFlash("Votre profil a bien été modifié","notif");
-				}else {
-					$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
-
-
-		
-
-
-
-	}*/
-
-	 function edit_profil()
-	 {
+	function edit_profil()
+	{
 		$Sessionguide     = $this->Auth->user('type_personne');
 		$Editguide        = $this->Auth->user('guide_id');
 		$this->User->id   = $this->Auth->user('id');//on fixe l'id du modéle
@@ -388,7 +304,6 @@ class UsersController extends AppController{
 			$d['Guide']['id'] = $this->User->field('guide_id');
 			$d['User']['id']  = $this->User->id;
 			
-
 		 	if (!$this->request->data['Guide']['photo_guide']['tmp_name']=='')
 		 	{
 				//On récupére le fichier
@@ -451,6 +366,7 @@ class UsersController extends AppController{
 					
 				}
 			}
+			
 
 		 	//verification mot de passe et confirmation mot de passe !!!!!
 		    $passError=false;
@@ -483,10 +399,10 @@ class UsersController extends AppController{
 			}
 			$this->request->data['User']['pass1']=$this->request->data['User']['pass2']='';//laisse les champs vides
 		}	
-
 	}
 
-	function edit_banque(){
+	function edit_banque()
+	{
 		$Editguide=$this->Auth->user('guide_id');	
 		//si le guide a au moins une fois changer son profil
 		if (!empty($Editguide))
@@ -700,7 +616,9 @@ class UsersController extends AppController{
 		$this->set($d);
 	}
 
-function Resume_profil (){ //a voir avec david le but de cette affichage plus les informations à afficher
+	function Resume_profil ()
+	{ 
+		//a voir avec david le but de cette affichage plus les informations à afficher
 		$valider= false;
 		//liste déroulante avec tous les guides
 		$this->set('ListGuide',$this->User->find('list',array('field'=>'Users.nom_user','conditions'=>array('User.type_personne'=>'1'))));
@@ -710,9 +628,10 @@ function Resume_profil (){ //a voir avec david le but de cette affichage plus le
 		{
 			$valider=true;
 			$this->set('valider',$valider);
-		//	debug($this->request->data['User']['GuideSelectionne']);
+			//	debug($this->request->data['User']['GuideSelectionne']);
 			$this->User->id=$this->request->data['User']['GuideSelectionne'];
 		}
+
 		//affichage des informations du guide
 		$d['User']['id']=$this->User->id;
 		$d['User']['identifiant'] =$this->User->field('identifiant');
@@ -721,12 +640,12 @@ function Resume_profil (){ //a voir avec david le but de cette affichage plus le
 		$d['User']['mail_user'] =$this->User->field('mail_user');
 		$d['User']['date_naissance_user'] =$this->User->field('date_naissance_user');
 		$d['User']['telephone_user'] =$this->User->field('telephone_user');
-		//$d['User']['langue_id'] =$this->User->field('langue_id');
+
 		$d['Langue']['nom_langue'] =$this->User->Langue->field('nom_langue');
-		$d['User']['prenom_user'] =$this->User->field('prenom_user');
+		
 		$d['User']['type_personne'] =$this->Auth->user('type_personne');
 		$d['User']['civilite'] =$this->User->field('civilite');
-		$d['Guide']['id'] =$this->User->Guide->field('id');
+		$d['Guide']['id'] =$this->User->field('guide_id');
 		$d['Guide']['photo_guide'] =$this->User->Guide->field('photo_guide');
 		$d['Rib_guide']['id'] =$this->User->Guide->Rib_guide->field('id');
 		$d['Rib_guide']['banque'] =$this->User->Guide->Rib_guide->field('banque');
@@ -744,38 +663,31 @@ function Resume_profil (){ //a voir avec david le but de cette affichage plus le
 		$d['Societe']['mail_societe'] =$this->User->Guide->Societe->field('mail_societe');
 
 		$d['Diplome']['id'] =$this->User->Guide->Diplome->field('id');
-		//$d['Diplome']['id'] =$this->User->Guide->Diplome->field('photo_diplome');
-
+		$d['Diplome']['photo_diplome'] =$this->User->Guide->Diplome->field('photo_diplome');
+		debug($d);
 		$this->set($d);
 		$this->User->Guide->Visite->recursive = 2;
-		    //affichage de toutes les visites proposées par le guide
-       
-	   ($this->set('visites',$this->User->Guide->Visite->find('all',array(
-	       		'conditions' => array('Guide.id' => $this->User->field('guide_id'))))));
-	  
-	   debug($this->User->Guide->Visite->find('all', array(
-	   		
-	   		'contain' => array(
-	   				'Visite',
-	   				'Visite_physique' => array(
-	   						'Trad_titre_desc_visite' => array(
-	   								'fields' => array('id', 'titre_visite_trad')
-	   								
-	   										)
-	   								)
-	   						),
-	   		'conditions' => array('Guide.id' => $this->User->field('guide_id'))
-	   						
-	   						)
-	   				)
-	   		)
-	  ;
-	   
-	       //affichage des photos des visites
-	       
+		//affichage de toutes les visites proposées par le guide
 
+		($this->set('visites',$this->User->Guide->Visite->find('all',array(
+		'conditions' => array('Guide.id' => $this->User->field('guide_id'))))));
 
+		debug($this->User->Guide->Visite->find('all', array(
 
+		'contain' => array(
+		'Visite',
+		'Visite_physique' => array(
+		'Trad_titre_desc_visite' => array(
+		'fields' => array('id', 'titre_visite_trad')
+
+		)
+		)
+		),
+		'conditions' => array('Guide.id' => $this->User->field('guide_id'))
+		)
+		)
+		)
+		;
 	}
 }
 
