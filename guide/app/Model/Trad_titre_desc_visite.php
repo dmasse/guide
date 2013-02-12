@@ -13,12 +13,10 @@ class Trad_titre_desc_visite extends AppModel {
 	
 			'Visite_physique' => array(
 					'className'    => 'Visite_physique',
-					'foreignKey'   => 'visite_papier_id'
+					'foreignKey'   => 'visite_physique_id'
 			),
-			'Visite_physique' => array(
-					'className'    => 'Visite_physique',
-					'foreignKey'   => 'visite_papier_id'
-			),
+		
+		
 				
 			'Langue'=> array(
 					'className'=>'Langue',

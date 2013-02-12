@@ -3,19 +3,19 @@ class Visite_audio extends AppModel {
 	public $belongsTo = array(
 			'Visite' => array(
 					'className'    => 'Visite',
-					'foreignKey'   => 'Visite_id'
+					'foreignKey'   => 'visite_id'
 			));
 	var $hasMany = array(
-			'Visite_audio_effectues' => array(
-							'className'    => 'Visite_audio_effectues',
+			'Visite_audio_effectue' => array(
+							'className'    => 'Visite_audio_effectue',
 							'dependent'    => true
 					),
-			'Visite_audio_dispensers' =>array (
-					'className'=>'Visite_audio_dispensers',
+			'Visite_audio_dispenser' =>array (
+					'className'=>'Visite_audio_dispenser',
 					'dependent'=>true),
 			
-		  'Trad_titre_desc_visites'=> array(
-					'className'=>'Trad_titre_desc_visites',
+		  'Trad_titre_desc_visite'=> array(
+					'className'=>'Trad_titre_desc_visite',
 					'dependent'=>true),
 			'Notation_visite' =>array (
 					'className'=>'Notation_visite',

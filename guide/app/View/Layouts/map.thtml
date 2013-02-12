@@ -1,0 +1,5 @@
+<?php  
+$key = "AIzaSyAikV7xH0eSVWCIu00CMEiTa8eVVVnZtII"; 
+$url = "http://maps.google.com/maps?file=api&v=2&key=$key"; 
+echo $javascript->linkOut($url);  
+?> 

@@ -1308,3 +1308,87 @@
 #1 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(VisitesController), Object(CakeRequest), Object(CakeResponse))
 #2 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #3 {main}
+2013-02-11 13:43:10 Error: [MissingActionException] Action VisitesController::ajout_visite_audio() could not be found.
+#0 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(VisitesController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-02-11 15:18:39 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`test`.`visite_audios`, CONSTRAINT `FK_heritagevisiteaudio` FOREIGN KEY (`visite_id`) REFERENCES `visites` (`id`))
+#0 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('INSERT INTO `te...', Array)
+#2 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(985): DboSource->execute('INSERT INTO `te...')
+#3 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(1703): DboSource->create(Object(Visite_audio), Array, Array)
+#4 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(2210): Model->save(Array, NULL)
+#5 C:\wamp\www\guide\guide\app\Controller\VisitesController.php(118): Model->saveAssociated(Array, true, Array)
+#6 [internal function]: VisitesController->ajout_visite_audio()
+#7 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(VisitesController), Array)
+#8 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(VisitesController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-02-11 15:35:10 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`test`.`visite_papiers`, CONSTRAINT `FK_heritagevisitepapier` FOREIGN KEY (`visite_id`) REFERENCES `visites` (`id`))
+#0 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('INSERT INTO `te...', Array)
+#2 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(985): DboSource->execute('INSERT INTO `te...')
+#3 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(1703): DboSource->create(Object(Visite_papier), Array, Array)
+#4 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(2210): Model->save(Array, NULL)
+#5 C:\wamp\www\guide\guide\app\Controller\VisitesController.php(85): Model->saveAssociated(Array, true, Array)
+#6 [internal function]: VisitesController->ajout_visite_papier()
+#7 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(VisitesController), Array)
+#8 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(VisitesController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-02-12 09:55:45 Error: [MissingControllerException] Controller class PointController could not be found.
+#0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-02-12 09:56:07 Error: [MissingControllerException] Controller class PoinntsController could not be found.
+#0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-02-12 09:56:11 Error: [MissingTableException] Table points for model Point was not found in datasource default.
+#0 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(3398): Model->setSource('points')
+#1 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(775): Model->getDataSource()
+#2 C:\wamp\www\guide\guide\app\Controller\PointsController.php(11): Model->__call('findAll', Array)
+#3 C:\wamp\www\guide\guide\app\Controller\PointsController.php(11): AppModel->findAll()
+#4 [internal function]: PointsController->index()
+#5 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PointsController), Array)
+#6 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#7 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointsController), Object(CakeRequest), Object(CakeResponse))
+#8 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#9 {main}
+2013-02-12 09:57:12 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'findAll' at line 1
+#0 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('findAll', Array)
+#2 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(647): DboSource->execute('findAll', Array, Array)
+#3 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(589): DboSource->fetchAll('findAll', Array, Array)
+#4 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(775): DboSource->query('findAll', Array, Object(AppModel))
+#5 C:\wamp\www\guide\guide\app\Controller\PointsController.php(11): Model->__call('findAll', Array)
+#6 C:\wamp\www\guide\guide\app\Controller\PointsController.php(11): AppModel->findAll()
+#7 [internal function]: PointsController->index()
+#8 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PointsController), Array)
+#9 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#10 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointsController), Object(CakeRequest), Object(CakeResponse))
+#11 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-02-12 09:57:50 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'findAll' at line 1
+#0 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('findAll', Array)
+#2 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(647): DboSource->execute('findAll', Array, Array)
+#3 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(589): DboSource->fetchAll('findAll', Array, Array)
+#4 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(775): DboSource->query('findAll', Array, Object(AppModel))
+#5 C:\wamp\www\guide\guide\app\Controller\PointsController.php(11): Model->__call('findAll', Array)
+#6 C:\wamp\www\guide\guide\app\Controller\PointsController.php(11): AppModel->findAll()
+#7 [internal function]: PointsController->index()
+#8 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PointsController), Array)
+#9 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#10 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointsController), Object(CakeRequest), Object(CakeResponse))
+#11 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-02-12 10:04:20 Error: [MissingHelperException] Helper class AjaxHelper could not be found.
+#0 C:\wamp\www\guide\guide\lib\Cake\View\View.php(850): HelperCollection->load('Ajax', Array)
+#1 C:\wamp\www\guide\guide\lib\Cake\View\View.php(456): View->loadHelpers()
+#2 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(959): View->render(NULL, NULL)
+#3 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(110): Controller->render()
+#4 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointsController), Object(CakeRequest), Object(CakeResponse))
+#5 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
