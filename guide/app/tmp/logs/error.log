@@ -1392,3 +1392,113 @@
 #4 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointsController), Object(CakeRequest), Object(CakeResponse))
 #5 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #6 {main}
+2013-02-12 15:18:33 Error: [MissingControllerException] Controller class PointsInteretsController could not be found.
+#0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-02-12 15:18:43 Error: [MissingControllerException] Controller class PointInteretsController could not be found.
+#0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-02-12 15:19:10 Error: [MissingControllerException] Controller class PointInteretsController could not be found.
+#0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-02-12 15:19:14 Error: [MissingControllerException] Controller class PointInteretsController could not be found.
+#0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-02-12 15:19:33 Error: [MissingControllerException] Controller class PointInteretsController could not be found.
+#0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-02-12 15:21:41 Error: [MissingActionException] Action PointInteretsController::index() could not be found.
+#0 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointInteretsController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-02-12 15:24:46 Error: [MissingActionException] Action PointInteretsController::index() could not be found.
+#0 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointInteretsController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-02-12 15:24:55 Error: [MissingActionException] Action PointInteretsController::lieu_interets() could not be found.
+#0 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointInteretsController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-02-12 15:25:44 Error: [MissingViewException] View file "C:\wamp\www\guide\guide\app\View\PointInterets\lieu_visite.ctp" is missing.
+#0 C:\wamp\www\guide\guide\lib\Cake\View\View.php(460): View->_getViewFileName(NULL)
+#1 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(959): View->render(NULL, NULL)
+#2 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(110): Controller->render()
+#3 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointInteretsController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-02-13 12:45:19 Error: [MissingModelException] Point_Interet
+#0 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(1084): PaginatorComponent->paginate('Point_Interet', Array, Array)
+#1 C:\wamp\www\guide\guide\app\Controller\PointInteretsController.php(6): Controller->paginate('Point_Interet')
+#2 [internal function]: PointInteretsController->lieu_visite()
+#3 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PointInteretsController), Array)
+#4 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#5 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointInteretsController), Object(CakeRequest), Object(CakeResponse))
+#6 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}
+2013-02-13 12:46:07 Error: [MissingModelException] Point_Interets
+#0 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(1084): PaginatorComponent->paginate('Point_Interets', Array, Array)
+#1 C:\wamp\www\guide\guide\app\Controller\PointInteretsController.php(6): Controller->paginate('Point_Interets')
+#2 [internal function]: PointInteretsController->lieu_visite()
+#3 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PointInteretsController), Array)
+#4 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#5 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointInteretsController), Object(CakeRequest), Object(CakeResponse))
+#6 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}
+2013-02-13 12:46:43 Error: [MissingModelException] Point_Interet
+#0 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(1084): PaginatorComponent->paginate('Point_Interet', Array, Array)
+#1 C:\wamp\www\guide\guide\app\Controller\PointInteretsController.php(6): Controller->paginate('Point_Interet')
+#2 [internal function]: PointInteretsController->lieu_visite()
+#3 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PointInteretsController), Array)
+#4 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#5 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointInteretsController), Object(CakeRequest), Object(CakeResponse))
+#6 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}
+2013-02-13 12:47:02 Error: [MissingModelException] Point_Interet
+#0 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(1084): PaginatorComponent->paginate('Point_Interet', Array, Array)
+#1 C:\wamp\www\guide\guide\app\Controller\PointInteretsController.php(6): Controller->paginate('Point_Interet')
+#2 [internal function]: PointInteretsController->lieu_visite()
+#3 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PointInteretsController), Array)
+#4 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#5 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointInteretsController), Object(CakeRequest), Object(CakeResponse))
+#6 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}
+2013-02-13 12:51:09 Error: [MissingModelException] Point_Interets
+#0 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(1084): PaginatorComponent->paginate('Point_Interets', Array, Array)
+#1 C:\wamp\www\guide\guide\app\Controller\PointInteretsController.php(6): Controller->paginate('Point_Interets')
+#2 [internal function]: PointInteretsController->lieu_visite()
+#3 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PointInteretsController), Array)
+#4 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#5 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointInteretsController), Object(CakeRequest), Object(CakeResponse))
+#6 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}
+2013-02-13 12:53:07 Error: [MissingModelException] PointInterets
+#0 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(1084): PaginatorComponent->paginate('PointInterets', Array, Array)
+#1 C:\wamp\www\guide\guide\app\Controller\PointInteretsController.php(6): Controller->paginate('PointInterets')
+#2 [internal function]: PointInteretsController->lieu_visite()
+#3 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PointInteretsController), Array)
+#4 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#5 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointInteretsController), Object(CakeRequest), Object(CakeResponse))
+#6 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}
+2013-02-13 12:56:19 Error: [MissingControllerException] Controller class PointInteretsController could not be found.
+#0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-02-13 12:56:56 Error: [MissingControllerException] Controller class PointInteretsController could not be found.
+#0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-02-13 12:57:59 Error: [MissingViewException] View file "C:\wamp\www\guide\guide\app\View\PointInterets\lieu_visite.ctp" is missing.
+#0 C:\wamp\www\guide\guide\lib\Cake\View\View.php(460): View->_getViewFileName(NULL)
+#1 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(959): View->render(NULL, NULL)
+#2 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(110): Controller->render()
+#3 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointInteretsController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-02-13 13:09:39 Error: [MissingControllerException] Controller class PointInteretsController could not be found.
+#0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-02-13 13:09:44 Error: [MissingControllerException] Controller class PointController could not be found.
+#0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

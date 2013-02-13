@@ -15,5 +15,6 @@
  echo $this->Form->input('Visite_audio.duree_audio',array('label'=>"Durée de la visite Audio"));
 
  
+ echo $this->Form->button('Ajouter une localisation',array('name'=>'type', 'value' => 'localisation'));
 
  echo $this->Form->end('Modifier');?>

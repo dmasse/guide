@@ -14,5 +14,7 @@
  echo $this->Form->input('Visite_physique.0.prix_physique',array('label'=>"Prix de la visite Physique : "));
  echo $this->Form->input('Visite_physique.0.duree_physique',array('label'=>"Durée de la visite Physique (en heure) : "));
  echo $this->Form->input('Date_visite_physique.0.date_visite_physique',array('label'=>"Date de la visite Physique : "));
-
+ 
+ echo $this->Form->button('Ajouter une localisation',array('name'=>'type', 'value' => 'localisation'));
+ 
  echo $this->Form->end('Modifier');?>

@@ -14,7 +14,9 @@
  		'options' => $typesVisites,'label'=>'Choisissez le type de la visite'
  ));
  
-
+ 
+ echo $this->Form->button('Ajouter une localisation',array('name'=>'type', 'value' => 'localisation'));
+ 
  echo $this->Form->end('Modifier');?>
  
  

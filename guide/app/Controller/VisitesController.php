@@ -35,6 +35,18 @@ class VisitesController extends AppController{
    $this->set('langues',$this->Visite->Visite_physique->Trad_titre_desc_visite->Langue->find('list',array('field'=>'Langues.nom_langue')));
    //permet d'afficher la liste des types de visites existants
   $this->set('typesVisites',$this->Visite->Type_de_visite->Type_visite_francai->find('list',array('field'=>'Type_visite_francais.type_visite_francai')));
+  
+ 
+  	//Gestion des boutons
+  $d= $this->request->data;
+  	if($this->request->data['type'] == 'localisation'){
+  		$this->redirect( array('controller' => 'Point_interets','action' => 'lieu_visite'));
+  	}
+  		
+  
+  
+  
+  
    if($this->request->is('put')||$this->request->is('post')){
 	$d=array();
 	$d=$this->request->data;
@@ -69,6 +81,14 @@ class VisitesController extends AppController{
 		$this->set('langues',$this->Visite->Visite_physique->Trad_titre_desc_visite->Langue->find('list',array('field'=>'Langues.nom_langue')));
 		//permet d'afficher la liste des types de visites existants
 		$this->set('typesVisites',$this->Visite->Type_de_visite->Type_visite_francai->find('list',array('field'=>'Type_visite_francais.type_visite_francai')));
+		
+		//Gestion des boutons
+		if($this->request->data['type'] == 'localisation'){
+			$this->redirect( array('controller' => 'Point_interets','action' => 'lieu_visite'));
+		}
+		
+			
+		
 		if($this->request->is('put')||$this->request->is('post')){
 			$d=array();
 			$d=$this->request->data;
@@ -101,6 +121,15 @@ $d['Visite']['id']= $this->Visite->field('id');
 		$this->set('langues',$this->Visite->Visite_physique->Trad_titre_desc_visite->Langue->find('list',array('field'=>'Langues.nom_langue')));
 		//permet d'afficher la liste des types de visites existants
 		$this->set('typesVisites',$this->Visite->Type_de_visite->Type_visite_francai->find('list',array('field'=>'Type_visite_francais.type_visite_francai')));
+		
+		//Gestion des boutons
+		if($this->request->data['type'] == 'localisation'){
+			$this->redirect( array('controller' => 'Point_interets','action' => 'lieu_visite'));
+		}
+		
+			
+		
+		
 		if($this->request->is('put')||$this->request->is('post')){
 			$d=array();
 			$d=$this->request->data;
