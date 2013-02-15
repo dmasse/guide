@@ -20,15 +20,29 @@ class VisitesController extends AppController{
 				$idvisite= $this->Visite->field('id');
 				debug($idvisite);
 				$this->Session->write('idvisite',$idvisite);
-				$this->redirect( array('controller' => 'Visites','action' => 'ajout_visite_physique',$idvisite));
+				$this->redirect( array('controller' => 'Visites','action' => 'ajout_visite_physique'));
 			}
 			
 				
 			if($this->request->data['type'] == 'papier'){
+				$d['Visite']['date_ajout']=date('Y-m-d H:i:s');
+				$d['Visite']['guide_id']= $this->Auth->User('guide_id');
+				$this->Visite->saveAssociated($d,true,array('deep' => true),array('Visite'=>array('id','date_ajout','guide_id')));
+				$idvisite= $this->Visite->field('id');
+				debug($idvisite);
+				$this->Session->write('idvisite',$idvisite);
+				
 				$this->redirect( array('controller' => 'Visites','action' => 'ajout_visite_papier'));
 			}
 				
 			if($this->request->data['type'] == 'audio'){
+				$d['Visite']['date_ajout']=date('Y-m-d H:i:s');
+				$d['Visite']['guide_id']= $this->Auth->User('guide_id');
+				$this->Visite->saveAssociated($d,true,array('deep' => true),array('Visite'=>array('id','date_ajout','guide_id')));
+				$idvisite= $this->Visite->field('id');
+				debug($idvisite);
+				$this->Session->write('idvisite',$idvisite);
+				
 				$this->redirect( array('controller' => 'Visites','action' => 'ajout_visite_audio'));
 			}
 	}
@@ -102,9 +116,9 @@ class VisitesController extends AppController{
 			//$d['Visite_papier']['id']= $this->Visite->Visite_papier->field('id');
 		
 //créer une nouvelle visite à chaque fois!!!!!
+$d['Visite']['id']= $this->Session->read('idvisite');
 if($this->Visite->saveAssociated($d,true,array('deep' => true),array('Visite_papier'=>array('Visite_papier.id','Visite_papier.duree_papier','Visite_papier.prix_papier')))){
-$d['Visite']['id']= $this->Visite->field('id');
-				$d['Visite_papier']['id']= $this->Visite->Visite_papier->field('id');
+$d['Visite_papier']['id']= $this->Visite->Visite_papier->field('id');
 		
 				($this->Visite->Visite_papier->saveAssociated($d,true,array('Trad_titre_desc_visite'=>array('id','titre_visite_trad','desc_visite_trad','langue_id'),'Langue'=>array('id','nom_langue'))));
 				$this->Session->setFlash("Une nouvelle visite papier a été créée","notif");
@@ -144,8 +158,8 @@ $d['Visite']['id']= $this->Visite->field('id');
 			//$d['Visite_audio']['id']= $this->Visite->Visite_audio->field('id');
 		
 			//créer une nouvelle visite à chaque fois!!!!!
+			$d['Visite']['id']= $this->Session->read('idvisite');
 			if($this->Visite->saveAssociated($d,true,array('deep' => true),array('Visite_audio'=>array('id','Visite_audio.duree_audio','Visite_audio.prix_audio')))){
-				$d['Visite']['id']= $this->Visite->field('id');
 				$d['Visite_audio']['id']= $this->Visite->Visite_audio->field('id');
 		
 				($this->Visite->Visite_audio->saveAssociated($d,true,array('Trad_titre_desc_visite'=>array('id','titre_visite_trad','desc_visite_trad','langue_id'),'Langue'=>array('id','nom_langue'))));
