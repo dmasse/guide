@@ -14,7 +14,13 @@ class VisitesController extends AppController{
 	
 		//Gestion des boutons
 			if($this->request->data['type'] == 'physique'){
-				$this->redirect( array('controller' => 'Visites','action' => 'ajout_visite_physique'));
+				$d['Visite']['date_ajout']=date('Y-m-d H:i:s');
+				$d['Visite']['guide_id']= $this->Auth->User('guide_id');
+				$this->Visite->saveAssociated($d,true,array('deep' => true),array('Visite'=>array('id','date_ajout','guide_id')));	
+				$idvisite= $this->Visite->field('id');
+				debug($idvisite);
+				$this->Session->write('idvisite',$idvisite);
+				$this->redirect( array('controller' => 'Visites','action' => 'ajout_visite_physique',$idvisite));
 			}
 			
 				
@@ -30,7 +36,8 @@ class VisitesController extends AppController{
 	
 	function ajout_visite_physique(){	
     $Sessionguide=$this->Auth->user('type_personne');
-    
+    debug($this->Session->read('idvisite'));
+   
     //permet d'afficher la liste des langues existantes
    $this->set('langues',$this->Visite->Visite_physique->Trad_titre_desc_visite->Langue->find('list',array('field'=>'Langues.nom_langue')));
    //permet d'afficher la liste des types de visites existants
@@ -40,27 +47,25 @@ class VisitesController extends AppController{
   	//Gestion des boutons
   $d= $this->request->data;
   	if($this->request->data['type'] == 'localisation'){
-  		$this->redirect( array('controller' => 'Point_interets','action' => 'lieu_visite'));
+  		$this->redirect( array('controller' => 'Points','action' => 'lieu_visite'));
   	}
   		
-  
-  
-  
+ 
   
    if($this->request->is('put')||$this->request->is('post')){
 	$d=array();
 	$d=$this->request->data;
-	$d['Visite']['date_ajout']=date('Y-m-d H:i:s');
 	
-	$d['Visite']['guide_id']= $this->Auth->User('guide_id');
 	//$d['Visite_physique']['id']= $this->Visite->Visite_physique->field('id');
 
 	//créer une nouvelle visite à chaque fois!!!!!
+	$d['Visite']['id']= $this->Session->read('idvisite');
+	debug($d['Visite']['id']);
 	if($this->Visite->saveAssociated($d,true,array('deep' => true),array('Visite_physique'=>array('id','Visite_physique.nb_personne','Visite_physique.duree_physique','Visite_physique.prix_physique','Visite_physique.acces_handicap')))){
-		$d['Visite']['id']= $this->Visite->field('id');
-		$d['Visite_physique']['id']= $this->Visite->Visite_physique->field('id');
+	$d['Visite_physique']['id']= $this->Visite->Visite_physique->field('id');
 	
-	($this->Visite->Visite_physique->saveAssociated($d,true,array('Trad_titre_desc_visite'=>array('id','titre_visite_trad','desc_visite_trad','langue_id'),'Langue'=>array('id','nom_langue'),'Date_visite_physique'=>array('id','date_visite_physique'))));
+		//$this->redirect(array('controller' => 'actualites', 'action' =>'autoadd',$idvisite));
+	//($this->Visite->Visite_physique->saveAssociated($d,true,array('Trad_titre_desc_visite'=>array('id','titre_visite_trad','desc_visite_trad','langue_id'),'Langue'=>array('id','nom_langue'),'Date_visite_physique'=>array('id','date_visite_physique'))));
 	$this->Session->setFlash("Une nouvelle visite physique a été créée","notif");
 	//$this->redirect('/visites/addvisit');
 	}else {
@@ -84,7 +89,7 @@ class VisitesController extends AppController{
 		
 		//Gestion des boutons
 		if($this->request->data['type'] == 'localisation'){
-			$this->redirect( array('controller' => 'Point_interets','action' => 'lieu_visite'));
+			$this->redirect( array('controller' => 'Points','action' => 'lieu_visite'));
 		}
 		
 			
@@ -124,7 +129,7 @@ $d['Visite']['id']= $this->Visite->field('id');
 		
 		//Gestion des boutons
 		if($this->request->data['type'] == 'localisation'){
-			$this->redirect( array('controller' => 'Point_interets','action' => 'lieu_visite'));
+			$this->redirect( array('controller' => 'Points','action' => 'lieu_visite'));
 		}
 		
 			

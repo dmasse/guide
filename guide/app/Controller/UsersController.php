@@ -280,8 +280,6 @@ class UsersController extends AppController{
 		$Editguide        = $this->Auth->user('guide_id');
 		$this->User->id   = $this->Auth->user('id');//on fixe l'id du modéle
 		$d['Guide']['id'] = $this->User->field('guide_id');
-		debug($this->User->id );
-		debug($d);
 
 		 //préremplir les champs
 		$this->request->data['User']['identifiant']         = $this->Auth->user('identifiant');
