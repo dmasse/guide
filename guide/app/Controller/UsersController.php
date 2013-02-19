@@ -135,7 +135,7 @@ class UsersController extends AppController{
 								->emailFormat('html')
 								->template('registration')
 								->viewVars(array('nom_user' =>$d['User']['nom_user'],'prenom_user'=>$d['User']['prenom_user'],'link'=>$link))
-								->send()
+								// ->send()
 								;
 						$this->request->data= array();//permet de vider tous les champs on peut aussi faire une redirection
 						$this->Session->setFlash("Votre compte a bien été créé, valider votre inscription grace au mail de confirmation","notif");
@@ -193,7 +193,7 @@ class UsersController extends AppController{
 	{
 		//permet de se déconnecter
 		$this->Auth->logout();
-		$this->Session->setFlash("vous �tes d�connect�","notif");// ne marche pas
+		$this->Session->setFlash("vous êtes déconnecté","notif");// ne marche pas
 		$this->redirect('/');//revoir pour faire la redirection
 	}
 
@@ -265,7 +265,7 @@ class UsersController extends AppController{
 						->emailFormat('html')
 						->template('mdp')
 						->viewVars(array('Identifiant'=>$user['User']['Identifiant'],'link'=>$link))
-						->send()
+						// ->send()
 						;
 
 				$this->Session->setFlash("Un email vous a été avec un nouveau mot de passe","notif");
@@ -278,34 +278,42 @@ class UsersController extends AppController{
 	{
 		$Sessionguide     = $this->Auth->user('type_personne');
 		$Editguide        = $this->Auth->user('guide_id');
+		//on fixe l'id du modéle
 		$this->User->id   = $this->Auth->user('id');//on fixe l'id du modéle
-		$d['Guide']['id'] = $this->User->field('guide_id');
+		$d = $this->User->find('first', array('conditions' => array('User.id' => $this->User->id)));
+		debug($this->User->id );
+		debug($d);
 
-		 //préremplir les champs
-		$this->request->data['User']['identifiant']         = $this->Auth->user('identifiant');
-		$this->request->data['User']['nom_user']            = $this->Auth->user('nom_user');
-		$this->request->data['User']['prenom_user']         = $this->Auth->user('prenom_user');
-		$this->request->data['User']['mail_user']           = $this->Auth->user('mail_user');
-		$this->request->data['User']['date_naissance_user'] = $this->Auth->user('date_naissance_user');
-		$this->request->data['User']['telephone_user']      = $this->Auth->user('telephone_user');
+
+		 //préremplir les champs;
+		$this->request->data['User']['identifiant']         = $d['User']['identifiant'];
+		$this->request->data['User']['nom_user']            = $d['User']['nom_user'];
+		$this->request->data['User']['prenom_user']         = $d['User']['prenom_user'] ;
+		$this->request->data['User']['mail_user']           = $d['User']['mail_user'];
+		$this->request->data['User']['date_naissance_user'] = $d['User']['date_naissance_user'];
+		$this->request->data['User']['telephone_user']      = $d['User']['telephone_user'] ;
+		// $this->request->data['User']['identifiant']         = $this->Auth->user('identifiant');
+		// $this->request->data['User']['nom_user']            = $this->Auth->user('nom_user');
+		// $this->request->data['User']['prenom_user']         = $this->Auth->user('prenom_user');
+		// $this->request->data['User']['mail_user']           = $this->Auth->user('mail_user');
+		// $this->request->data['User']['date_naissance_user'] = $this->Auth->user('date_naissance_user');
+		// $this->request->data['User']['telephone_user']      = $this->Auth->user('telephone_user');
 		 
 		 
 		 //permet d'afficher la liste des langues existantes
 		$this->set('langues',$this->User->Langue->find('list',array('field'=>'Langues.nom_langue')));
-		$d['Guide']['photo_guide'] =$this->User->Guide->field('photo_guide');
-		$this->set($d);
-		debug($d);		
+		$photo['Guide']['photo_guide'] =$d['Guide']['photo_guide'];
+		$this->set($photo);
+		debug($photo);
+		debug($this->request->data['Guide']['photo']);
 		if($this->request->is('put')||$this->request->is('post'))
 		{
-			$d                = array();
-			$d                = $this->request->data;
-			$d['Guide']['id'] = $this->User->field('guide_id');
-			$d['User']['id']  = $this->User->id;
-			
-		 	if (!$this->request->data['Guide']['photo_guide']['tmp_name']=='')
+			if (!$this->request->data['Guide']['photo']['tmp_name']=='')
 		 	{
+		 		
+		 		debug($this->request->data['Guide']['photo']);
 				//On récupére le fichier
-				$tmp_name                  =$this->request->data['Guide']['photo_guide']['tmp_name'];
+				$tmp_name                  =$this->request->data['Guide']['photo']['tmp_name'];
 				// Définition de la largeur et de la hauteur maximale
 				$width = 300;
 				$height = 300;
@@ -315,6 +323,7 @@ class UsersController extends AppController{
 				//Traitement selon le type du fichier
 				if ($type == "1" ||$type == "2" ||$type == "3" )
 				{
+					$format = 1;
 					//Selon le type, on créer l'image pour la redimensionner
 					switch ( $type ) {
 						case "1":
@@ -327,7 +336,9 @@ class UsersController extends AppController{
 							$image = imagecreatefrompng( $tmp_name );
 							break;
 						default:
-							$this->Session->setFlash("L'image n'est pas dans un format reconnu. Extensions autorisées : jpg/jpeg, gif, png","message_error");
+							// Normalement ne doit jamais rentrer dans cette boucle (condition précédente ...)
+							//Le format n'est pas correct
+							$format = 0;
 						break;
 					}
 
@@ -348,23 +359,41 @@ class UsersController extends AppController{
 					imagecopyresampled($image_final, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
 
 					//On définit le nom de la photo. ici : profil + 'identifiant'
-					$name        ='Profil '.$this->User->field('identifiant') . ".jpg";
-					$uploads_dir ='H:/wamp/www/guide/guide/'.'app/webroot/img/profil/';
+					$name        ='Profil '. $d['User']['identifiant']. ".jpg";
+					//On définit le chemin ou sera enregistré la photo
+					$folder_url = 'img/profil/';
+					$uploads_dir =WWW_ROOT. $folder_url;
+
+					//Si le dossier n est pas encore présent sur le serveur on le créé
+					if(!is_dir($folder_url)) {
+						mkdir($folder_url);
+					}
+
+
+					debug($uploads_dir);
 					$this->Session->setFlash("Photo de profil modifiée","notif");	
 					chmod($uploads_dir, 0777);
+
 					imagejpeg( $image_final, $uploads_dir. $name);
+					
 					$d['Guide']['photo_guide'] = 'profil/'.$name;
 
+					//  nettoyage de la mémoire
+				   	imagedestroy($image);        
+					imagedestroy($image_final);
 					
 					
 				}else
 				{
 					debug($type);
-					$this->Session->setFlash("L'image n'est pas dans un format reconnu. Extensions autorisées : jpg/jpeg, gif, png","message_error");	
-					
+					//Le format n'est pas correct
+					$format = 0;
 				}
 			}
-			
+			else
+			{
+				$format = 1;
+			}
 
 		 	//verification mot de passe et confirmation mot de passe !!!!!
 		    $passError=false;
@@ -390,7 +419,12 @@ class UsersController extends AppController{
 			debug($this->request->data);	
 			if(($this->User->saveAssociated($d,true,array('User'=>array('id','identifiant','nom_user','prenom_user','mail_user','date_naissance_user','telephone_user','mdp','langue_id'),'Guide'=>array('id','photo_guide')))))
 			{
-				$this->Session->setFlash("Votre profil a bien été modifié","notif"); 
+				$this->Session->setFlash("Votre profil a bien été modifié","notif");
+				//Si un fichier au format incorrect a ete placé dans le champs image de profil
+				debug($format);
+				if(!$format){
+					$this->Session->setFlash("1 : L'image n'est pas dans un format reconnu. Extensions autorisées : jpg/jpeg, gif, png","message_error");
+				}
 			}else 
 			{
 				$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
@@ -401,18 +435,29 @@ class UsersController extends AppController{
 
 	function edit_banque()
 	{
-		$Editguide=$this->Auth->user('guide_id');	
+		$Editguide=$this->Auth->user('guide_id');
+		$this->User->id   = $this->Auth->user('id');//on fixe l'id du modéle
+		$d = $this->User->find('first', array('conditions' => array('User.id' => $this->User->id)));
+			
 		//si le guide a au moins une fois changer son profil
 		if (!empty($Editguide))
 		{
 			//on préremplit les champs
-			$this->request->data['Rib_guide']['banque']        =  $this->User->Guide->Rib_guide->field('banque');
-			$this->request->data['Rib_guide']['guichet']       =  $this->User->Guide->Rib_guide->field('guichet');
-			$this->request->data['Rib_guide']['num_compte']    =  $this->User->Guide->Rib_guide->field('num_compte');
-			$this->request->data['Rib_guide']['nom_titulaire'] =  $this->User->Guide->Rib_guide->field('nom_titulaire');
-			$this->request->data['Rib_guide']['domiciliation'] =  $this->User->Guide->Rib_guide->field('domiciliation');
-			$this->request->data['Rib_guide']['num_iban']      =  $this->User->Guide->Rib_guide->field('num_iban');
-			$this->request->data['Rib_guide']['bic']           =  $this->User->Guide->Rib_guide->field('bic');
+			$this->request->data['Rib_guide']['banque']        =  $d['Rib_guide']['banque'] ;
+			$this->request->data['Rib_guide']['guichet']       =  $d['Rib_guide']['guichet'] ;
+			$this->request->data['Rib_guide']['num_compte']    =  $d['Rib_guide']['num_compte'] ;
+			$this->request->data['Rib_guide']['nom_titulaire'] =  $d['Rib_guide']['nom_titulaire'];
+			$this->request->data['Rib_guide']['domiciliation'] =  $d['Rib_guide']['domiciliation'];
+			$this->request->data['Rib_guide']['num_iban']      =  $d['Rib_guide']['num_iban'] ;
+			$this->request->data['Rib_guide']['bic']           =  $d['Rib_guide']['bic'] ;
+			//on préremplit les champs
+			// $this->request->data['Rib_guide']['banque']        =  $this->User->Guide->Rib_guide->field('banque');
+			// $this->request->data['Rib_guide']['guichet']       =  $this->User->Guide->Rib_guide->field('guichet');
+			// $this->request->data['Rib_guide']['num_compte']    =  $this->User->Guide->Rib_guide->field('num_compte');
+			// $this->request->data['Rib_guide']['nom_titulaire'] =  $this->User->Guide->Rib_guide->field('nom_titulaire');
+			// $this->request->data['Rib_guide']['domiciliation'] =  $this->User->Guide->Rib_guide->field('domiciliation');
+			// $this->request->data['Rib_guide']['num_iban']      =  $this->User->Guide->Rib_guide->field('num_iban');
+			// $this->request->data['Rib_guide']['bic']           =  $this->User->Guide->Rib_guide->field('bic');
 		}
 		if($this->request->is('put')||$this->request->is('post'))
 		{
@@ -431,38 +476,40 @@ class UsersController extends AppController{
 	function edit_cursus()
 	{
 		$Editguide        = $this->Auth->user('guide_id');
+		//on fixe l'id du modéle
 		$this->User->id   = $this->Auth->user('id');//on fixe l'id du modéle
-		$d['Guide']['id'] = $this->User->field('guide_id');
+		$d = $this->User->find('first', array('conditions' => array('User.id' => $this->User->id)));
+		
 		debug($this->User->id );
 		debug($d);
-			
+		
 		//$this->set('diplome', $this->User->Guide->Diplome->field('id'));
 		//si le guide a au moins une fois changer son profil
 		if (!empty($Editguide))
 		{
-			$this->request->data['Societe']['nom_societe']       = $this->User->Guide->Societe->field('nom_societe');
-			$this->request->data['Societe']['telephone_societe'] = $this->User->Guide->Societe->field('telephone_societe');
-			$this->request->data['Societe']['mail_societe']      = $this->User->Guide->Societe->field('mail_societe');
-			$this->request->data['Societe']['siret']             = $this->User->Guide->Societe->field('siret');	
+			
+			$this->request->data['Societe']['nom_societe']       = $d['Societe']['nom_societe'];
+			$this->request->data['Societe']['telephone_societe'] = $d['Societe']['telephone_societe'];
+			$this->request->data['Societe']['mail_societe']      = $d['Societe']['mail_societe'];
+			$this->request->data['Societe']['siret']             = $d['Societe']['siret'];	
+
+			// $this->request->data['Societe']['nom_societe']       = $this->User->Guide->Societe->field('nom_societe');
+			// $this->request->data['Societe']['telephone_societe'] = $this->User->Guide->Societe->field('telephone_societe');
+			// $this->request->data['Societe']['mail_societe']      = $this->User->Guide->Societe->field('mail_societe');
+			// $this->request->data['Societe']['siret']             = $this->User->Guide->Societe->field('siret');	
 		}
-		$d['Diplome']['photo_diplome'] =$this->User->Guide->Diplome->field('photo_diplome');
-		$this->set($d);
-		debug($d);	
+		$photo['Guide']['photo_diplome'] =$d['Guide']['photo_diplome'];
+		$this->set($photo);
+		debug($photo);
+		debug($d['Diplome']);
 		if($this->request->is('put')||$this->request->is('post'))
 		{
-			$d=$this->request->data;
-
-
-			$d['Guide']['id']   = $this->User->field('guide_id');
-			$d['User']['id']    = $this->User->id;
-			$d['Diplome']['id'] = $this->User->Guide->Diplome->field('id');
-			$d['Diplome']['photo_diplome'] =$this->User->Guide->Diplome->field('photo_diplome');
-			$this->set($d);
-			debug($d);	
-			if (!$this->request->data['Diplome']['photo_diplome']['tmp_name']=='')
+			if (!$this->request->data['Guide']['diplome']['tmp_name']=='')
 		 	{
+		 		
+		 		debug($this->request->data['Guide']['diplome']);
 				//On récupére le fichier
-				$tmp_name = $this->request->data['Diplome']['photo_diplome']['tmp_name'];
+				$tmp_name                  =$this->request->data['Guide']['diplome']['tmp_name'];
 				// Définition de la largeur et de la hauteur maximale
 				$width = 1000;
 				$height = 1000;
@@ -472,6 +519,7 @@ class UsersController extends AppController{
 				//Traitement selon le type du fichier
 				if ($type == "1" ||$type == "2" ||$type == "3" )
 				{
+					$format = 1;
 					//Selon le type, on créer l'image pour la redimensionner
 					switch ( $type ) {
 						case "1":
@@ -484,7 +532,9 @@ class UsersController extends AppController{
 							$image = imagecreatefrompng( $tmp_name );
 							break;
 						default:
-							$this->Session->setFlash("L'image n'est pas dans un format reconnu. Extensions autorisées : jpg/jpeg, gif, png","message_error");
+							// Normalement ne doit jamais rentrer dans cette boucle (condition précédente ...)
+							//Le format n'est pas correct
+							$format = 0;
 						break;
 					}
 
@@ -505,29 +555,46 @@ class UsersController extends AppController{
 					imagecopyresampled($image_final, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
 
 					//On définit le nom de la photo. ici : profil + 'identifiant'
-					$name        ='Diplome '.$this->User->field('identifiant') . ".jpg";
-					$uploads_dir ='H:/wamp/www/guide/guide/'.'app/webroot/img/diplome/';
-					debug($uploads_dir);
-					$this->Session->setFlash("Diplome modifié","notif");	
-					chmod($uploads_dir, 0777);
-					imagejpeg( $image_final, $uploads_dir. $name);
-					$d['Diplome']['photo_diplome'] = 'diplome/'.$name;
+					$name        ='Diplome '. $d['User']['identifiant']. ".jpg";
+					//On définit le chemin ou sera enregistré la photo
+					$folder_url = 'img/diplome/';
+					$uploads_dir =WWW_ROOT. $folder_url;
 
-					debug($type);
+					//Si le dossier n est pas encore présent sur le serveur on le créé
+					if(!is_dir($folder_url)) {
+						mkdir($folder_url);
+					}
+
+
+					debug($uploads_dir);
+					$this->Session->setFlash("Diplome modifiée","notif");	
+					chmod($uploads_dir, 0777);
+
+					imagejpeg( $image_final, $uploads_dir. $name);
+					
+					$d['Guide']['photo_diplome'] = 'diplome/'.$name;
+
+					
 					
 				}else
 				{
 					debug($type);
-					$this->Session->setFlash("L'image n'est pas dans un format reconnu. Extensions autorisées : jpg/jpeg, gif, png","message_error");	
-					
+					//Le format n'est pas correct
+					$format = 0;
 				}
+			}
+			else
+			{
+				$format = 1;
 			}
 			if($this->User->Guide->saveAssociated($d,true,array('Societe'=>array('id','Societe.nom_societe','Societe.telephone_societe','mail_societe','siret'),'Diplome'=>array('id','photo_diplome'))))
 			{
 				$this->Session->setFlash("Votre profil a bien été modifié","notif");
+
+
 			}else 
 			{
-			$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
+				$this->Session->setFlash("Impossible de sauvegarder","notif",array('type'=>'error'));
 			}
 		}
 	}
@@ -544,43 +611,11 @@ class UsersController extends AppController{
 		}
 		//on fixe l'id du modéle
 		$this->User->id = $user_id;	
-		//stockage des informations dans la variable $d
-		$d['User']['id']                  =$user_id;
-		$d['User']['identifiant']         =$this->User->field('identifiant');
-		$d['User']['nom_user']            =$this->User->field('nom_user');
-		$d['User']['prenom_user']         =$this->User->field('prenom_user');
-		$d['User']['mail_user']           =$this->User->field('mail_user');
-		$d['User']['date_naissance_user'] =$this->User->field('date_naissance_user');
-		$d['User']['telephone_user']      =$this->User->field('telephone_user');
-		//$d['User']['langue_id']         =$this->User->field('langue_id');
-		$d['Langue']['nom_langue']        =$this->User->Langue->field('nom_langue');
-		$d['User']['prenom_user']         =$this->User->field('prenom_user');
-		$d['User']['type_personne']       =$this->Auth->user('type_personne');
-		$d['User']['civilite']            =$this->User->field('civilite');
 
-		if ($this->Auth->user('type_personne')==1)
-		{
-			$d['Guide']['id']                  =$this->User->Guide->field('id');
-			
-			$d['Guide']['photo_guide']         =$this->User->Guide->field('photo_guide');
-			$d['Rib_guide']['id']              =$this->User->Guide->Rib_guide->field('id');
-			$d['Rib_guide']['banque']          =$this->User->Guide->Rib_guide->field('banque');
-			$d['Rib_guide']['guichet']         =$this->User->Guide->Rib_guide->field('guichet');
-			$d['Rib_guide']['num_compte']      =$this->User->Guide->Rib_guide->field('num_compte');
-			$d['Rib_guide']['nom_titulaire']   =$this->User->Guide->Rib_guide->field('nom_titulaire');
-			$d['Rib_guide']['domiciliation']   =$this->User->Guide->Rib_guide->field('domiciliation');
-			$d['Rib_guide']['num_iban']        =$this->User->Guide->Rib_guide->field('num_iban');
-			$d['Rib_guide']['bic']             =$this->User->Guide->Rib_guide->field('bic');
-			
-			$d['Societe']['id']                =$this->User->Guide->Societe->field('id');
-			$d['Societe']['siret']             =$this->User->Guide->Societe->field('siret');
-			$d['Societe']['nom_societe']       =$this->User->Guide->Societe->field('nom_societe');
-			$d['Societe']['telephone_societe'] =$this->User->Guide->Societe->field('telephone_societe');
-			$d['Societe']['mail_societe']      =$this->User->Guide->Societe->field('mail_societe');
-			
-			$d['Diplome']['id']                =$this->User->Guide->Diplome->field('id');
-			$d['Diplome']['id']                =$this->User->Guide->Diplome->field('photo_diplome');
-		}
+		//Récupération et stockage des informations dans la variable $d
+		$d = $this->User->find('first', array('conditions' => array('User.id' => $this->User->id)));
+		debug($d);
+
 
 		//gestion des boutons
 		if($this->request->data['type'] == 'profil')
@@ -631,61 +666,37 @@ class UsersController extends AppController{
 		}
 
 		//affichage des informations du guide
-		$d['User']['id']=$this->User->id;
-		$d['User']['identifiant'] =$this->User->field('identifiant');
-		$d['User']['nom_user'] =$this->User->field('nom_user');
-		$d['User']['prenom_user'] =$this->User->field('prenom_user');
-		$d['User']['mail_user'] =$this->User->field('mail_user');
-		$d['User']['date_naissance_user'] =$this->User->field('date_naissance_user');
-		$d['User']['telephone_user'] =$this->User->field('telephone_user');
-
-		$d['Langue']['nom_langue'] =$this->User->Langue->field('nom_langue');
 		
-		$d['User']['type_personne'] =$this->Auth->user('type_personne');
-		$d['User']['civilite'] =$this->User->field('civilite');
-		$d['Guide']['id'] =$this->User->field('guide_id');
-		$d['Guide']['photo_guide'] =$this->User->Guide->field('photo_guide');
-		$d['Rib_guide']['id'] =$this->User->Guide->Rib_guide->field('id');
-		$d['Rib_guide']['banque'] =$this->User->Guide->Rib_guide->field('banque');
-		$d['Rib_guide']['guichet'] =$this->User->Guide->Rib_guide->field('guichet');
-		$d['Rib_guide']['num_compte'] =$this->User->Guide->Rib_guide->field('num_compte');
-		$d['Rib_guide']['nom_titulaire'] =$this->User->Guide->Rib_guide->field('nom_titulaire');
-		$d['Rib_guide']['domiciliation'] =$this->User->Guide->Rib_guide->field('domiciliation');
-		$d['Rib_guide']['num_iban'] =$this->User->Guide->Rib_guide->field('num_iban');
-		$d['Rib_guide']['bic'] =$this->User->Guide->Rib_guide->field('bic');
-
-		$d['Societe']['id'] =$this->User->Guide->Societe->field('id');
-		$d['Societe']['siret'] =$this->User->Guide->Societe->field('siret');
-		$d['Societe']['nom_societe'] =$this->User->Guide->Societe->field('nom_societe');
-		$d['Societe']['telephone_societe'] =$this->User->Guide->Societe->field('telephone_societe');
-		$d['Societe']['mail_societe'] =$this->User->Guide->Societe->field('mail_societe');
-
-		$d['Diplome']['id'] =$this->User->Guide->Diplome->field('id');
-		$d['Diplome']['photo_diplome'] =$this->User->Guide->Diplome->field('photo_diplome');
-		debug($d);
+		$d = $this->User->find('first', array('conditions' => array('User.id' => $this->User->id)));
+		//debug($d);
 		$this->set($d);
 		$this->User->Guide->Visite->recursive = 2;
 		//affichage de toutes les visites proposées par le guide
 
-		($this->set('visites',$this->User->Guide->Visite->find('all',array(
-		'conditions' => array('Guide.id' => $this->User->field('guide_id'))))));
+		$this->set('visites_physique',$this->User->Guide->Visite->Visite_physique->find('all',array(
+			'conditions' => array(
+				'Visite.guide_id' => $this->User->field('guide_id')))));
+		$this->set('visites_papier',$this->User->Guide->Visite->Visite_papier->find('all',array(
+			'conditions' => array(
+				'Visite.guide_id' => $this->User->field('guide_id')))));
+		$this->set('visites_audio',$this->User->Guide->Visite->Visite_audio->find('all',array(
+			'conditions' => array(
+				'Visite.guide_id' => $this->User->field('guide_id')))));
+		$this->set('langues_list',$this->User->Langue->find('all',array()));
 
-		debug($this->User->Guide->Visite->find('all', array(
+		//debug($this->User->Langue->find('all',array()));
+/*
+			debug($this->User->Guide->Visite->find('all', array(
 
-		'contain' => array(
-		'Visite',
-		'Visite_physique' => array(
-		'Trad_titre_desc_visite' => array(
-		'fields' => array('id', 'titre_visite_trad')
-
-		)
-		)
-		),
-		'conditions' => array('Guide.id' => $this->User->field('guide_id'))
-		)
-		)
-		)
-		;
+				'contain' => array(
+					'Visite',
+					'Visite_physique' => array(
+						'Trad_titre_desc_visite' => array(
+							'fields' => array(
+								'id', 'titre_visite_trad')))),
+				'conditions' => array(
+					'Guide.id' => $this->User->field('guide_id')))));
+//*/
 	}
 }
 

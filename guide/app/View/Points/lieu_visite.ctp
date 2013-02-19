@@ -100,6 +100,7 @@ function setPosition(marker){
  
  
  echo $this->Form->create('Point',array('type'=>'file'));
+ echo(" Veuillez sélectionner une localisation sur la carte en déplaçant le curseur rouge ");
  echo $this->Form->input('Point.name',array('label'=>"nom"));
  echo $this->Form->input('Point.lat',array('label'=>"Latitude"));
  echo $this->Form->input('Point.lng',array('label'=>"Longitude"));

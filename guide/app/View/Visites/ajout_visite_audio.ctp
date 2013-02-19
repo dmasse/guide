@@ -13,7 +13,10 @@
  
  echo $this->Form->input('Trad_mot_cle_pt_ints.mot_cle_francais_id',array('label'=>"Points d'intérêt proposés au cours de cette visite : ")); echo $this->Form->input('Visite_audio.prix_audio',array('label'=>"Prix de la visite Audio"));
  echo $this->Form->input('Visite_audio.duree_audio',array('label'=>"Durée de la visite Audio"));
-
+ echo $this->Form->input('Visite.audio', array(
+ 		'label'   => 'Ajouter le fichier audio de la visite',
+ 		'type'    => 'file'
+ ));
  echo $this->Form->input('Vide',array('type'=>'label','label'=>"Liste des localisations afféctées à cette visite :"));?>
   
   </script>

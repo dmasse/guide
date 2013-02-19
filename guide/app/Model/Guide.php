@@ -4,16 +4,13 @@ class Guide extends AppModel {
 
 
 	var $hasOne = array(
-			'User' => array(
-					'className'    => 'User',
-					'conditions'   => array('User.type_personne' => '1'),
-					'dependent'    => true
-			),
-			'Diplome' => array(
-					'className'    => 'Diplome',
-					'dependent'    => true)
-		
+		'User' => array(
+				'className'    => 'User',
+				'conditions'   => array('User.type_personne' => '1'),
+				'dependent'    => true
+		)
 	);
+	
 	var $hasMany = array(
 			'Visite' => array(
 					'className'    => 'Visite',

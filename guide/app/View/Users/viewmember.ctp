@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 	 function affiche ($view,$texte,$data,&$error)
 	{
 		if (!$data == '')

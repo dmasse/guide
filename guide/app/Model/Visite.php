@@ -11,12 +11,9 @@ class Visite extends AppModel {
 			,
 			'Porter_sur' => array(
 					'className'    => 'Porter_sur',
-					'dependent'    => true)
-					,
-			'Trad_titre_desc_visite' => array(
-							'className'    => 'Trad_titre_desc_visite',
-							'dependent'    => true)
-							)
+					'dependent'    => true))
+					
+		
 					
 	;
 	var $hasOne = array(

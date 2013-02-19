@@ -2,17 +2,17 @@
 	$this->set('title_for_layout',"Editer mon profil");
 
 	 echo $this->Form->create('User',array('type'=>'file'));
-	 debug ($Guide);
+	 debug ($Guide['photo_diplome']);
 	 if ($SessionTypePers==1)
 	 {
-		if ($Diplome['photo_diplome'] =='')
+		if ($Guide['photo_diplome'] =='')
 		{
 			echo $this->Html->image('diplome/Diplome.jpg', array('alt'=>'CakePHP', true)); 
 		}else 
 		{
-			echo $this->Html->image($Diplome['photo_diplome'], array('alt'=>'CakePHP', true)); 
+			echo $this->Html->image($Guide['photo_diplome'], array('alt'=>'CakePHP', true)); 
 		}
-		 echo $this->Form->input('Diplome.photo_diplome', array(
+		echo $this->Form->input('Guide.diplome', array(
 		    'between' => '<br />',
 		    'type' => 'file'
 		));

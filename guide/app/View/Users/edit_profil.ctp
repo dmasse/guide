@@ -1,23 +1,29 @@
 <?php 
  	$this->set('title_for_layout',"Editer mon profil");
 
-	 
-	 
+
 	echo $this->Form->create('User',array('enctype' => 'multipart/form-data'));
-	 
-	 
+
+
+
+
+
+
+
 	if ($SessionTypePers==1)
 	{
 		if ($Guide['photo_guide'] =='')
 		{
+			//echo $this->Html->fichier ('File / image ');
 			echo $this->Html->image('profil/Profil.jpg', array('alt'=>'CakePHP', true)); 
 		}else 
 		{
 			echo $this->Html->image($Guide['photo_guide'], array('alt'=>'CakePHP', true)); 
 		}
 		
-		echo $this->Form->input('Guide.photo_guide', array(
-		    'between' => 'Modifier la photo de profil<br />',
+
+		echo $this->Form->input('Guide.photo', array(
+		    'between' => 'Modifier la photo de profil',
 		    'type' => 'file'
 		));
 	}

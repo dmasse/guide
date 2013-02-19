@@ -20,9 +20,6 @@ class Trad_titre_desc_visite extends AppModel {
 					'className'=>'Langue',
 					'foreignKey' =>'langue_id'),
 
-			'Visite'=> array(
-					'className'=>'Visite',
-					'foreignKey' =>'visite_id'),
 			
 			
 			
