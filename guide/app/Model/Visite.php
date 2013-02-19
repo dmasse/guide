@@ -4,18 +4,6 @@
 class Visite extends AppModel {
 
 	var $hasMany = array(
-			'Visite_audio' => array(
-					'className'    => 'Visite_audio',
-					'dependent'    => true
-			),
-			'Visite_papier' => array(
-					'className'    => 'Visite_papier',
-					'dependent'    => true 
-			),
-			'Visite_physique' => array(
-					'className'    => 'Visite_physique',
-					'dependent'    => true)
-			,
 		
 			'Type_de_visite' => array(
 					'className'    => 'Type_de_visite',
@@ -24,9 +12,26 @@ class Visite extends AppModel {
 			'Porter_sur' => array(
 					'className'    => 'Porter_sur',
 					'dependent'    => true)
-					)
+					,
+			'Trad_titre_desc_visite' => array(
+							'className'    => 'Trad_titre_desc_visite',
+							'dependent'    => true)
+							)
 					
 	;
+	var $hasOne = array(
+			'Visite_audio' => array(
+					'className'    => 'Visite_audio',
+					'dependent'    => true
+			),
+			'Visite_papier' => array(
+					'className'    => 'Visite_papier',
+					'dependent'    => true
+			),
+			'Visite_physique' => array(
+					'className'    => 'Visite_physique',
+					'dependent'    => true)
+			);
 
 	public $belongsTo = array(
 			'Guide' => array(

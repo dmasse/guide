@@ -103,8 +103,9 @@ function setPosition(marker){
  echo $this->Form->input('Point.name',array('label'=>"nom"));
  echo $this->Form->input('Point.lat',array('label'=>"Latitude"));
  echo $this->Form->input('Point.lng',array('label'=>"Longitude"));
- echo $this->Form->input('Adresse');?>
- 
+ echo $this->Form->input('Adresse');
+  echo $this->Form->button('retour au formulaire d ajout d une visite',array('name'=>'bouton', 'value' => 'retour'));
+?>
  
  <div id="gmap" style="width:100%;height:350px;""></div>
   <?php

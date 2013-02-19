@@ -8,18 +8,18 @@ class Point extends AppModel {
 					'dependent'    => true
 			));
 			
-	var$hasMany=array(
-			'Photo_visite'=>array(
-					'className'    => 'Photo_visite',
-					'dependent'    => true
-			),
-			'Mot_cles'=>array(
-					'className' =>'Mot_cles',
-					'dependent'=> true
+	//var$hasMany=array(
+			//'Photo_visite'=>array(
+			//		'className'    => 'Photo_visite',
+			//		'dependent'    => true
+			//),
+		//	'Mot_cles'=>array(
+		//			'className' =>'Mot_cles',
+		//			'dependent'=> true
 					
-					)
+		//			)
 
-	);	
+	//);	
 
 }
 

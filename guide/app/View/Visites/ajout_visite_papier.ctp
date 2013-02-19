@@ -14,8 +14,37 @@
  		'options' => $typesVisites,'label'=>'Choisissez le type de la visite'
  ));
  
- 
- echo $this->Form->button('Ajouter une localisation',array('name'=>'type', 'value' => 'localisation'));
+ echo $this->Form->input('Vide',array('type'=>'label','label'=>"Liste des localisations afféctées à cette visite :"));?>
+  
+  </script>
+  
+  
+  <table>
+  <tr>
+  
+  <th>Nom</th>
+  <th>Latitude</th>
+  <th>Longitude</th>
+  <th>Actions</th>
+  
+  </tr>
+   <?php foreach ($lieu as $k=>$v): $v=current($v);?>
+  
+   <tr>
+   
+   <td><?php echo $lieu[$k]['Point']['name']?></td>
+   <td><?php echo $lieu[$k]['Point']['lat']?></td>
+   <td><?php echo $lieu[$k]['Point']['lng']?></td>
+   <td>
+   <?php  echo $this->Html->link("Editer ",array('action'=>'edit',$v['point_id']));?>-
+   <?php  echo $this->Html->link("Supprimer",array('action'=>'delete',$v['point_id'],null,'voulez vous vraiment supprimer cette page ?'));?>
+   
+   </td>
+   
+   </tr>
+   <?php endforeach;?>
+   </table>	
+<?php echo $this->Form->button('Ajouter une localisation',array('name'=>'type', 'value' => 'localisation'));
  
  echo $this->Form->end('Modifier');?>
  
