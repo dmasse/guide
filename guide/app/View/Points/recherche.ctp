@@ -24,9 +24,6 @@ positions.push({
 	"lat":"<?php echo $points[$k]['Point']['lat'];?>",
 	"lng":"<?php echo $points[$k]['Point']['lng'];?>",
 	"name":"<?php echo $points[$k]['Point']['name'];?>",		
-"titre":"<?php echo $points[$k]['Porter_sur']['Visite']['Trad_titre_desc_visite']['0']['titre_visite_trad'];?>",
-"description":"<?php echo $points[$k]['Porter_sur']['Visite']['Trad_titre_desc_visite']['desc_visite_trad'];?>"
-			
 
 		
 	});
@@ -71,9 +68,6 @@ iterator++;
 <div id="gmap" style="width:800px; height:350px; margin:0 auto;"></div>
 
 <?php foreach ($points as $k=>$v): $v=current($v);?>
-
-<?php echo $points[$k]['Point']['lat'];?>
-<?php echo $points[$k]['Porter_sur']['Visite']['Trad_titre_desc_visite']['0']['titre_visite_trad'];?>"
 
 
 <?php endforeach;?>

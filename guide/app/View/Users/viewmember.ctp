@@ -1,9 +1,14 @@
+<link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/css/docs.css" />
+
 <?php 
 	 function affiche ($view,$texte,$data,&$error)
 	{
 		if (!$data == '')
 		{
 			echo $view->Form->input('nom',array('type'=>'label','label'=> "{$texte} : {$data}"));
+			echo('<br>');
 		}
 		else
 		{
@@ -11,6 +16,7 @@
 		}
 	}//*/
  ?>
+
 
 <?php 
 	$this->set('title_for_layout','Mon profil');
@@ -28,8 +34,15 @@
 	}else 
 	{
 		echo $this->Html->image($Guide['photo_guide'], array('alt'=>'CakePHP', true)); 
-	}//imagejpeg($image_p, null, 100);
+	}//imagejpeg($image_p, null, 100); ?>
 
+	<body>
+	
+	<div class="container">
+	<form class="form-box">
+	<div class="controls controls-row">
+	
+	<?php 
 	affiche($this,'Civilité',$User['civilite'],$champsManquant);
 	affiche($this,'Nom',$User['nom_user'],$champsManquant);
 	affiche($this,'Prénom',$User['prenom_user'],$champsManquant);
@@ -55,7 +68,13 @@
 		affiche($this,'IBAN',$Rib_guide['num_iban'],$champsManquant);
 		affiche($this,'BIC',$Rib_guide['bic'],$champsManquant);
 	}
-	echo "<br><br>";
+	echo "<br><br>"; ?>
+	
+	</form>
+	</div>
+	</body>
+	
+	<?php
 	//Vérification si le profil est complet
 	$count = count($champsManquant);
 	if ($count == 0)

@@ -2066,3 +2066,286 @@
 2013-02-19 10:58:40 Error: [MissingControllerException] Controller class ImgController could not be found.
 #0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2013-02-19 15:26:39 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Mot_cle_francai.mot_cle_français' in 'field list'
+#0 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('SELECT `Mot_cle...', Array)
+#2 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(647): DboSource->execute('SELECT `Mot_cle...', Array, Array)
+#3 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(1058): DboSource->fetchAll('SELECT `Mot_cle...', false)
+#4 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(2653): DboSource->read(Object(Mot_cle_francai), Array)
+#5 C:\wamp\www\guide\guide\app\Controller\VisitesController.php(115): Model->find('list', Array)
+#6 [internal function]: VisitesController->ajout_visite_papier()
+#7 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(VisitesController), Array)
+#8 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(VisitesController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-02-19 15:26:56 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Mot_cle_francai.mot_cle_français' in 'field list'
+#0 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('SELECT `Mot_cle...', Array)
+#2 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(647): DboSource->execute('SELECT `Mot_cle...', Array, Array)
+#3 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(1058): DboSource->fetchAll('SELECT `Mot_cle...', false)
+#4 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(2653): DboSource->read(Object(Mot_cle_francai), Array)
+#5 C:\wamp\www\guide\guide\app\Controller\VisitesController.php(115): Model->find('list', Array)
+#6 [internal function]: VisitesController->ajout_visite_papier()
+#7 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(VisitesController), Array)
+#8 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(VisitesController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-02-19 15:27:13 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Mot_cle_francai.mot_cle_français' in 'field list'
+#0 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('SELECT `Mot_cle...', Array)
+#2 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(647): DboSource->execute('SELECT `Mot_cle...', Array, Array)
+#3 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(1058): DboSource->fetchAll('SELECT `Mot_cle...', false)
+#4 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(2653): DboSource->read(Object(Mot_cle_francai), Array)
+#5 C:\wamp\www\guide\guide\app\Controller\VisitesController.php(115): Model->find('list', Array)
+#6 [internal function]: VisitesController->ajout_visite_papier()
+#7 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(VisitesController), Array)
+#8 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(VisitesController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-02-19 15:37:01 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Mot_cle_francai.mot_cle_français' in 'field list'
+#0 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('SELECT `Mot_cle...', Array)
+#2 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(647): DboSource->execute('SELECT `Mot_cle...', Array, Array)
+#3 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(1058): DboSource->fetchAll('SELECT `Mot_cle...', false)
+#4 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(2653): DboSource->read(Object(Mot_cle_francai), Array)
+#5 C:\wamp\www\guide\guide\app\Controller\VisitesController.php(115): Model->find('list', Array)
+#6 [internal function]: VisitesController->ajout_visite_papier()
+#7 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(VisitesController), Array)
+#8 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(VisitesController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-02-19 15:38:12 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Mot_cle_francai.mot_cle_français' in 'field list'
+#0 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('SELECT `Mot_cle...', Array)
+#2 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(647): DboSource->execute('SELECT `Mot_cle...', Array, Array)
+#3 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(1058): DboSource->fetchAll('SELECT `Mot_cle...', false)
+#4 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(2653): DboSource->read(Object(Mot_cle_francai), Array)
+#5 C:\wamp\www\guide\guide\app\Controller\VisitesController.php(115): Model->find('list', Array)
+#6 [internal function]: VisitesController->ajout_visite_papier()
+#7 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(VisitesController), Array)
+#8 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(VisitesController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-02-19 15:50:04 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Mot_cle_francai.mot_cle_id' in 'where clause'
+#0 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('SELECT `Mot_cle...', Array)
+#2 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(647): DboSource->execute('SELECT `Mot_cle...', Array, Array)
+#3 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(1231): DboSource->fetchAll('SELECT `Mot_cle...', false)
+#4 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(1185): DboSource->queryAssociation(Object(Mot_cle), Object(Mot_cle_francai), 'hasOne', 'Mot_cle_francai', Array, Array, true, Array, 1, Array)
+#5 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(1087): DboSource->queryAssociation(Object(Point), Object(Mot_cle), 'hasMany', 'Mot_cle', Array, Array, true, Array, 2, Array)
+#6 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(2653): DboSource->read(Object(Point), Array)
+#7 C:\wamp\www\guide\guide\app\Controller\PointsController.php(8): Model->find('all', Array)
+#8 [internal function]: PointsController->recherche()
+#9 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PointsController), Array)
+#10 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#11 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointsController), Object(CakeRequest), Object(CakeResponse))
+#12 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2013-02-19 15:51:05 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Mot_cle_francai.mot_cle_id' in 'where clause'
+#0 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('SELECT `Mot_cle...', Array)
+#2 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(647): DboSource->execute('SELECT `Mot_cle...', Array, Array)
+#3 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(1231): DboSource->fetchAll('SELECT `Mot_cle...', false)
+#4 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(1185): DboSource->queryAssociation(Object(Mot_cle), Object(Mot_cle_francai), 'hasOne', 'Mot_cle_francai', Array, Array, true, Array, 1, Array)
+#5 C:\wamp\www\guide\guide\lib\Cake\Model\Datasource\DboSource.php(1087): DboSource->queryAssociation(Object(Point), Object(Mot_cle), 'hasMany', 'Mot_cle', Array, Array, true, Array, 2, Array)
+#6 C:\wamp\www\guide\guide\lib\Cake\Model\Model.php(2653): DboSource->read(Object(Point), Array)
+#7 C:\wamp\www\guide\guide\app\Controller\PointsController.php(8): Model->find('all', Array)
+#8 [internal function]: PointsController->recherche()
+#9 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PointsController), Array)
+#10 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#11 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PointsController), Object(CakeRequest), Object(CakeResponse))
+#12 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2013-02-19 18:08:31 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-02-19 18:08:31 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-02-19 18:08:31 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-02-19 18:54:06 Warning: Warning (2): array_merge(): Argument #2 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2163]
+Trace:
+array_merge - [internal], line ??
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2163
+UsersController::viewmember() - APP\Controller\UsersController.php, line 625
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 18:54:06 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #1 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2193]
+Trace:
+array_merge - [internal], line ??
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2193
+UsersController::viewmember() - APP\Controller\UsersController.php, line 625
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 18:54:06 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #1 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2193]
+Trace:
+array_merge - [internal], line ??
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2193
+UsersController::viewmember() - APP\Controller\UsersController.php, line 625
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 18:55:02 Warning: Warning (2): array_merge(): Argument #2 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2163]
+Trace:
+array_merge - [internal], line ??
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2163
+UsersController::viewmember() - APP\Controller\UsersController.php, line 635
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 18:55:14 Warning: Warning (2): array_merge(): Argument #2 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2163]
+Trace:
+array_merge - [internal], line ??
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2163
+UsersController::viewmember() - APP\Controller\UsersController.php, line 643
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 18:55:14 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #2 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2163]
+Trace:
+array_merge - [internal], line ??
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2163
+UsersController::viewmember() - APP\Controller\UsersController.php, line 644
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 18:55:47 Warning: Warning (2): array_merge(): Argument #2 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2163]
+Trace:
+array_merge - [internal], line ??
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2163
+VisitesController::Addvisit() - APP\Controller\VisitesController.php, line 19
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 18:58:11 Warning: Warning (2): array_merge(): Argument #2 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2163]
+Trace:
+array_merge - [internal], line ??
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2163
+VisitesController::Addvisit() - APP\Controller\VisitesController.php, line 31
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 18:58:21 Warning: Warning (2): array_merge(): Argument #2 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2163]
+Trace:
+array_merge - [internal], line ??
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2163
+VisitesController::ajout_visite_papier() - APP\Controller\VisitesController.php, line 210
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 18:58:21 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #1 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2253]
+Trace:
+array_merge - [internal], line ??
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2253
+VisitesController::ajout_visite_papier() - APP\Controller\VisitesController.php, line 210
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 18:58:21 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #2 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2032]
+Trace:
+array_merge - [internal], line ??
+Model::saveMany() - CORE\Cake\Model\Model.php, line 2032
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2253
+VisitesController::ajout_visite_papier() - APP\Controller\VisitesController.php, line 210
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 18:58:21 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #2 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2163]
+Trace:
+array_merge - [internal], line ??
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2163
+VisitesController::ajout_visite_papier() - APP\Controller\VisitesController.php, line 214
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 18:58:21 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #1 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2193]
+Trace:
+array_merge - [internal], line ??
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2193
+VisitesController::ajout_visite_papier() - APP\Controller\VisitesController.php, line 214
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 18:58:22 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #1 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2253]
+Trace:
+array_merge - [internal], line ??
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2253
+VisitesController::ajout_visite_papier() - APP\Controller\VisitesController.php, line 214
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 18:58:22 Warning: Warning (2): array_merge() [<a href='http://php.net/function.array-merge'>function.array-merge</a>]: Argument #2 is not an array in [C:\wamp\www\guide\guide\lib\Cake\Model\Model.php, line 2032]
+Trace:
+array_merge - [internal], line ??
+Model::saveMany() - CORE\Cake\Model\Model.php, line 2032
+Model::saveAssociated() - CORE\Cake\Model\Model.php, line 2253
+VisitesController::ajout_visite_papier() - APP\Controller\VisitesController.php, line 214
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 485
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 103
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 85
+[main] - APP\webroot\index.php, line 96
+
+2013-02-19 19:10:24 Error: [NotFoundException] Not Found
+#0 C:\wamp\www\guide\guide\lib\Cake\View\View.php(908): include()
+#1 C:\wamp\www\guide\guide\lib\Cake\View\View.php(872): View->_evaluate('C:\wamp\www\gui...', Array)
+#2 C:\wamp\www\guide\guide\lib\Cake\View\View.php(463): View->_render('C:\wamp\www\gui...')
+#3 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(959): View->render('home', NULL)
+#4 C:\wamp\www\guide\guide\app\Controller\PagesController.php(80): Controller->render('home')
+#5 [internal function]: PagesController->display('home')
+#6 C:\wamp\www\guide\guide\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#7 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#8 C:\wamp\www\guide\guide\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#9 C:\wamp\www\guide\guide\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}

@@ -69,32 +69,9 @@ function setPosition(marker){
   </script>
 
 		 
-<table>
-<tr>
 
-<th>Nom</th>
-<th>Latitude</th>
-<th>Longitude</th>
-<th>Actions</th>
 
-</tr>
-<?php foreach ($lieu as $k=>$v): $v=current($v);?>
-<tr>
 
-<td><?php echo $v['name']?></td>
-<td><?php echo $v['lat']?></td>
-<td><?php echo $v['lng']?></td>
-<td>
-<?php  echo $this->Html->link("Editer ",array('action'=>'edit',$v['id']));?>-
-<?php  echo $this->Html->link("Supprimer",array('action'=>'delete',$v['id'],null,'voulez vous vraiment supprimer cette page ?'));?>
-
-</td>
-
-</tr>
-<?php endforeach;?>
-</table>	
-
-<?php //echo $this->Paginator->numbers();?>
  <?php $this->set('title_for_layout',"définir le lieu de la visite");
  
  

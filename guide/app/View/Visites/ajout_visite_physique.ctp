@@ -7,13 +7,17 @@
  echo $this->Form->input('Type_de_visite.0.type_visite_francai_id', array ('type' => 'select',
  		'options' => $typesVisites,'label'=>'Choisissez le type de la visite'
  		));
+ echo $this->Form->input('Mot_cle.mot_cle_francai_id', array ('type' => 'select',
+ 		'options' => $pointinteret,'label'=>'Points d\'intérêt proposés au cours de cette visite :'
+ ));
+ echo $this->Form->button('Soumettre un nouveau point d\'interet',array('name'=>'type', 'value' => 'soumission'));
+ echo('<br> <br> <br>');
  echo $this->Form->input('Visite_physique',array('type'=>'label','label'=>"Remplissez les informations correspondants à la visite physique que vous souhaitez proposer : "));
  echo $this->Form->input('Trad_titre_desc_visite.0.titre_visite_trad',array('label'=>"Titre de la visite"));
  echo $this->Form->input('Trad_titre_desc_visite.0.desc_visite_trad',array('label'=>"Description de la visite"));
  echo $this->Form->input('Visite_physique.nb_personne',array('label'=>"Nombre de personnes autorisés pour la visite :  "));
  echo $this->Form->input('Visite_physique.acces_handicap',array('label'=>"Accés aux personnes handicapées: "));
- echo $this->Form->input('Trad_mot_cle_pt_ints.mot_cle_francais_id',array('label'=>"Points d'intérêt proposés au cours de cette visite : "));
- echo $this->Form->input('Visite_physique.prix_physique',array('label'=>"Prix de la visite Physique : "));
+ echo $this->Form->input('Visite_physique.prix_physique',array('label'=>"Prix de la visite Physique (par personne): "));
  echo $this->Form->input('Visite_physique.duree_physique',array('label'=>"Durée de la visite Physique (en heure) : "));
  echo $this->Form->input('Date_visite_physique.0.date_visite_physique',array('label'=>"Date de la visite Physique : "));
  

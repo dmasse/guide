@@ -60,7 +60,9 @@ class VisitesController extends AppController{
    $this->set('langues',$this->Visite->Visite_physique->Trad_titre_desc_visite->Langue->find('list',array('field'=>'Langues.nom_langue')));
    //permet d'afficher la liste des types de visites existants
    $this->set('typesVisites',$this->Visite->Type_de_visite->Type_visite_francai->find('list',array('field'=>'Type_visite_francais.type_visite_francai')));
-  
+   //permet d'afficher la liste des points d'interets proposées
+   $this->set('pointinteret',$this->Visite->Porter_sur->Point->Mot_cle->Mot_cle_francai->find('list',array('field'=>'Mot_cles_francais.mot_cle_francais')));
+    
  
   	//Gestion des boutons
     $d= $this->request->data;
@@ -99,8 +101,7 @@ class VisitesController extends AppController{
 		
 		
 	function ajout_visite_papier(){
-
-		$Sessionguide=$this->Auth->user('type_personne');
+ $Sessionguide=$this->Auth->user('type_personne');
 		$this->paginate = array(
 				'conditions' => array('Porter_sur.visite_id LIKE'=>$this->Session->read('idvisite')));
 		
@@ -111,7 +112,9 @@ class VisitesController extends AppController{
 		$this->set('langues',$this->Visite->Visite_papier->Trad_titre_desc_visite->Langue->find('list',array('field'=>'Langues.nom_langue')));
 		//permet d'afficher la liste des types de visites existants
 		$this->set('typesVisites',$this->Visite->Type_de_visite->Type_visite_francai->find('list',array('field'=>'Type_visite_francais.type_visite_francai')));
-		
+		//permet d'afficher la liste des points d'interets proposées
+		$this->set('pointinteret',$this->Visite->Porter_sur->Point->Mot_cle->Mot_cle_francai->find('list',array('field'=>'Mot_cles_francais.mot_cle_francais')));
+
 		//Gestion des boutons
 		if($this->request->data['type'] == 'localisation'){
 			$this->redirect( array('controller' => 'Points','action' => 'lieu_visite'));
@@ -154,7 +157,7 @@ class VisitesController extends AppController{
 					{
 			
 						//On définit le nom de la photo. ici : profil + 'identifiant'
-						$nameInt        ='Visite Audio '.  $d['Visite']['id'].' '. $d['Visite']['date_ajout'].'.pdf';
+						$nameInt        ='Visite papier '.  $d['Visite']['id'].' '. $d['Visite']['date_ajout'].'.pdf';
 						//On remplace les : par - sinon erreur à l'enregistrement
 						$name       = str_replace(":", "-", $nameInt  );
 						//On définit le chemin ou sera enregistré la photo
@@ -232,7 +235,8 @@ class VisitesController extends AppController{
 		$this->set('langues',$this->Visite->Visite_audio->Trad_titre_desc_visite->Langue->find('list',array('field'=>'Langues.nom_langue')));
 		//permet d'afficher la liste des types de visites existants
 		$this->set('typesVisites',$this->Visite->Type_de_visite->Type_visite_francai->find('list',array('field'=>'Type_visite_francais.type_visite_francai')));
-		
+		//permet d'afficher la liste des points d'interets proposées
+		$this->set('pointinteret',$this->Visite->Porter_sur->Point->Mot_cle->Mot_cle_francai->find('list',array('field'=>'Mot_cles_francais.mot_cle_francais')));
 		//Gestion des boutons
 		if($this->request->data['type'] == 'localisation'){
 			$this->redirect( array('controller' => 'Points','action' => 'lieu_visite'));

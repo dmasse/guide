@@ -135,7 +135,7 @@ class UsersController extends AppController{
 								->emailFormat('html')
 								->template('registration')
 								->viewVars(array('nom_user' =>$d['User']['nom_user'],'prenom_user'=>$d['User']['prenom_user'],'link'=>$link))
-								// ->send()
+								->send()
 								;
 						$this->request->data= array();//permet de vider tous les champs on peut aussi faire une redirection
 						$this->Session->setFlash("Votre compte a bien été créé, valider votre inscription grace au mail de confirmation","notif");
@@ -265,7 +265,7 @@ class UsersController extends AppController{
 						->emailFormat('html')
 						->template('mdp')
 						->viewVars(array('Identifiant'=>$user['User']['Identifiant'],'link'=>$link))
-						// ->send()
+						->send()
 						;
 
 				$this->Session->setFlash("Un email vous a été avec un nouveau mot de passe","notif");

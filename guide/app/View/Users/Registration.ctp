@@ -11,7 +11,7 @@ $this->set('title_for_layout',"Me contacter");
           'options' => array(2 => 'Guide', 3 => 'Touriste')));?>
           
 <?php echo $this->Form->error('type_personne');?>
-<?php echo $this->Form->input('Vide',array('type'=>'label','label'=>""));?>
+
 
 <?php echo $this->Form->input('civilite', array(
           'div' => false,
@@ -21,7 +21,7 @@ $this->set('title_for_layout',"Me contacter");
           'options' => array(2 => 'Melle', 3 => 'Mme', 4 => 'Mr')));?>
  
 <?php echo $this->Form->error('civilite');?>
-<?php echo $this->Form->input('Vide2',array('type'=>'label','label'=>""));?>
+
 
 <?php echo $this->Form->input('nom_user',array('label'=>"Votre nom"));?>
 <?php echo $this->Form->input('prenom_user',array('label'=>"Votre prenom"));?>

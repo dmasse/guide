@@ -14,6 +14,9 @@ class Langue extends AppModel {
 					'dependent'    => true)
 	);
 	
+	
+	
+	//permet de définir ce que l'on va afficher dans la liste déroulante
 	var $displayField = 'nom_langue';
 	}
 	?>
